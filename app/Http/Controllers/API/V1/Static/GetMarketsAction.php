@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * @OA\Get(
- *     path="/api/v1/markets",
+ *     path="/api/v1/static/markets",
  *     summary="Get a list of markets",
  *     description="Fetches all markets from the database and caches the response indefinitely.",
  *     tags={"Markets"},

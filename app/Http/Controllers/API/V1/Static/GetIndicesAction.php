@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * @OA\Get(
- *     path="/v1/indices",
+ *     path="/v1/static/indices",
  *     summary="Get a list of indices",
  *     description="Fetches all indices from the database and caches the response indefinitely.",
  *     tags={"Indices"},

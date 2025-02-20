@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * @OA\Get(
- *     path="/v1/countries",
+ *     path="/v1/static/countries",
  *     summary="Get a list of countries",
  *     description="Fetches all countries from the database and caches the response indefinitely.",
  *     tags={"Countries"},

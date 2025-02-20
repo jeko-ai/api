@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * @OA\Get(
- *     path="/v1/symbols",
+ *     path="/v1/static/symbols",
  *     summary="Get a list of symbols",
  *     description="Fetches all symbols from the database and caches the response indefinitely.",
  *     tags={"Symbols"},
