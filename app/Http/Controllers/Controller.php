@@ -8,7 +8,7 @@ namespace App\Http\Controllers;
  *      version="1.0.0",
  *      description="API documentation for Kira platform",
  *      @OA\Contact(
- *          email="support@yourdomain.com"
+ *          email="info@kira.ws"
  *      ),
  *      @OA\License(
  *          name="MIT License"
