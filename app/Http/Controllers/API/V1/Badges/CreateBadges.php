@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Post(
- *     path="/api/v1/badges",
+ *     path="/v1/badges",
  *     summary="Create a new Badges",
  *     tags={"Badges"},
  *     @OA\RequestBody(

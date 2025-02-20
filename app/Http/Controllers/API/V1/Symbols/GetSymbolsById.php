@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/symbols/{id}",
+ *     path="/v1/symbols/{id}",
  *     summary="Get Symbols by ID",
  *     tags={"Symbols"},
  *     @OA\Parameter(

@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/subscriptionfeatures/{id}",
+ *     path="/v1/subscriptionfeatures/{id}",
  *     summary="Get SubscriptionFeatures by ID",
  *     tags={"SubscriptionFeatures"},
  *     @OA\Parameter(

@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/marketmoversactive/{id}",
+ *     path="/v1/marketmoversactive/{id}",
  *     summary="Get MarketMoversActive by ID",
  *     tags={"MarketMoversActive"},
  *     @OA\Parameter(

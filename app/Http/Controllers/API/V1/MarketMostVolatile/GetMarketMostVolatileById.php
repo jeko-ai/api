@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/marketmostvolatile/{id}",
+ *     path="/v1/marketmostvolatile/{id}",
  *     summary="Get MarketMostVolatile by ID",
  *     tags={"MarketMostVolatile"},
  *     @OA\Parameter(

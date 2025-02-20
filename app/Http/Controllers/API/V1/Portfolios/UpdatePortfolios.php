@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Put(
- *     path="/api/v1/portfolios/{id}",
+ *     path="/v1/portfolios/{id}",
  *     summary="Update Portfolios",
  *     tags={"Portfolios"},
  *     @OA\Parameter(

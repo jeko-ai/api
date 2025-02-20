@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/levels/{id}",
+ *     path="/v1/levels/{id}",
  *     summary="Get Levels by ID",
  *     tags={"Levels"},
  *     @OA\Parameter(

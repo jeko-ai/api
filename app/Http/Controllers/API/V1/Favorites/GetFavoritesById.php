@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/favorites/{id}",
+ *     path="/v1/favorites/{id}",
  *     summary="Get Favorites by ID",
  *     tags={"Favorites"},
  *     @OA\Parameter(

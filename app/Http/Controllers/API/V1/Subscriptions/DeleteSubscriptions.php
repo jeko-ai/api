@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Delete(
- *     path="/api/v1/subscriptions/{id}",
+ *     path="/v1/subscriptions/{id}",
  *     summary="Delete Subscriptions",
  *     tags={"Subscriptions"},
  *     @OA\Parameter(

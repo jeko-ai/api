@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Delete(
- *     path="/api/v1/symbols/{id}",
+ *     path="/v1/symbols/{id}",
  *     summary="Delete Symbols",
  *     tags={"Symbols"},
  *     @OA\Parameter(

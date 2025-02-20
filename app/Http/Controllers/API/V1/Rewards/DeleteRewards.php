@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Delete(
- *     path="/api/v1/rewards/{id}",
+ *     path="/v1/rewards/{id}",
  *     summary="Delete Rewards",
  *     tags={"Rewards"},
  *     @OA\Parameter(

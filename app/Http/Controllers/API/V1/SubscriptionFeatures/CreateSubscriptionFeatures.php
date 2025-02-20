@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Post(
- *     path="/api/v1/subscriptionfeatures",
+ *     path="/v1/subscriptionfeatures",
  *     summary="Create a new SubscriptionFeatures",
  *     tags={"SubscriptionFeatures"},
  *     @OA\RequestBody(

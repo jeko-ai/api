@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Put(
- *     path="/api/v1/subscriptionfeatureusage/{id}",
+ *     path="/v1/subscriptionfeatureusage/{id}",
  *     summary="Update SubscriptionFeatureUsage",
  *     tags={"SubscriptionFeatureUsage"},
  *     @OA\Parameter(

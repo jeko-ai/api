@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Delete(
- *     path="/api/v1/pricepredictionrequests/{id}",
+ *     path="/v1/pricepredictionrequests/{id}",
  *     summary="Delete PricePredictionRequests",
  *     tags={"PricePredictionRequests"},
  *     @OA\Parameter(

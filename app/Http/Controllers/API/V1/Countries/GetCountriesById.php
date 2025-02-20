@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/countries/{id}",
+ *     path="/v1/countries/{id}",
  *     summary="Get Countries by ID",
  *     tags={"Countries"},
  *     @OA\Parameter(

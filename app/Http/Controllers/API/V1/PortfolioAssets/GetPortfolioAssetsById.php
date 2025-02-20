@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/portfolioassets/{id}",
+ *     path="/v1/portfolioassets/{id}",
  *     summary="Get PortfolioAssets by ID",
  *     tags={"PortfolioAssets"},
  *     @OA\Parameter(

@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Delete(
- *     path="/api/v1/userbadges/{id}",
+ *     path="/v1/userbadges/{id}",
  *     summary="Delete UserBadges",
  *     tags={"UserBadges"},
  *     @OA\Parameter(

@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Delete(
- *     path="/api/v1/portfolioassets/{id}",
+ *     path="/v1/portfolioassets/{id}",
  *     summary="Delete PortfolioAssets",
  *     tags={"PortfolioAssets"},
  *     @OA\Parameter(

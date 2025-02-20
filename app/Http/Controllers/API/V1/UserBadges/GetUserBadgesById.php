@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/userbadges/{id}",
+ *     path="/v1/userbadges/{id}",
  *     summary="Get UserBadges by ID",
  *     tags={"UserBadges"},
  *     @OA\Parameter(

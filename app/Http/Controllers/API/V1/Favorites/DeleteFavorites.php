@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Delete(
- *     path="/api/v1/favorites/{id}",
+ *     path="/v1/favorites/{id}",
  *     summary="Delete Favorites",
  *     tags={"Favorites"},
  *     @OA\Parameter(

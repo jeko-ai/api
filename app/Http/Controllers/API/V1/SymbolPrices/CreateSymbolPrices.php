@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Post(
- *     path="/api/v1/symbolprices",
+ *     path="/v1/symbolprices",
  *     summary="Create a new SymbolPrices",
  *     tags={"SymbolPrices"},
  *     @OA\RequestBody(

@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Post(
- *     path="/api/v1/tradingsimulationrequests",
+ *     path="/v1/tradingsimulationrequests",
  *     summary="Create a new TradingSimulationRequests",
  *     tags={"TradingSimulationRequests"},
  *     @OA\RequestBody(

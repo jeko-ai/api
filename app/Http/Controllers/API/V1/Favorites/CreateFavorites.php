@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Post(
- *     path="/api/v1/favorites",
+ *     path="/v1/favorites",
  *     summary="Create a new Favorites",
  *     tags={"Favorites"},
  *     @OA\RequestBody(

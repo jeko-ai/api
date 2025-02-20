@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 /**
  * @OA\Get(
- *     path="/api/v1/tradingsimulationrequests/{id}",
+ *     path="/v1/tradingsimulationrequests/{id}",
  *     summary="Get TradingSimulationRequests by ID",
  *     tags={"TradingSimulationRequests"},
  *     @OA\Parameter(
