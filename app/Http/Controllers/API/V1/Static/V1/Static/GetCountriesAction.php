@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Static;
+namespace App\Http\Controllers\API\V1\Static\V1\Static;
 
 use App\Models\Countries;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @OA\Get(

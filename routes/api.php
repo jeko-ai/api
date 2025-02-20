@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\API\V1\Static\GetCountriesAction;
-use App\Http\Controllers\API\V1\Static\GetIndicesAction;
-use App\Http\Controllers\API\V1\Static\GetMarketsAction;
-use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
+use App\Http\Controllers\API\V1\Static\V1\Static\GetCountriesAction;
+use App\Http\Controllers\API\V1\Static\V1\Static\GetIndicesAction;
+use App\Http\Controllers\API\V1\Static\V1\Static\GetMarketsAction;
+use App\Http\Controllers\API\V1\Static\V1\Static\GetSymbolsAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {

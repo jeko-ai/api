@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Static;
+namespace App\Http\Controllers\API\V1\Static\V1\Static;
 
 use App\Models\Symbols;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @OA\Get(
- *     path="/v1/static/symbols",
- *     summary="Get a list of symbols",
- *     description="Fetches all symbols from the database and caches the response indefinitely.",
- *     tags={"Symbols"},
+ *     path="/v1/static/indices",
+ *     summary="Get a list of indices",
+ *     description="Fetches all indices from the database and caches the response indefinitely.",
+ *     tags={"Indices"},
  *     @OA\Response(
  *         response=200,
- *         description="List of symbols retrieved successfully",
+ *         description="List of indices retrieved successfully",
  *         @OA\JsonContent(
  *             type="array",
  *             @OA\Items(
@@ -49,14 +49,14 @@ use Illuminate\Http\JsonResponse;
  *     )
  * )
  */
-class GetSymbolsAction
+class GetIndicesAction
 {
     public function __invoke(): JsonResponse
     {
-        $symbols = Cache::rememberForever('symbols', function () {
-            return Symbols::where('type', 'stock')->get();
+        $indices = Cache::rememberForever('indices', function () {
+            return Symbols::where('type', 'index')->get();
         });
 
-        return response()->json($symbols);
+        return response()->json($indices);
     }
 }
