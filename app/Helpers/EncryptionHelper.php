@@ -9,7 +9,7 @@ class EncryptionHelper
 {
     private static function getKey(): string
     {
-        return hash('sha256', 'your-secret-key', true); // Generate 32-byte key
+        return hash('sha256', config('app.http_key'), true); // Generate 32-byte key
     }
 
     public static function encrypt(string $text): array
