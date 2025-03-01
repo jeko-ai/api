@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Static\V1\Static;
+namespace App\Http\Controllers\API\V1\Static;
 
 use App\Models\Countries;
 use Illuminate\Http\JsonResponse;
