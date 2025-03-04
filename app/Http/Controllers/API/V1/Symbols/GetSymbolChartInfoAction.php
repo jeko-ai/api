@@ -9,15 +9,11 @@ class GetSymbolChartInfoAction
 {
     public function __invoke($symbol)
     {
-        return response()->json($symbol);
-
-        return response()->json($symbol);
-        dd($symbol);
         $symbols = Cache::rememberForever('symbols', function () {
             return Symbols::where('type', 'stock')->get();
         });
         $symbolObject = collect($symbols)->keyBy('id')->get($symbol);
-        dd($symbolObject);
+
         if (!$symbolObject) {
             $indices = Cache::rememberForever('indices', function () {
                 return Symbols::where('type', 'index')->get();
