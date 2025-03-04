@@ -9,6 +9,7 @@ class GetSymbolChartInfoAction
 {
     public function __invoke($symbol)
     {
+        dump($symbol);
         $symbols = Cache::rememberForever('symbols', function () {
             return Symbols::where('type', 'stock')->get();
         });
