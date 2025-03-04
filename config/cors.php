@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:5000', 'https://kira.ws'], // Add your Nuxt frontend URL
 
     'allowed_origins_patterns' => [],
 
