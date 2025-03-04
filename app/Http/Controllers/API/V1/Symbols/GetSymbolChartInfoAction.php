@@ -13,7 +13,7 @@ class GetSymbolChartInfoAction
             return Symbols::where('type', 'stock')->get();
         });
         $symbol = collect($symbols)->keyBy('id')->get($symbol);
-        dd($symbol);
+        dd($symbol->inv_id);
         $res = \Http::baseUrl(config('app.browser_endpoint'))
             ->withBasicAuth(config('app.browser_user_name'), config('app.browser_password'))
             ->post('/fetch', [
