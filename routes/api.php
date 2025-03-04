@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V1\Static\GetCountriesAction;
 use App\Http\Controllers\API\V1\Static\GetIndicesAction;
 use App\Http\Controllers\API\V1\Static\GetMarketsAction;
+use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
@@ -13,6 +14,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('static')->middleware('cacheResponse')->group(function () {
         Route::get('countries', GetCountriesAction::class);
         Route::get('markets', GetMarketsAction::class);
+        Route::get('sectors', GetSectorsAction::class);
         Route::get('symbols', GetSymbolsAction::class);
         Route::get('indices', GetIndicesAction::class);
     });
