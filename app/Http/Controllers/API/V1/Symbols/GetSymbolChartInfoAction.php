@@ -16,7 +16,7 @@ class GetSymbolChartInfoAction
         $res = \Http::baseUrl(config('app.browser_endpoint'))
             ->withBasicAuth(config('app.browser_user_name'), config('app.browser_password'))
             ->post('/fetch', [
-                'url'   =>  "https://tvc4.investing.com/038e96de5e1978788c0336951c8f0454/1741116809/1/1/8/symbols?symbol=$symbol->iv_id"
+                'url'   =>  "https://tvc4.investing.com/". \Str::uuid()->toString() ."/" . time() . "/1/1/8/symbols?symbol={$symbol['iv_id']}"
             ])
         ;
 
