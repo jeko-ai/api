@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
         Route::get('indices', GetIndicesAction::class);
     });
 
-    Route::prefix('symbols')->group(function () {
+    Route::prefix('symbols')->middleware('cacheResponse')->group(function () {
         Route::prefix('{symbol}')->group(function () {
             Route::get('history', GetSymbolHistoryAction::class);
             Route::get('info', GetSymbolInfoAction::class);
