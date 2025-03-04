@@ -15,8 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api([
-            ValidateApiKey::class,
-            EncryptResponse::class,
+//            ValidateApiKey::class,
+//            EncryptResponse::class,
         ]);
         $middleware->alias([
             'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
