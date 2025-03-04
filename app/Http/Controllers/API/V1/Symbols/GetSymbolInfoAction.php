@@ -9,11 +9,6 @@ class GetSymbolInfoAction
 {
     public function __invoke($symbol)
     {
-//        $symbols = Cache::rememberForever('symbols', function () {
-//            return Symbols::where('type', 'stock')->get();
-//        });
-//        $symbols->
-
         return response()->json($symbol);
     }
 }

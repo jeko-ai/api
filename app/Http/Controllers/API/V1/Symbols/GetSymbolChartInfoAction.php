@@ -14,6 +14,9 @@ class GetSymbolChartInfoAction
         });
         $id = collect($symbols)->pluck('inv_id', 'id')->get($symbol);
 
-        return response()->json($id);
+        return response()->json([
+            $id,
+            $symbol
+        ]);
     }
 }
