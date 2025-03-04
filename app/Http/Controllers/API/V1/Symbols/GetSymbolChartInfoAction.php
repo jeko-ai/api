@@ -12,11 +12,11 @@ class GetSymbolChartInfoAction
         $symbols = Cache::rememberForever('symbols', function () {
             return Symbols::where('type', 'stock')->get();
         });
-        $id = collect($symbols)->pluck('inv_id', 'id')->get($symbol);
+        $symbol = collect($symbols)->keyBy('id')->get($symbol);
 
         return response()->json([
-            $id,
-            $symbol
+            $symbol,
+            collect($symbols)->keyBy('id')
         ]);
     }
 }
