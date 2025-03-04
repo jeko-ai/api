@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Cache;
 
 class GetSymbolChartInfoAction
 {
-    public function __invoke(Symbols $symbol)
+    public function __invoke($symbol)
     {
+        return response()->json($symbol);
+
         return response()->json($symbol);
         dd($symbol);
         $symbols = Cache::rememberForever('symbols', function () {
