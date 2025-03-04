@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * @OA\Get(
- *     path="/api/v1/static/markets",
+ *     path="/v1/static/markets",
  *     summary="Get a list of markets",
  *     description="Fetches all markets from the database and caches the response indefinitely.",
- *     tags={"Markets"},
+ *     tags={"static"},
  *     @OA\Response(
  *         response=200,
  *         description="List of markets retrieved successfully",

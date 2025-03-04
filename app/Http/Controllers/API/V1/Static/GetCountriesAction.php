@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
  *     path="/v1/static/countries",
  *     summary="Get a list of countries",
  *     description="Fetches all countries from the database and caches the response indefinitely.",
- *     tags={"Countries"},
+ *     tags={"static"},
  *     @OA\Response(
  *         response=200,
  *         description="List of countries retrieved successfully",

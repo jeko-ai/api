@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
  *     path="/v1/static/indices",
  *     summary="Get a list of indices",
  *     description="Fetches all indices from the database and caches the response indefinitely.",
- *     tags={"Indices"},
+ *     tags={"static"},
  *     @OA\Response(
  *         response=200,
  *         description="List of indices retrieved successfully",
