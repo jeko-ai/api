@@ -13,6 +13,7 @@ class GetSymbolChartInfoAction
             return Symbols::where('type', 'stock')->get();
         });
         $symbolObject = collect($symbols)->keyBy('id')->get($symbol);
+        dd($symbolObject);
         if (!$symbolObject) {
             $indices = Cache::rememberForever('indices', function () {
                 return Symbols::where('type', 'index')->get();
