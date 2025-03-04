@@ -100,6 +100,9 @@ return [
     'key' => env('APP_KEY'),
 
     'http_key' => env('HTTP_KEY'),
+    'browser_endpoint' => env('BROWSER_ENDPOINT'),
+    'browser_user_name' => env('BROWSER_USER_NAME'),
+    'browser_password' => env('BROWSER_PASSWORD'),
 
     'previous_keys' => [
         ...array_filter(
