@@ -20,12 +20,6 @@ class GetSymbolChartInfoAction
             ->post('/fetch', [
                 'url' => $url
             ])->json();
-
-        dd([
-            'symbol' => $symbol,
-            'url' => $url,
-            'response' => $res
-        ]);
         return response()->json($res);
     }
 }
