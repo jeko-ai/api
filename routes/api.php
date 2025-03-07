@@ -7,6 +7,7 @@ use App\Http\Controllers\API\V1\Static\GetHighestVolumeAction;
 use App\Http\Controllers\API\V1\Static\GetIndicesAction;
 use App\Http\Controllers\API\V1\Static\GetMarketsAction;
 use App\Http\Controllers\API\V1\Static\GetMostVolatileAction;
+use App\Http\Controllers\API\V1\Static\GetPlansAction;
 use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Static\GetWorstAction;
@@ -23,6 +24,7 @@ Route::prefix('v1')->group(function () {
         Route::get('sectors', GetSectorsAction::class);
         Route::get('symbols', GetSymbolsAction::class);
         Route::get('indices', GetIndicesAction::class);
+        Route::get('plans', GetPlansAction::class);
         Route::prefix('{market}')->group(function () {
             Route::get('best', GetBestAction::class);
             Route::get('companies', GetCompaniesAction::class);
