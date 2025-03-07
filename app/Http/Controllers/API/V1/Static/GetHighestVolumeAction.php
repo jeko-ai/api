@@ -10,10 +10,13 @@ class GetHighestVolumeAction
 {
     public function __invoke(string $market): JsonResponse
     {
-        $movers = Cache::remember("highest-volume-{$market}", 1440, function () use ($market) {
+        $items = Cache::remember("highest-volume-{$market}", 1440, function () use ($market) {
             return MarketMoversActive::where('market_id', $market)->get();
         });
 
-        return response()->json($movers->random(8));
+        $count = $items->count();
+        $itemsToReturn = $count >= 8 ? $items->random(8) : $items;
+
+        return response()->json($itemsToReturn);
     }
 }

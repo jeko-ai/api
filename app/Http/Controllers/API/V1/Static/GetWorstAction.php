@@ -10,10 +10,13 @@ class GetWorstAction
 {
     public function __invoke(string $market): JsonResponse
     {
-        $losers = Cache::remember("worst-{$market}", 1440, function () use ($market) {
+        $items = Cache::remember("worst-{$market}", 1440, function () use ($market) {
             return MarketMoversLosers::where('market_id', $market)->get();
         });
 
-        return response()->json($losers->random(8));
+        $count = $items->count();
+        $itemsToReturn = $count >= 8 ? $items->random(8) : $items;
+
+        return response()->json($itemsToReturn);
     }
 }

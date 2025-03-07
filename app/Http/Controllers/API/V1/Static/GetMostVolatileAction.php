@@ -10,10 +10,13 @@ class GetMostVolatileAction
 {
     public function __invoke(string $market): JsonResponse
     {
-        $volatiles = Cache::remember("most-volatile-{$market}", 1440, function () use ($market) {
+        $items = Cache::remember("most-volatile-{$market}", 1440, function () use ($market) {
             return MarketMostVolatile::where('market_id', $market)->get();
         });
 
-        return response()->json($volatiles->random(8));
+        $count = $items->count();
+        $itemsToReturn = $count >= 8 ? $items->random(8) : $items;
+
+        return response()->json($itemsToReturn);
     }
 }
