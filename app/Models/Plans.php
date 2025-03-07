@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class Plans extends Model
 {
@@ -22,5 +22,9 @@ class Plans extends Model
         'status',
         'created_at',
         'slug',
+    ];
+
+    protected $casts = [
+        'features' => 'array'
     ];
 }
