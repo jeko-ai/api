@@ -25,8 +25,8 @@ class UpdateUserSettingsRequest extends FormRequest
         return [
             'full_name' => 'sometimes|string|max:255',
             'language' => 'sometimes|string|max:10',
-            'risk_level' => 'sometimes|integer|min:1|max:5',
-            'country_id' => 'sometimes|integer|exists:countries,id',
+            'risk_level' => 'sometimes|in:low,medium,high',
+            'country_id' => 'sometimes|uuid|exists:countries,id',
             'is_notification_enabled' => 'sometimes|boolean',
             'is_price_alerts_enabled' => 'sometimes|boolean',
             'is_new_recommendations_alerts_enabled' => 'sometimes|boolean',
