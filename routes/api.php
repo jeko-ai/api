@@ -46,6 +46,11 @@ Route::prefix('v1')->group(function () {
             ->where('timeframe', 'month|quarter|biannual|year');
     });
 
+    Route::prefix('news')->middleware('news')->group(function () {
+        Route::get('{timeframe}', GetNewsBySentiment::class)
+            ->where('timeframe', 'month|quarter|biannual|year');
+    });
+
 
 
 
