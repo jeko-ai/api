@@ -14,7 +14,9 @@ class GetNewsAction
         $search = request('search');
 
         $query = News::query()
-            ->where('language', $language)
+            ->where('language', $language)->select([
+                'slug', 'title', 'small_image_url', 'symbol_id', 'market_id', 'description', 'sentiment', 'date'
+            ])
             ->orderByDesc('created_at');
 
         if ($market_id) {
