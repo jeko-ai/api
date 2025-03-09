@@ -98,6 +98,7 @@ return [
     'cipher' => 'AES-256-CBC',
 
     'key' => env('APP_KEY'),
+    'supabase_jwt_secret' => env('SUPABASE_JWT_SECRET'),
 
     'http_key' => env('HTTP_KEY'),
     'browser_endpoint' => env('BROWSER_ENDPOINT'),

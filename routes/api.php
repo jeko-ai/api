@@ -78,14 +78,14 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    Route::prefix('ai')->group(function () {
+    Route::prefix('ai')->middleware('supabase.auth')->group(function () {
         Route::prefix('predictions')->group(function () {
             Route::get('', GetPredictionsAction::class);
             Route::post('', CreatePredictionAction::class);
         });
         Route::prefix('simulations')->group(function () {
             Route::get('', GetSimulationsAction::class);
-            Route::post('', CreateSimulationAction::class);
+            Route::post('{id}', CreateSimulationAction::class);
         });
     });
 });

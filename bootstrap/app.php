@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Middleware\EncryptResponse;
-use App\Http\Middleware\ValidateApiKey;
+use App\Http\Middleware\ValidateSupabaseToken;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Spatie\ResponseCache\Middlewares\CacheResponse;
+use Spatie\ResponseCache\Middlewares\DoNotCacheResponse;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,8 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
 //            EncryptResponse::class,
         ]);
         $middleware->alias([
-            'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
-            'doNotCacheResponse' => \Spatie\ResponseCache\Middlewares\DoNotCacheResponse::class,
+            'cacheResponse' => CacheResponse::class,
+            'doNotCacheResponse' => DoNotCacheResponse::class,
+            'supabase.auth' => ValidateSupabaseToken::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
