@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\GetSymbolPriceAction;
 use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
+use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsByTimeframeAction;
 use App\Http\Controllers\API\V1\Static\GetBestAction;
 use App\Http\Controllers\API\V1\Static\GetCompaniesAction;
@@ -47,8 +48,8 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('news')->middleware('news')->group(function () {
-        Route::get('{timeframe}', GetNewsBySentiment::class)
-            ->where('timeframe', 'month|quarter|biannual|year');
+        Route::get('{sentiment}', GetNewsBySentiment::class)
+            ->where('sentiment', 'negative|positive|neutral');
     });
 
 
