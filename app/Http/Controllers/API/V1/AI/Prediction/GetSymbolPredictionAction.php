@@ -9,8 +9,13 @@ class GetSymbolPredictionAction
 {
     public function __invoke($symbol)
     {
-        return Cache::remember("symbol-$symbol-price-prediction", 3600, function () use ($symbol) {
-            return SymbolPricePrediction::where('symbol_id', $symbol)->orderByDesc('prediction_date')->first();
+        return SymbolPricePrediction::where('symbol_id', $symbol)
+            ->orderByDesc('prediction_date')
+            ->first();
+        return Cache::remember("symbol-$symbol-price-prediction", 5 * 60, function () use ($symbol) {
+            return SymbolPricePrediction::where('symbol_id', $symbol)
+                ->orderByDesc('prediction_date')
+                ->first();
         });
     }
 }
