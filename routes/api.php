@@ -37,7 +37,7 @@ Route::prefix('v1')->group(function () {
             Route::get('most-volatile', GetMostVolatileAction::class);
             Route::get('highest-volume', GetHighestVolumeAction::class);
             Route::get('worst', GetWorstAction::class);
-        })->middleware('cacheResponse:3600');
+        })->middleware('cacheResponse:1440');
     });
 
     Route::get('prices/{id}', GetSymbolPriceAction::class)->middleware('cacheResponse:300');
