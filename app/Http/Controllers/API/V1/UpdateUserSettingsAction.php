@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\UpdateUserSettingsRequest;
+use Illuminate\Support\Facades\DB;
 
 class UpdateUserSettingsAction
 {
