@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\GetSymbolPriceAction;
 use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
+use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsByTimeframeAction;
 use App\Http\Controllers\API\V1\Static\GetBestAction;
 use App\Http\Controllers\API\V1\Static\GetCompaniesAction;
 use App\Http\Controllers\API\V1\Static\GetCountriesAction;
@@ -38,6 +39,17 @@ Route::prefix('v1')->group(function () {
 
     Route::get('prices/{id}', GetSymbolPriceAction::class);
     Route::get('quotes/{id}', GetSymbolQuoteAction::class);
+
+
+    Route::prefix('recommendations')->middleware('cacheResponse')->group(function () {
+        Route::get('{timeframe}', GetRecommendationsByTimeframeAction::class)
+            ->where('timeframe', 'month|quarter|biannual|year');
+    });
+
+
+
+
+
 
     Route::prefix('symbols')->middleware('cacheResponse')->group(function () {
         Route::prefix('{symbol}')->group(function () {
