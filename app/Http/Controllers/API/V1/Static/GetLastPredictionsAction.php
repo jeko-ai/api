@@ -10,9 +10,10 @@ class GetLastPredictionsAction
     public function __invoke()
     {
         $predictions = Cache::remember("get_latest_symbol_price_predictions", 60 * 60, function () {
-            return DB::select('select * from get_latest_symbol_price_predictions()');
+            $predictions = DB::select('select * from get_latest_symbol_price_predictions()');
+            return collect($predictions)->keyBy('symbol_id');
         });
 
-        return response()->json(collect($predictions)->keyBy('symbol_id'));
+        return response()->json($predictions);
     }
 }
