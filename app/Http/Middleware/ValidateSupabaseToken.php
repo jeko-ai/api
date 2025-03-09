@@ -19,7 +19,6 @@ class ValidateSupabaseToken
 
         try {
             $decoded = JWT::decode($token, new Key(config('app.supabase_jwt_secret'), 'HS256'));
-            return response()->json($decoded);
             $request->attributes->set('user_id', $decoded->sub);
         } catch (Exception $e) {
             return response()->json(['error' => 'Invalid Token'], 401);
