@@ -22,34 +22,36 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
-    Route::prefix('static')->middleware('cacheResponse')->group(function () {
-        Route::get('countries', GetCountriesAction::class);
-        Route::get('markets', GetMarketsAction::class);
-        Route::get('sectors', GetSectorsAction::class);
-        Route::get('symbols', GetSymbolsAction::class);
-        Route::get('indices', GetIndicesAction::class);
-        Route::get('plans', GetPlansAction::class);
+    Route::prefix('static')->group(function () {
+        Route::middleware('cacheResponse')->group(function () {
+            Route::get('countries', GetCountriesAction::class);
+            Route::get('markets', GetMarketsAction::class);
+            Route::get('sectors', GetSectorsAction::class);
+            Route::get('symbols', GetSymbolsAction::class);
+            Route::get('indices', GetIndicesAction::class);
+            Route::get('plans', GetPlansAction::class);
+        });
         Route::prefix('{market}')->group(function () {
             Route::get('best', GetBestAction::class);
             Route::get('companies', GetCompaniesAction::class);
             Route::get('most-volatile', GetMostVolatileAction::class);
             Route::get('highest-volume', GetHighestVolumeAction::class);
             Route::get('worst', GetWorstAction::class);
-        });
+        })->middleware('cacheResponse:3600');
     });
 
-    Route::get('prices/{id}', GetSymbolPriceAction::class);
-    Route::get('quotes/{id}', GetSymbolQuoteAction::class);
+    Route::get('prices/{id}', GetSymbolPriceAction::class)->middleware('cacheResponse:300');
+    Route::get('quotes/{id}', GetSymbolQuoteAction::class)->middleware('cacheResponse:300');
 
 
-    Route::prefix('recommendations')->middleware('cacheResponse')->group(function () {
+    Route::prefix('recommendations')->group(function () {
         Route::get('{timeframe}', GetRecommendationsByTimeframeAction::class)
-            ->where('timeframe', 'month|quarter|biannual|year');
+            ->where('timeframe', 'month|quarter|biannual|year')->middleware('cacheResponse:1728000');
     });
 
-    Route::prefix('news')->middleware('cacheResponse')->group(function () {
+    Route::prefix('news')->group(function () {
         Route::get('{sentiment}', GetNewsBySentiment::class)
-            ->where('sentiment', 'negative|positive|neutral');
+            ->where('sentiment', 'negative|positive|neutral')->middleware('cacheResponse:3600');
     });
 
 
