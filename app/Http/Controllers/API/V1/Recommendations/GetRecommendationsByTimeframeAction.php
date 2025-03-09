@@ -9,14 +9,16 @@ class GetRecommendationsByTimeframeAction
 {
     public function __invoke(string $timeframe)
     {
-        $locale = request()->header('Accept-Language', 'en');
+        $locale = request()->header('Accept-Language', request('locale', 'en'));
         $limit = request('limit');
         $market_id = request('market_id');
-        $select = 'id, symbol_id, sector_id, market_id, target_price, expected_return, timeframe, risk_level, slug';
+        $select = [
+            'id', 'symbol_id', 'sector_id', 'market_id', 'target_price', 'expected_return', 'timeframe', 'risk_level', 'slug'
+        ];
         if ($locale === 'ar') {
-            $select .= ', title_ar, description_ar, points_ar';
+            $select = array_merge($select, ['title_ar', 'description_ar', 'points_ar']);
         } else {
-            $select .= ', title, description, points';
+            $select = array_merge($select, ['title', 'description', 'points']);
         }
         $query = Recommendations::query()->select($select);
         if ($market_id) {
