@@ -4,6 +4,7 @@ use App\Http\Controllers\API\V1\GetSymbolPriceAction;
 use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
+use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsByTimeframeAction;
 use App\Http\Controllers\API\V1\Static\GetBestAction;
 use App\Http\Controllers\API\V1\Static\GetCompaniesAction;
@@ -46,6 +47,8 @@ Route::prefix('v1')->group(function () {
 
 
     Route::prefix('recommendations')->group(function () {
+        Route::get('', GetRecommendationsAction::class);
+
         Route::get('{timeframe}', GetRecommendationsByTimeframeAction::class)
             ->where('timeframe', 'month|quarter|biannual|year')->middleware('cacheResponse:1728000');
     });
