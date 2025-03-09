@@ -47,7 +47,7 @@ Route::prefix('v1')->group(function () {
             ->where('timeframe', 'month|quarter|biannual|year');
     });
 
-    Route::prefix('news')->middleware('news')->group(function () {
+    Route::prefix('news')->middleware('cacheResponse')->group(function () {
         Route::get('{sentiment}', GetNewsBySentiment::class)
             ->where('sentiment', 'negative|positive|neutral');
     });
