@@ -16,6 +16,7 @@ use App\Http\Controllers\API\V1\Static\GetCompaniesAction;
 use App\Http\Controllers\API\V1\Static\GetCountriesAction;
 use App\Http\Controllers\API\V1\Static\GetHighestVolumeAction;
 use App\Http\Controllers\API\V1\Static\GetIndicesAction;
+use App\Http\Controllers\API\V1\Static\GetLastPredictionsAction;
 use App\Http\Controllers\API\V1\Static\GetMarketsAction;
 use App\Http\Controllers\API\V1\Static\GetMostVolatileAction;
 use App\Http\Controllers\API\V1\Static\GetPlansAction;
@@ -31,13 +32,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::prefix('static')->group(function () {
-        Route::middleware('cacheResponse')->group(function () {
+        Route::middleware('cacheResponse:3600')->group(function () {
             Route::get('countries', GetCountriesAction::class);
             Route::get('markets', GetMarketsAction::class);
             Route::get('sectors', GetSectorsAction::class);
             Route::get('symbols', GetSymbolsAction::class);
             Route::get('indices', GetIndicesAction::class);
             Route::get('plans', GetPlansAction::class);
+            Route::get('predictions', GetLastPredictionsAction::class);
         });
         Route::prefix('{market}')->group(function () {
             Route::get('best', GetBestAction::class);
