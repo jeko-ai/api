@@ -23,6 +23,6 @@ class GetNewsAction
             $query->where('market_id', $market_id);
         }
 
-        return News::paginate($limit);
+        return $query->paginate($limit);
     }
 }
