@@ -13,6 +13,6 @@ class GetLastPredictionsAction
             return DB::select('select * from get_latest_symbol_price_predictions()');
         });
 
-        return response()->json($predictions->keyBy('symbol_id'));
+        return response()->json(collect($predictions)->keyBy('symbol_id'));
     }
 }
