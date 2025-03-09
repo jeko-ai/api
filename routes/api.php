@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\V1\GetSymbolPriceAction;
+use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
 use App\Http\Controllers\API\V1\Static\GetBestAction;
 use App\Http\Controllers\API\V1\Static\GetCompaniesAction;
 use App\Http\Controllers\API\V1\Static\GetCountriesAction;
@@ -33,6 +35,9 @@ Route::prefix('v1')->group(function () {
             Route::get('worst', GetWorstAction::class);
         });
     });
+
+    Route::get('prices/{id}', GetSymbolPriceAction::class);
+    Route::get('quotes/{id}', GetSymbolQuoteAction::class);
 
     Route::prefix('symbols')->middleware('cacheResponse')->group(function () {
         Route::prefix('{symbol}')->group(function () {
