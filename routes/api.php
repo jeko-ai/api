@@ -46,8 +46,8 @@ Route::prefix('v1')->group(function () {
         })->middleware('cacheResponse:1440');
     });
 
-    Route::get('prices/{id}', GetSymbolPriceAction::class)->middleware('cacheResponse:300');
-    Route::get('quotes/{id}', GetSymbolQuoteAction::class)->middleware('cacheResponse:300');
+    Route::get('prices/{id}', GetSymbolPriceAction::class);
+    Route::get('quotes/{id}', GetSymbolQuoteAction::class);
 
 
     Route::prefix('recommendations')->group(function () {
