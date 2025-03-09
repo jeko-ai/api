@@ -16,7 +16,7 @@ class CreatePredictionAction
         });
         $symbol = collect($symbols)->keyBy('id')->get($request->id);
         PricePredictionRequests::create([
-            'user_id' => $user->id,
+            'user_id' => $request->attributes->get('user_id'),
             'symbol_id' => $symbol?->id,
             'symbol' => $symbol?->symbol,
             'market_id' => $symbol?->market_id,
