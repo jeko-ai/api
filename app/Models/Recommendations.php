@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class Recommendations extends Model
 {
@@ -48,5 +48,9 @@ class Recommendations extends Model
         'meta_tags',
         'meta_tags_ar',
         'slug',
+    ];
+
+    protected $casts = [
+        'points' => 'array'
     ];
 }
