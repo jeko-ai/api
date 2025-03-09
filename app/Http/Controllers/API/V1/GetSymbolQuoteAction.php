@@ -11,6 +11,10 @@ class GetSymbolQuoteAction
 {
     public function __invoke(string $id)
     {
+        if (Cache::has("quotes-$id")) {
+            return Cache::get("quotes-$id");
+        }
+
         $symbols = Cache::rememberForever('symbols', function () {
             return Symbols::where('type', 'stock')->get();
         });
@@ -32,6 +36,8 @@ class GetSymbolQuoteAction
                 'url' => $url
             ])->json();
 
-        return response()->json($res);
+        return Cache::remember("quotes-$id", 5 * 60, function () use ($res) {
+            return response()->json($res);
+        });
     }
 }
