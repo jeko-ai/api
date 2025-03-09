@@ -46,12 +46,12 @@ Route::prefix('v1')->group(function () {
 
 
     Route::prefix('recommendations')->group(function () {
-        Route::get('', GetNewsAction::class);
         Route::get('{timeframe}', GetRecommendationsByTimeframeAction::class)
             ->where('timeframe', 'month|quarter|biannual|year')->middleware('cacheResponse:1728000');
     });
 
     Route::prefix('news')->group(function () {
+        Route::get('', GetNewsAction::class);
         Route::get('{sentiment}', GetNewsBySentiment::class)
             ->where('sentiment', 'negative|positive|neutral')->middleware('cacheResponse:3600');
     });
