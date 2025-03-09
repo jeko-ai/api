@@ -25,6 +25,7 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolChartInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
+use App\Http\Controllers\API\V1\UpdateUserSettingsAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -78,14 +79,17 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    Route::prefix('ai')->middleware('supabase.auth')->group(function () {
-        Route::prefix('predictions')->group(function () {
-            Route::get('', GetPredictionsAction::class);
-            Route::post('', CreatePredictionAction::class);
-        });
-        Route::prefix('simulations')->group(function () {
-            Route::get('', GetSimulationsAction::class);
-            Route::post('{id}', CreateSimulationAction::class);
+    Route::middleware('supabase.auth')->group(function () {
+        Route::post('settings', UpdateUserSettingsAction::class);
+        Route::prefix('ai')->group(function () {
+            Route::prefix('predictions')->group(function () {
+                Route::get('', GetPredictionsAction::class);
+                Route::post('', CreatePredictionAction::class);
+            });
+            Route::prefix('simulations')->group(function () {
+                Route::get('', GetSimulationsAction::class);
+                Route::post('{id}', CreateSimulationAction::class);
+            });
         });
     });
 });
