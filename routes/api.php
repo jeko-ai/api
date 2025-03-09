@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\AI\Prediction\CreatePredictionAction;
 use App\Http\Controllers\API\V1\AI\Prediction\GetPredictionsAction;
+use App\Http\Controllers\API\V1\AI\Prediction\GetSymbolPredictionAction;
 use App\Http\Controllers\API\V1\AI\Simulation\CreateSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
 use App\Http\Controllers\API\V1\GetSymbolPriceAction;
@@ -65,17 +66,17 @@ Route::prefix('v1')->group(function () {
     });
 
 
-
-
-
-
-    Route::prefix('symbols')->middleware('cacheResponse')->group(function () {
+    Route::prefix('symbols')->group(function () {
         Route::prefix('{symbol}')->group(function () {
-            Route::get('history', GetSymbolHistoryAction::class);
-            Route::get('info', GetSymbolInfoAction::class);
-            Route::get('chart-info', GetSymbolChartInfoAction::class);
+            Route::get('prediction', GetSymbolPredictionAction::class);
             Route::get('technical/{timeframe}', GetSymbolTechnicalAction::class)
                 ->where('timeframe', '5m|15m|30m|1h|5h|1d|1w|1mo');
+            Route::get('chart-info', GetSymbolChartInfoAction::class);
+            Route::get('history', GetSymbolHistoryAction::class);
+
+
+            Route::get('info', GetSymbolInfoAction::class);
+
         });
     });
 
