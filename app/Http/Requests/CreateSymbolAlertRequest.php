@@ -23,7 +23,7 @@ class CreateSymbolAlertRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'symbol_id' => 'required|uuid|exists:symbols,id',
+            'id' => 'required|uuid|exists:symbols,id',
             'enable_price_alert' => 'nullable|boolean',
             'price_alert' => 'nullable|numeric',
             'new_recommendation' => 'nullable|boolean',

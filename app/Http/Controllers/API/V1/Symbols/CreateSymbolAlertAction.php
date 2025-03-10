@@ -11,7 +11,7 @@ class CreateSymbolAlertAction
     public function __invoke(CreateSymbolAlertRequest $request, string $symbol)
     {
         $userId = $request->attributes->get('user_id');
-        $symbolId = $request->input('symbol_id');
+        $symbolId = $request->input('id');
 
         // Fetch symbol details
         $symbol = Symbols::select('inv_id', 'tv_id')->where('id', $symbolId)->first();
