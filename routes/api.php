@@ -73,6 +73,9 @@ Route::prefix('v1')->group(function () {
             Route::get('prediction', GetSymbolPredictionAction::class);
             Route::get('technical/{timeframe}', GetSymbolTechnicalAction::class)
                 ->where('timeframe', '5m|15m|30m|1h|5h|1d|1w|1mo');
+            Route::get('check', CheckIfUserOwnSymbolAction::class);
+
+
             Route::get('chart-info', GetSymbolChartInfoAction::class);
             Route::get('history', GetSymbolHistoryAction::class);
 
