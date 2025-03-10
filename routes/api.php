@@ -31,6 +31,7 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolChartInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
+use App\Http\Controllers\API\V1\Symbols\SellSymbolAction;
 use App\Http\Controllers\API\V1\UpdateUserSettingsAction;
 use Illuminate\Support\Facades\Route;
 
@@ -77,10 +78,14 @@ Route::prefix('v1')->group(function () {
             Route::get('prediction', GetSymbolPredictionAction::class);
             Route::get('technical/{timeframe}', GetSymbolTechnicalAction::class)
                 ->where('timeframe', '5m|15m|30m|1h|5h|1d|1w|1mo');
-            Route::get('check', CheckIfUserOwnSymbolAction::class)->middleware('supabase.auth');
-            Route::get('alerts', GetSymbolAlertsAction::class)->middleware('supabase.auth');
-            Route::post('alerts', CreateSymbolAlertAction::class)->middleware('supabase.auth');
-            Route::post('add', AddSymbolToPortfolioAction::class)->middleware('supabase.auth');
+
+            Route::middleware('supabase.auth')->group(function () {
+                Route::get('check', CheckIfUserOwnSymbolAction::class);
+                Route::get('alerts', GetSymbolAlertsAction::class);
+                Route::post('alerts', CreateSymbolAlertAction::class);
+                Route::post('add', AddSymbolToPortfolioAction::class);
+                Route::post('sell', SellSymbolAction::class);
+            });
 
 
             Route::get('chart-info', GetSymbolChartInfoAction::class);
