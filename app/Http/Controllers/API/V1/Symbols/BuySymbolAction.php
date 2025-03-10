@@ -6,7 +6,6 @@ use App\Http\Requests\BuySymbolRequest;
 use App\Models\PortfolioAssets;
 use App\Models\Portfolios;
 use App\Models\PortfolioTransactions;
-use App\Models\Symbols;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -14,12 +13,6 @@ class BuySymbolAction
 {
     public function __invoke(BuySymbolRequest $request, string $symbol)
     {
-        // Check if the symbol exists
-        $symbolExists = Symbols::where('id', $request->symbol_id)->exists();
-        if (!$symbolExists) {
-            return response()->json(['status' => 'invalid_symbol'], 400);
-        }
-
         $userId = $request->attributes->get('user_id');
 
         // Get user's default portfolio
@@ -35,7 +28,7 @@ class BuySymbolAction
             DB::transaction(function () use ($request, $userPortfolio, $userId) {
                 // Check if the asset exists in the portfolio
                 $existingAsset = PortfolioAssets::where('portfolio_id', $userPortfolio->id)
-                    ->where('symbol_id', $request->symbol_id)
+                    ->where('symbol_id', $request->id)
                     ->first();
 
                 if ($existingAsset) {
@@ -53,7 +46,7 @@ class BuySymbolAction
                     // Insert new asset
                     PortfolioAssets::create([
                         'portfolio_id' => $userPortfolio->id,
-                        'symbol_id' => $request->symbol_id,
+                        'symbol_id' => $request->id,
                         'user_id' => $userId,
                         'quantity' => $request->quantity,
                         'avg_buy_price' => $request->price_per_unit,
@@ -64,7 +57,7 @@ class BuySymbolAction
                 // Insert transaction record
                 PortfolioTransactions::create([
                     'portfolio_id' => $userPortfolio->id,
-                    'symbol_id' => $request->symbol_id,
+                    'symbol_id' => $request->id,
                     'user_id' => $userId,
                     'transaction_type' => 'buy',
                     'quantity' => $request->quantity,
