@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class Portfolios extends Model
 {
@@ -11,7 +11,6 @@ class Portfolios extends Model
 
     protected $table = 'portfolios';
     protected $fillable = [
-        'user_id',
         'name',
         'description',
         'created_at',
