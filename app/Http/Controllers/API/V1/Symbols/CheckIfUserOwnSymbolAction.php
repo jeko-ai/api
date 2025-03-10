@@ -9,10 +9,10 @@ class CheckIfUserOwnSymbolAction
 {
     public function __invoke(string $symbol)
     {
-        $user = request()->attributes->get('user_id');
+        $userId = request()->attributes->get('user_id');
 
         // Get the user's default portfolio
-        $userPortfolio = Portfolios::where('user_id', $user->id)
+        $userPortfolio = Portfolios::where('user_id', $userId)
             ->where('is_default', true)
             ->first();
 
