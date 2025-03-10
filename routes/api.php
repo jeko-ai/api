@@ -23,6 +23,7 @@ use App\Http\Controllers\API\V1\Static\GetPlansAction;
 use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Static\GetWorstAction;
+use App\Http\Controllers\API\V1\Symbols\CheckIfUserOwnSymbolAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolChartInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
