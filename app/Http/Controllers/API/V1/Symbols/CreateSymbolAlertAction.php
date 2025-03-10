@@ -11,6 +11,7 @@ class CreateSymbolAlertAction
     public function __invoke(CreateSymbolAlertRequest $request, string $symbol)
     {
         $userId = $request->attributes->get('user_id');
+        dd($userId);
         $symbolId = $request->input('id');
 
         // Fetch symbol details
