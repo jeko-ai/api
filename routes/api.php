@@ -23,6 +23,7 @@ use App\Http\Controllers\API\V1\Static\GetPlansAction;
 use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Static\GetWorstAction;
+use App\Http\Controllers\API\V1\Symbols\AddSymbolToPortfolioAction;
 use App\Http\Controllers\API\V1\Symbols\CheckIfUserOwnSymbolAction;
 use App\Http\Controllers\API\V1\Symbols\CreateSymbolAlertAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolAlertsAction;
@@ -79,6 +80,7 @@ Route::prefix('v1')->group(function () {
             Route::get('check', CheckIfUserOwnSymbolAction::class)->middleware('supabase.auth');
             Route::get('alerts', GetSymbolAlertsAction::class)->middleware('supabase.auth');
             Route::post('alerts', CreateSymbolAlertAction::class)->middleware('supabase.auth');
+            Route::post('add', AddSymbolToPortfolioAction::class)->middleware('supabase.auth');
 
 
             Route::get('chart-info', GetSymbolChartInfoAction::class);
