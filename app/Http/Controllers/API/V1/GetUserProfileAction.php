@@ -8,7 +8,7 @@ class GetUserProfileAction
 {
     public function __invoke()
     {
-        $profile = Profiles::where('user_id', request()->attributes->get('user_id'))->first();
+        $profile = Profiles::find(request()->attributes->get('user_id'));
         return response()->json($profile);
     }
 }

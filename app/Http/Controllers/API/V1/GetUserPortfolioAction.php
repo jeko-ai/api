@@ -10,7 +10,7 @@ class GetUserPortfolioAction
     public function __invoke()
     {
         // Get the latest default portfolio
-        $latestPortfolio = Portfolios::where('id', request()->attributes->get('user_id'))
+        $latestPortfolio = Portfolios::where('user_id', request()->attributes->get('user_id'))
             ->where('is_default', true)
             ->orderBy('created_at', 'desc')
             ->first();
