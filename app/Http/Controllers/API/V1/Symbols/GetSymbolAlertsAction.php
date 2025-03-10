@@ -11,7 +11,7 @@ class GetSymbolAlertsAction
         $alerts = UserSymbolAlert::where([
             'symbol_id' => $symbol,
             'user_id' => request()->attributes->get('user_id'),
-        ])->get();
+        ])->first();
 
         return response()->json($alerts);
     }
