@@ -24,6 +24,8 @@ use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Static\GetWorstAction;
 use App\Http\Controllers\API\V1\Symbols\CheckIfUserOwnSymbolAction;
+use App\Http\Controllers\API\V1\Symbols\CreateSymbolAlertAction;
+use App\Http\Controllers\API\V1\Symbols\GetSymbolAlertsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolChartInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
@@ -75,6 +77,8 @@ Route::prefix('v1')->group(function () {
             Route::get('technical/{timeframe}', GetSymbolTechnicalAction::class)
                 ->where('timeframe', '5m|15m|30m|1h|5h|1d|1w|1mo');
             Route::get('check', CheckIfUserOwnSymbolAction::class);
+            Route::get('alerts', GetSymbolAlertsAction::class);
+            Route::post('alerts', CreateSymbolAlertAction::class);
 
 
             Route::get('chart-info', GetSymbolChartInfoAction::class);
