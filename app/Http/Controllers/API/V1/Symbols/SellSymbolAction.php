@@ -13,8 +13,10 @@ class SellSymbolAction
 {
     public function __invoke(SellSymbolRequest $request, string $symbol)
     {
+        $userId = $request->attributes->get('user_id');
+
         // Get user's default portfolio
-        $userPortfolio = Portfolios::where('user_id', $request->attributes->get('user_id'))
+        $userPortfolio = Portfolios::where('user_id', $userId)
             ->where('is_default', true)
             ->first();
 
@@ -24,7 +26,7 @@ class SellSymbolAction
 
         // Find the asset in the portfolio
         $existingAsset = PortfolioAssets::where('portfolio_id', $userPortfolio->id)
-            ->where('symbol_id', $request->symbol_id)
+            ->where('symbol_id', $request->id)
             ->first();
 
         if (!$existingAsset) {
@@ -37,7 +39,7 @@ class SellSymbolAction
         }
 
         try {
-            DB::transaction(function () use ($existingAsset, $request, $userPortfolio, $user) {
+            DB::transaction(function () use ($existingAsset, $request, $userPortfolio, $userId) {
                 if ($existingAsset->quantity == $request->quantity) {
                     // Remove the asset if selling all shares
                     $existingAsset->delete();
@@ -51,8 +53,8 @@ class SellSymbolAction
                 // Insert transaction record
                 PortfolioTransactions::create([
                     'portfolio_id' => $userPortfolio->id,
-                    'symbol_id' => $request->symbol_id,
-                    'user_id' => $user->id,
+                    'symbol_id' => $request->id,
+                    'user_id' => $userId,
                     'transaction_type' => 'sell',
                     'quantity' => $request->quantity,
                     'price_per_unit' => $request->sell_price,
