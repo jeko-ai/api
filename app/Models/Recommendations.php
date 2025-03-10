@@ -51,6 +51,7 @@ class Recommendations extends Model
     ];
 
     protected $casts = [
-        'points' => 'array'
+        'points' => 'array',
+        'points_ar' => 'array'
     ];
 }
