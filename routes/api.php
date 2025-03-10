@@ -32,6 +32,7 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolChartInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
+use App\Http\Controllers\API\V1\Symbols\GetSymbolTransactionsAction;
 use App\Http\Controllers\API\V1\Symbols\SellSymbolAction;
 use App\Http\Controllers\API\V1\UpdateUserSettingsAction;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,7 @@ Route::prefix('v1')->group(function () {
                 Route::post('add', AddSymbolToPortfolioAction::class);
                 Route::post('sell', SellSymbolAction::class);
                 Route::post('buy', BuySymbolAction::class);
+                Route::get('transactions', GetSymbolTransactionsAction::class);
             });
 
 
