@@ -24,6 +24,7 @@ use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Static\GetWorstAction;
 use App\Http\Controllers\API\V1\Symbols\AddSymbolToPortfolioAction;
+use App\Http\Controllers\API\V1\Symbols\BuySymbolAction;
 use App\Http\Controllers\API\V1\Symbols\CheckIfUserOwnSymbolAction;
 use App\Http\Controllers\API\V1\Symbols\CreateSymbolAlertAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolAlertsAction;
@@ -85,6 +86,7 @@ Route::prefix('v1')->group(function () {
                 Route::post('alerts', CreateSymbolAlertAction::class);
                 Route::post('add', AddSymbolToPortfolioAction::class);
                 Route::post('sell', SellSymbolAction::class);
+                Route::post('buy', BuySymbolAction::class);
             });
 
 
