@@ -14,7 +14,14 @@ class GetUserPortfolioTransactionsAction
             ->orderBy('created_at', 'desc')
             ->first();
 
-        $transactions = PortfolioTransactions::where('portfolio_id', $latestPortfolio->id)->get();
+        $transactions = PortfolioTransactions::where('portfolio_id', $latestPortfolio->id)->with([
+            'symbol' => function ($query) {
+                $query->select([
+                    'id', 'logo_id', 'name_ar', 'name_en', 'symbol', 'currency'
+                ])->with('quote');
+            },
+        ])
+            ->get();
 
         return response()->json($transactions);
     }

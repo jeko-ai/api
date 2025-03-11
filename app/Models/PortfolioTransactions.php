@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PortfolioTransactions extends Model
 {
@@ -22,4 +23,9 @@ class PortfolioTransactions extends Model
         'executed_at',
         'user_id',
     ];
+
+    public function symbol(): HasOne
+    {
+        return $this->hasOne(Symbols::class, 'id', 'symbol_id');
+    }
 }
