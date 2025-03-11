@@ -33,8 +33,8 @@ class GetPortfolioChangePercentage
             ->value('total_value');
 
         // If no previous value exists, return "N/A"
-        if ($yesterdayValue === null || $yesterdayValue == 0) {
-            return response()->json(['change_percentage' => 'N/A']);
+        if ($yesterdayValue == 0) {
+            return response()->json(['change_percentage' => 0]);
         }
 
         // Calculate percentage change
