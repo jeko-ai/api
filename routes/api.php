@@ -36,6 +36,7 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolAlertsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolChartInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
+use App\Http\Controllers\API\V1\Symbols\GetSymbolPricesAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTransactionsAction;
 use App\Http\Controllers\API\V1\Symbols\SellSymbolAction;
@@ -94,6 +95,7 @@ Route::prefix('v1')->group(function () {
                 Route::post('sell', SellSymbolAction::class);
                 Route::post('buy', BuySymbolAction::class);
                 Route::get('transactions', GetSymbolTransactionsAction::class);
+                Route::get('{from}/{to}', GetSymbolPricesAction::class);
             });
 
 
