@@ -24,4 +24,9 @@ class Portfolios extends Model
     {
         return $this->hasMany(PortfolioAssets::class, 'portfolio_id');
     }
+
+    public function histories(): HasMany
+    {
+        return $this->hasMany(PortfolioHistory::class, 'portfolio_id');
+    }
 }
