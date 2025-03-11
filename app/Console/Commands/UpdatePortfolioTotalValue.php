@@ -17,7 +17,7 @@ class UpdatePortfolioTotalValue extends Command
             SET total_value = (
                 SELECT COALESCE(SUM(pa.quantity * q.last_price), 0)
                 FROM portfolio_assets pa
-                JOIN quotes q ON pa.symbol_id = s.symbol_id
+                JOIN quotes q ON pa.symbol_id = q.symbol_id
                 WHERE pa.portfolio_id = p.id
             )
             WHERE EXISTS (
