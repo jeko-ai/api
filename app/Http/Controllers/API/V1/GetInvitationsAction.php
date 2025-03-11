@@ -9,7 +9,7 @@ class GetInvitationsAction
     public function __invoke()
     {
         $invitations = Invitations::select(['id', 'created_at', 'status', 'invitee_id', 'invitee_email', 'invitee_phone'])
-            ->with('profile:full_name')
+            ->with('profile:id,full_name')
             ->get();
 
         $grouped = $invitations->groupBy('status');
