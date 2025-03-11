@@ -14,7 +14,9 @@ class GetUserPortfolioAssetsAction
             ->orderBy('created_at', 'desc')
             ->first();
 
-        $assets = PortfolioAssets::where('portfolio_id', $latestPortfolio->id)->get();
+        $assets = PortfolioAssets::where('portfolio_id', $latestPortfolio->id)->with([
+            'symbol:logo_id,name_ar,name_en,symbol',
+        ])->get();
 
         return response()->json($assets);
     }

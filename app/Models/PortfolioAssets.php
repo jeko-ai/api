@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PortfolioAssets extends Model
 {
@@ -23,4 +24,9 @@ class PortfolioAssets extends Model
         'profit_loss',
         'dividends_received',
     ];
+
+    public function symbol(): HasOne
+    {
+        return $this->hasOne(Symbols::class, 'id', 'symbol_id');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Portfolios extends Model
 {
@@ -18,4 +19,9 @@ class Portfolios extends Model
         'currency',
         'total_value',
     ];
+
+    public function assets(): HasMany
+    {
+        return $this->hasMany(PortfolioAssets::class, 'portfolio_id');
+    }
 }
