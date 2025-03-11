@@ -11,6 +11,7 @@ use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
 use App\Http\Controllers\API\V1\GetUserProfileAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
+use App\Http\Controllers\API\V1\Portfolio\GetPortfolioChangePercentage;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAssetsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioTransactionsAction;
@@ -116,6 +117,7 @@ Route::prefix('v1')->group(function () {
             Route::get('', GetUserPortfolioAction::class);
             Route::get('assets', GetUserPortfolioAssetsAction::class);
             Route::get('transactions', GetUserPortfolioTransactionsAction::class);
+            Route::get('change-percentage', GetPortfolioChangePercentage::class);
         });
         Route::prefix('ai')->group(function () {
             Route::prefix('predictions')->group(function () {
