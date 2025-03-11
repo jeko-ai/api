@@ -17,7 +17,7 @@ class GetUserPortfolioAssetsAction
         $assets = PortfolioAssets::where('portfolio_id', $latestPortfolio->id)->with([
             'symbol' => function ($query) {
                 $query->select([
-                    'id,logo_id,name_ar,name_en,symbol'
+                    'id', 'logo_id', 'name_ar', 'name_en', 'symbol'
                 ])->with('quote');
             },
         ])->get();
