@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Symbols;
 
-use App\Models\Symbols;use App\Models\Symbols;
+use App\Models\Symbols;
 use Http;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
