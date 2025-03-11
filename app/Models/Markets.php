@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class Markets extends Model
 {
@@ -20,5 +20,9 @@ class Markets extends Model
         'created_at',
         'symbol_id',
         'tv_link',
+    ];
+
+    protected $casts = [
+        'trading_days' => 'array'
     ];
 }
