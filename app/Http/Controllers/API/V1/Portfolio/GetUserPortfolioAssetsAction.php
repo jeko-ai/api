@@ -15,7 +15,7 @@ class GetUserPortfolioAssetsAction
             ->first();
 
         $assets = PortfolioAssets::where('portfolio_id', $latestPortfolio->id)->with([
-            'symbol:logo_id,name_ar,name_en,symbol',
+            'symbol:id,logo_id,name_ar,name_en,symbol',
         ])->get();
 
         return response()->json($assets);
