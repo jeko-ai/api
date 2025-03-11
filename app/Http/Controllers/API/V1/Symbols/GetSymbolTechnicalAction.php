@@ -68,7 +68,7 @@ class GetSymbolTechnicalAction
             '1w' => 604800,
             '1mo' => 2592000,
         ];
-        return Cache::remember("symbol-$symbol->id-technical-$timeframe", $timeframes[$timeframe], function () use ($symbol, $timeframe, $timeframes) {
+        $technical = Cache::remember("symbol-$symbol->id-technical-$timeframe", $timeframes[$timeframe], function () use ($symbol, $timeframe, $timeframes) {
             $url = "https://api.investing.com/api/financialdata/technical/analysis/{$symbol->inv_id}/{$timeframe}";
 
             return Http::baseUrl(config('app.browser_endpoint'))
@@ -78,5 +78,6 @@ class GetSymbolTechnicalAction
                 ])->json();
 
         });
+        return response()->json($technical);
     }
 }
