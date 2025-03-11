@@ -8,10 +8,12 @@ use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
 use App\Http\Controllers\API\V1\GetInvitationsAction;
 use App\Http\Controllers\API\V1\GetSymbolPriceAction;
 use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
-use App\Http\Controllers\API\V1\GetUserPortfolioAction;
 use App\Http\Controllers\API\V1\GetUserProfileAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
+use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAction;
+use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAssetsAction;
+use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioTransactionsAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsByTimeframeAction;
 use App\Http\Controllers\API\V1\Static\GetBestAction;
@@ -108,7 +110,11 @@ Route::prefix('v1')->group(function () {
         Route::post('settings', UpdateUserSettingsAction::class);
         Route::get('invitations', GetInvitationsAction::class);
         Route::get('profile', GetUserProfileAction::class);
-        Route::get('portfolio', GetUserPortfolioAction::class);
+        Route::prefix('portfolio')->group(function () {
+            Route::get('', GetUserPortfolioAction::class);
+            Route::get('assets', GetUserPortfolioAssetsAction::class);
+            Route::get('transactions', GetUserPortfolioTransactionsAction::class);
+        });
         Route::prefix('ai')->group(function () {
             Route::prefix('predictions')->group(function () {
                 Route::get('', GetPredictionsAction::class);

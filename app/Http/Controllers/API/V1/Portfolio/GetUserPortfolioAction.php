@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V1\Portfolio;
 
 use App\Models\PortfolioHistory;
 use App\Models\Portfolios;
