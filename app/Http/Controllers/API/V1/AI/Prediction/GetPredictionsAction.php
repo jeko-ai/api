@@ -11,6 +11,7 @@ class GetPredictionsAction
         return PricePredictionRequests::where('user_id', request()->attributes->get('user_id'))
             ->select([
                 'id',
+                'user_id',
                 'symbol_id',
                 'symbol',
                 'market_id',
