@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\AI\Prediction\CreatePredictionAction;
+use App\Http\Controllers\API\V1\AI\Prediction\GetPredictionAction;
 use App\Http\Controllers\API\V1\AI\Prediction\GetPredictionsAction;
 use App\Http\Controllers\API\V1\AI\Prediction\GetSymbolPredictionAction;
 use App\Http\Controllers\API\V1\AI\Simulation\CreateSimulationAction;
@@ -121,6 +122,7 @@ Route::prefix('v1')->group(function () {
         });
         Route::prefix('ai')->group(function () {
             Route::prefix('predictions')->group(function () {
+                Route::get('{id}', GetPredictionAction::class);
                 Route::get('', GetPredictionsAction::class);
                 Route::post('', CreatePredictionAction::class);
             });
