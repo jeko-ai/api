@@ -37,6 +37,6 @@ class PricePredictionRequests extends Model
 
     public function quote(): HasOne
     {
-        return $this->hasOne(Quotes::class, 'id', 'symbol_id');
+        return $this->hasOne(Quotes::class, 'symbol_id', 'symbol_id');
     }
 }
