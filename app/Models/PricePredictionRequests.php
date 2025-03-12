@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class PricePredictionRequests extends Model
 {
@@ -23,5 +23,9 @@ class PricePredictionRequests extends Model
         'prediction_result',
         'created_at',
         'updated_at',
+    ];
+
+    protected $casts = [
+        'prediction_result' => 'array'
     ];
 }
