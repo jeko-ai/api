@@ -8,7 +8,7 @@ class GetPredictionAction
 {
     public function __invoke(string $id)
     {
-        $prediction = PricePredictionRequests::find($id);
+        $prediction = PricePredictionRequests::with(['symbol', 'quote'])->find($id);
         return response()->json($prediction);
     }
 }
