@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Symbols extends Model
@@ -42,5 +43,10 @@ class Symbols extends Model
     public function quote(): HasOne
     {
         return $this->hasOne(Quotes::class, 'symbol_id', 'id');
+    }
+
+    public function market(): BelongsTo
+    {
+        return $this->belongsTo(Markets::class, 'market_id', 'id');
     }
 }
