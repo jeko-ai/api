@@ -17,6 +17,7 @@ class CreatePredictionAction
         });
         $symbol = collect($symbols)->keyBy('id')->get($request->id);
         $market = $symbol?->market;
+        dd($market->open_at, $market->close_at);
         PricePredictionRequests::create([
             'user_id' => $request->attributes->get('user_id'),
             'symbol_id' => $symbol?->id,
