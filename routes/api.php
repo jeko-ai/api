@@ -33,6 +33,7 @@ use App\Http\Controllers\API\V1\Static\GetPlansAction;
 use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Static\GetWorstAction;
+use App\Http\Controllers\API\V1\Stripe\CreateStripeSessionAction;
 use App\Http\Controllers\API\V1\Symbols\AddSymbolToPortfolioAction;
 use App\Http\Controllers\API\V1\Symbols\BuySymbolAction;
 use App\Http\Controllers\API\V1\Symbols\CheckIfUserOwnSymbolAction;
@@ -136,6 +137,10 @@ Route::prefix('v1')->group(function () {
                 Route::get('', GetSimulationsAction::class);
                 Route::post('', CreateSimulationAction::class);
             });
+        });
+
+        Route::prefix('stripe')->group(function () {
+            Route::post('create-checkout-session', CreateStripeSessionAction::class);
         });
     });
 });
