@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class TradingSimulationRequests extends Model
 {
@@ -28,5 +28,10 @@ class TradingSimulationRequests extends Model
         'results',
         'created_at',
         'updated_at',
+    ];
+
+    protected $casts = [
+        'symbols' => 'array',
+        'sectors' => 'array',
     ];
 }
