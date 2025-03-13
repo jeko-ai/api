@@ -51,7 +51,7 @@ class CreateStripeSessionAction
                 'cancel_url' => 'http://localhost:5000/subscription-cancel',
             ]);
 
-            return response()->json(['id' => $session->id]);
+            return response()->json(['id' => $session->id, 'url' => $session->url]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
