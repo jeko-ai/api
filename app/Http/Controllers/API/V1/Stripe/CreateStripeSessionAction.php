@@ -12,7 +12,7 @@ class CreateStripeSessionAction
 {
     public function __invoke(CreateStripeSessionRequest $request)
     {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         $plan = Plans::find($request->plan_id);
 
