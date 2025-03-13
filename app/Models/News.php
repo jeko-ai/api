@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
@@ -38,5 +38,12 @@ class News extends Model
         'slug',
         'meta_tags',
         'meta_description',
+    ];
+
+    protected $casts = [
+        'actions' => 'array',
+        'images' => 'array',
+        'meta_tags' => 'array',
+        'meta_description' => 'array',
     ];
 }
