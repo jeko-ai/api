@@ -18,7 +18,7 @@ class CreateSimulationAction
 
         $market = collect($markets)->keyBy('id')->get($request->market_id);
 
-        TradingSimulationRequests::creae([
+        TradingSimulationRequests::create([
             'user_id' => $request->attributes->get('user_id'),
             'market_id' => $request->market_id,
             'symbols' => $request->symbols,
