@@ -45,5 +45,7 @@ class News extends Model
         'images' => 'array',
         'meta_tags' => 'array',
         'meta_description' => 'array',
+        'negative_aspects' => 'array',
+        'positive_aspects' => 'array',
     ];
 }
