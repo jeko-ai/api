@@ -79,7 +79,7 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('news')->group(function () {
         Route::get('', GetNewsAction::class);
-        Route::get('{slug}', GetNewsDetailsAction::class);
+        Route::get('details/{slug}', GetNewsDetailsAction::class);
         Route::get('{sentiment}', GetNewsBySentiment::class)
             ->where('sentiment', 'negative|positive|neutral')->middleware('cacheResponse:3600');
     });
