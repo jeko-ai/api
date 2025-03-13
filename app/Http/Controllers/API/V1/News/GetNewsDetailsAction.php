@@ -9,7 +9,7 @@ class GetNewsDetailsAction
 {
     public function __invoke(string $slug)
     {
-        $news = Cache::rememberForever('plans', function () use ($slug) {
+        $news = Cache::rememberForever($slug, function () use ($slug) {
             return News::where('slug', $slug)->firstOrFail();
         });
 
