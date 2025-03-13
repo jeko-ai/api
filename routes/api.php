@@ -12,6 +12,7 @@ use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
 use App\Http\Controllers\API\V1\GetUserProfileAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
+use App\Http\Controllers\API\V1\News\GetNewsDetailsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetPortfolioChangePercentage;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAssetsAction;
@@ -78,6 +79,7 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('news')->group(function () {
         Route::get('', GetNewsAction::class);
+        Route::get('{slug}', GetNewsDetailsAction::class);
         Route::get('{sentiment}', GetNewsBySentiment::class)
             ->where('sentiment', 'negative|positive|neutral')->middleware('cacheResponse:3600');
     });
