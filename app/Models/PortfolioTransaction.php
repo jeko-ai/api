@@ -6,23 +6,20 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class PortfolioAssets extends Model
+class PortfolioTransaction extends Model
 {
     use HasUuids;
 
-    protected $table = 'portfolio_assets';
+    protected $table = 'portfolio_transactions';
+
     protected $fillable = [
         'portfolio_id',
-        'user_id',
         'symbol_id',
         'quantity',
-        'avg_buy_price',
-        'total_value',
-        'buy_date',
-        'created_at',
-        'current_price',
-        'profit_loss',
-        'dividends_received',
+        'price_per_unit',
+        'transaction_type',
+        'executed_at',
+        'user_id',
     ];
 
     public function symbol(): HasOne

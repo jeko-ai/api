@@ -2,19 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
-class Sectors extends Model
+class Level extends Model
 {
     use HasUuids;
 
-    protected $table = 'sectors';
+    protected $table = 'levels';
     protected $fillable = [
-        'name_en',
+        'slug',
+        'level',
         'name_ar',
-        'description_en',
+        'name_en',
         'description_ar',
+        'description_en',
+        'xp_required',
         'created_at',
     ];
 }

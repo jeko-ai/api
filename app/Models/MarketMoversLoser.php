@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
-class MarketMoversGainers extends Model
+class MarketMoversLoser extends Model
 {
     use HasUuids;
 
-    protected $table = 'market_movers_gainers';
+    protected $table = 'market_movers_losers';
     protected $fillable = [
         'symbol_id',
         'market_id',

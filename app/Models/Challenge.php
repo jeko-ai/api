@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
-class Levels extends Model
+class Challenge extends Model
 {
     use HasUuids;
 
-    protected $table = 'levels';
+    protected $table = 'challenges';
     protected $fillable = [
         'slug',
-        'level',
         'name_ar',
         'name_en',
         'description_ar',
         'description_en',
-        'xp_required',
+        'reward_points',
+        'xp',
+        'status',
         'created_at',
     ];
 }

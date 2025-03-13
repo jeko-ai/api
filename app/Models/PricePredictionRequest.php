@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class PricePredictionRequests extends Model
+class PricePredictionRequest extends Model
 {
     use HasUuids;
 

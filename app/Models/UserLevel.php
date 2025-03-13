@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
-class Rewards extends Model
+class UserLevel extends Model
 {
     use HasUuids;
 
-    protected $table = 'rewards';
+    protected $table = 'user_levels';
     protected $fillable = [
         'user_id',
-        'points',
+        'level_id',
         'xp',
-        'type',
-        'status',
         'created_at',
     ];
 }

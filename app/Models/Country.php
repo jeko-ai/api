@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactUs extends Model
+class Country extends Model
 {
     use HasUuids;
 
-    protected $table = 'contact_us';
+    protected $table = 'countries';
     protected $fillable = [
-        'user_id',
-        'name',
-        'email',
-        'phone',
-        'message',
+        'name_en',
+        'name_ar',
+        'code',
+        'currency_en',
+        'currency_ar',
+        'currency_code',
         'created_at',
     ];
 }

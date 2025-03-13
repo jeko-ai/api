@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
-class Favorites extends Model
+class Reward extends Model
 {
     use HasUuids;
 
-    protected $table = 'favorites';
+    protected $table = 'rewards';
     protected $fillable = [
         'user_id',
-        'item_id',
-        'item_type',
+        'points',
+        'xp',
+        'type',
+        'status',
         'created_at',
     ];
 }

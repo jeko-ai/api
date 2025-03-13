@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Recommendations extends Model
+class Recommendation extends Model
 {
     use HasUuids;
 
