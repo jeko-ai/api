@@ -24,7 +24,7 @@ class CreateStripeSessionRequest extends FormRequest
     {
         return [
             'plan_id' => 'required|exists:plans,id',
-            'payment_option' => 'required|in:monthly|quarterly|biannual|yearly',
+            'payment_option' => 'required|in:monthly,quarterly,biannual,yearly',
         ];
     }
 }
