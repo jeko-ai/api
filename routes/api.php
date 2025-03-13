@@ -19,6 +19,7 @@ use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAssetsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioTransactionsAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsByTimeframeAction;
+use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsDetailsAction;
 use App\Http\Controllers\API\V1\Static\GetBestAction;
 use App\Http\Controllers\API\V1\Static\GetCompaniesAction;
 use App\Http\Controllers\API\V1\Static\GetCountriesAction;
@@ -71,6 +72,7 @@ Route::prefix('v1')->group(function () {
 
 
     Route::prefix('recommendations')->group(function () {
+        Route::get('details/{slug}', GetRecommendationsDetailsAction::class);
         Route::get('', GetRecommendationsAction::class);
 
         Route::get('{timeframe}', GetRecommendationsByTimeframeAction::class)
