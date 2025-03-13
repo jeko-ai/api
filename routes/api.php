@@ -5,6 +5,7 @@ use App\Http\Controllers\API\V1\AI\Prediction\GetPredictionAction;
 use App\Http\Controllers\API\V1\AI\Prediction\GetPredictionsAction;
 use App\Http\Controllers\API\V1\AI\Prediction\GetSymbolPredictionAction;
 use App\Http\Controllers\API\V1\AI\Simulation\CreateSimulationAction;
+use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
 use App\Http\Controllers\API\V1\GetInvitationsAction;
 use App\Http\Controllers\API\V1\GetSymbolPriceAction;
@@ -131,8 +132,9 @@ Route::prefix('v1')->group(function () {
                 Route::post('', CreatePredictionAction::class);
             });
             Route::prefix('simulations')->group(function () {
+                Route::get('{id}', GetSimulationAction::class);
                 Route::get('', GetSimulationsAction::class);
-                Route::post('{id}', CreateSimulationAction::class);
+                Route::post('', CreateSimulationAction::class);
             });
         });
     });

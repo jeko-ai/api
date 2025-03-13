@@ -2,10 +2,38 @@
 
 namespace App\Http\Controllers\API\V1\AI\Simulation;
 
+use App\Http\Requests\CreateSimulationRequest;
+use App\Models\Markets;
+use App\Models\TradingSimulationRequests;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+
 class CreateSimulationAction
 {
-    public function __invoke()
+    public function __invoke(CreateSimulationRequest $request)
     {
-        // TODO: Implement __invoke() method.
+        $markets = Cache::rememberForever('markets', function () {
+            return Markets::all();
+        });
+
+        $market = collect($markets)->keyBy('id')->get($request->market_id);
+
+        TradingSimulationRequests::creae([
+            'user_id' => $request->attributes->get('user_id'),
+            'market_id' => $request->market_id,
+            'symbols' => $request->symbols,
+            'sectors' => $request->sectors,
+            'investment_amount' => $request->investment_amount,
+            'risk_level' => $request->risk_level,
+            'duration' => $request->duration,
+            'strategy' => $request->strategy,
+            'start_time' => Carbon::parse($request->start_time)->setTimeFromTimeString($market->open_at),
+            'end_time' => Carbon::parse($request->end_time)->setTimeFromTimeString($market->close_at),
+            'expected_return_percentage' => $request->expected_return_percentage,
+            'stop_loss_percentage' => $request->stop_loss_percentage,
+            'selected_type' => $request->selected_type,
+        ]);
+        return response()->json([]);
+
     }
 }
