@@ -52,6 +52,8 @@ class Recommendations extends Model
 
     protected $casts = [
         'points' => 'array',
-        'points_ar' => 'array'
+        'points_ar' => 'array',
+        'meta_tags_ar',
+        'meta_tags' => 'array',
     ];
 }
