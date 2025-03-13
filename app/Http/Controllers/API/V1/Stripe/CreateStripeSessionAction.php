@@ -47,8 +47,8 @@ class CreateStripeSessionAction
                         'quantity' => 1,
                     ],
                 ],
-                'success_url' => 'http://localhost:5000/subscription-success',
-                'cancel_url' => 'http://localhost:5000/subscription-cancel',
+                'success_url' => 'http://localhost:5000/subscription-success?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => 'http://localhost:5000/subscription-cancel?session_id={CHECKOUT_SESSION_ID}',
             ]);
 
             return response()->json(['id' => $session->id, 'url' => $session->url]);
