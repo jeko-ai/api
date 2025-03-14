@@ -13,7 +13,7 @@ class GetPortfolioChangePercentage
         $dateToday = Carbon::today()->toDateString();
         $dateYesterday = Carbon::yesterday()->toDateString();
 
-        $latestPortfolio = Portfolio::where('user_id', request()->attributes->get('user_id'))
+        $latestPortfolio = Portfolio::where('user_id', request()->user()->id)
             ->where('is_default', true)
             ->orderBy('created_at', 'desc')
             ->first();
