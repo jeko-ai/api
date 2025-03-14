@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -17,9 +16,9 @@ return new class extends Migration {
             $table->text('name');
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->boolean('is_default')->nullable()->default(true);
-            $table->string('currency')->nullable()->default('USD');
-            $table->decimal('total_value')->nullable()->default(0);
+            $table->boolean('is_default')->nullable();
+            $table->string('currency')->nullable();
+            $table->decimal('total_value')->nullable();
         });
     }
 
