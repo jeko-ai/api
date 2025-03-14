@@ -7,6 +7,8 @@ use App\Http\Controllers\API\V1\AI\Prediction\GetSymbolPredictionAction;
 use App\Http\Controllers\API\V1\AI\Simulation\CreateSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
+use App\Http\Controllers\API\V1\Auth\LoginAction;
+use App\Http\Controllers\API\V1\Auth\VerifyAction;
 use App\Http\Controllers\API\V1\GetInvitationsAction;
 use App\Http\Controllers\API\V1\GetSymbolPriceAction;
 use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
@@ -50,6 +52,10 @@ use App\Http\Controllers\API\V1\UpdateUserSettingsAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('login', LoginAction::class);
+        Route::post('verify', VerifyAction::class);
+    });
     Route::prefix('static')->group(function () {
         Route::middleware('cacheResponse:3600')->group(function () {
             Route::get('countries', GetCountriesAction::class);
