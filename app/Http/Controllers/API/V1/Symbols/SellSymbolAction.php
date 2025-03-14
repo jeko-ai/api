@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API\V1\Symbols;
 
 use App\Http\Requests\SellSymbolRequest;
+use App\Models\Portfolio;
 use App\Models\PortfolioAssets;
-use App\Models\Portfolios;
 use App\Models\PortfolioTransactions;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +16,7 @@ class SellSymbolAction
         $userId = $request->attributes->get('user_id');
 
         // Get user's default portfolio
-        $userPortfolio = Portfolios::where('user_id', $userId)
+        $userPortfolio = Portfolio::where('user_id', $userId)
             ->where('is_default', true)
             ->first();
 

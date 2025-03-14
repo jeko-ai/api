@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API\V1\Symbols;
 
+use App\Models\Portfolio;
 use App\Models\PortfolioAssets;
-use App\Models\Portfolios;
 
 class CheckIfUserOwnSymbolAction
 {
@@ -12,7 +12,7 @@ class CheckIfUserOwnSymbolAction
         $userId = request()->attributes->get('user_id');
 
         // Get the user's default portfolio
-        $userPortfolio = Portfolios::where('user_id', $userId)
+        $userPortfolio = Portfolio::where('user_id', $userId)
             ->where('is_default', true)
             ->first();
 
