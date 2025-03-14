@@ -95,7 +95,7 @@ Route::prefix('v1')->group(function () {
             Route::get('technical/{timeframe}', GetSymbolTechnicalAction::class)
                 ->where('timeframe', '5m|15m|30m|1h|5h|1d|1w|1mo');
 
-            Route::middleware('supabase.auth')->group(function () {
+            Route::middleware('auth')->group(function () {
                 Route::get('check', CheckIfUserOwnSymbolAction::class);
                 Route::get('alerts', GetSymbolAlertsAction::class);
                 Route::post('alerts', CreateSymbolAlertAction::class);
@@ -116,7 +116,7 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    Route::middleware('supabase.auth')->group(function () {
+    Route::middleware('auth')->group(function () {
         Route::post('settings', UpdateUserSettingsAction::class);
         Route::get('invitations', GetInvitationsAction::class);
         Route::get('profile', GetUserProfileAction::class);

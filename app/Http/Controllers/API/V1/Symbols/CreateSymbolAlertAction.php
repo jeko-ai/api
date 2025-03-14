@@ -13,7 +13,6 @@ use Illuminate\Http\JsonResponse;
  *     summary="Create or update symbol alerts for the authenticated user",
  *     description="Creates or updates alert settings for a specific symbol for the authenticated user",
  *     tags={"symbols"},
- *     security={"supabase_auth": {}},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",
