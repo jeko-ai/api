@@ -13,6 +13,7 @@ class VerifyAction
         $validation = (new Otp)->validate($request->identifier, $request->token);
 
         if ($validation->status) {
+            //
             $user = User::firstOrCreate([
                 'email' => $request->identifier
             ]);
@@ -20,6 +21,11 @@ class VerifyAction
                 'message' => 'OTP verified',
                 'status' => true,
                 'user' => $user,
+                'portfolio' => $user->portfolio()->firstOrCreate([], [
+                    'name' => 'Default Portfolio',
+                    'description' => 'This is your default portfolio',
+                    'is_default' => true
+                ]),
                 'token' => $user->createToken('auth_token')->accessToken
             ]);
         }
