@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\V1\Symbols;
 
 use App\Http\Requests\BuySymbolRequest;
 use App\Models\Portfolio;
-use App\Models\PortfolioAssets;
-use App\Models\PortfolioTransactions;
+use App\Models\PortfolioAsset;
+use App\Models\PortfolioTransaction;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +13,7 @@ class BuySymbolAction
 {
     public function __invoke(BuySymbolRequest $request, string $symbol)
     {
-        $userId = $request->attributes->get('user_id');
+        $userId = $request->user()->id;
 
         // Get user's default portfolio
         $userPortfolio = Portfolio::where('user_id', $userId)
@@ -27,7 +27,7 @@ class BuySymbolAction
         try {
             DB::transaction(function () use ($request, $userPortfolio, $userId) {
                 // Check if the asset exists in the portfolio
-                $existingAsset = PortfolioAssets::where('portfolio_id', $userPortfolio->id)
+                $existingAsset = PortfolioAsset::where('portfolio_id', $userPortfolio->id)
                     ->where('symbol_id', $request->id)
                     ->first();
 
@@ -44,7 +44,7 @@ class BuySymbolAction
                     ]);
                 } else {
                     // Insert new asset
-                    PortfolioAssets::create([
+                    PortfolioAsset::create([
                         'portfolio_id' => $userPortfolio->id,
                         'symbol_id' => $request->id,
                         'user_id' => $userId,
@@ -55,7 +55,7 @@ class BuySymbolAction
                 }
 
                 // Insert transaction record
-                PortfolioTransactions::create([
+                PortfolioTransaction::create([
                     'portfolio_id' => $userPortfolio->id,
                     'symbol_id' => $request->id,
                     'user_id' => $userId,

@@ -4,23 +4,23 @@ namespace App\Http\Controllers\API\V1\Symbols;
 
 use App\Http\Requests\AddSymbolToPortfolioRequest;
 use App\Models\Portfolio;
-use App\Models\PortfolioAssets;
-use App\Models\PortfolioTransactions;
-use App\Models\Symbols;
+use App\Models\PortfolioAsset;
+use App\Models\PortfolioTransaction;
+use App\Models\Symbol;
 use DB;
 
 class AddSymbolToPortfolioAction
 {
     public function __invoke(AddSymbolToPortfolioRequest $request, string $symbol)
     {
-        $userId = $request->attributes->get('user_id');
+        $userId = $request->user()->id;
         $symbolId = $request->id;
         $quantity = $request->quantity;
         $avgBuyPrice = $request->avg_buy_price;
         $buyDate = $request->buy_date;
 
         // Check if the symbol exists
-        if (!Symbols::where('id', $symbolId)->exists()) {
+        if (!Symbol::where('id', $symbolId)->exists()) {
             return response()->json(['status' => 'invalid_symbol'], 400);
         }
 
@@ -37,7 +37,7 @@ class AddSymbolToPortfolioAction
 
         return DB::transaction(function () use ($portfolioId, $symbolId, $userId, $quantity, $avgBuyPrice, $buyDate) {
             // Check if the asset already exists in the portfolio
-            $existingAsset = PortfolioAssets::where('portfolio_id', $portfolioId)
+            $existingAsset = PortfolioAsset::where('portfolio_id', $portfolioId)
                 ->where('symbol_id', $symbolId)
                 ->first();
 
@@ -53,7 +53,7 @@ class AddSymbolToPortfolioAction
                 ]);
             } else {
                 // Insert new asset
-                PortfolioAssets::create([
+                PortfolioAsset::create([
                     'portfolio_id' => $portfolioId,
                     'symbol_id' => $symbolId,
                     'user_id' => $userId,
@@ -65,7 +65,7 @@ class AddSymbolToPortfolioAction
             }
 
             // Log the transaction
-            PortfolioTransactions::create([
+            PortfolioTransaction::create([
                 'portfolio_id' => $portfolioId,
                 'symbol_id' => $symbolId,
                 'user_id' => $userId,

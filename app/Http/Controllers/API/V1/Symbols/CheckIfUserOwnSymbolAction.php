@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API\V1\Symbols;
 
 use App\Models\Portfolio;
-use App\Models\PortfolioAssets;
+use App\Models\PortfolioAsset;
 
 class CheckIfUserOwnSymbolAction
 {
     public function __invoke(string $symbol)
     {
-        $userId = request()->attributes->get('user_id');
+        $userId = request()->user()->id;
 
         // Get the user's default portfolio
         $userPortfolio = Portfolio::where('user_id', $userId)
@@ -21,7 +21,7 @@ class CheckIfUserOwnSymbolAction
         }
 
         // Check if the symbol exists in portfolio_assets
-        $symbolOwned = PortfolioAssets::where('portfolio_id', $userPortfolio->id)
+        $symbolOwned = PortfolioAsset::where('portfolio_id', $userPortfolio->id)
             ->where('symbol_id', $symbol)
             ->exists();
 
