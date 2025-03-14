@@ -23,7 +23,7 @@ class UpdateUserSettingsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => 'sometimes|string|max:255',
+            'name' => 'sometimes|string|max:255',
             'language' => 'sometimes|string|max:10',
             'risk_level' => 'sometimes|in:low,medium,high',
             'country_id' => 'sometimes|uuid|exists:countries,id',
