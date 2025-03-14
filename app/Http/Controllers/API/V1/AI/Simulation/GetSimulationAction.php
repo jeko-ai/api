@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\V1\AI\Simulation;
 
-use App\Models\TradingSimulationRequests;
+use App\Models\TradingSimulationRequest;
 
 class GetSimulationAction
 {
     public function __invoke()
     {
-        return TradingSimulationRequests::where('user_id', request()->attributes->get('user_id'))->orderByDesc('created_at')->get();
+        return TradingSimulationRequest::where('user_id', request()->user()->id)->orderByDesc('created_at')->get();
     }
 }
