@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('div_yield_ttm', 20)->nullable();
             $table->string('sector', 50)->nullable();
             $table->string('analyst_rating', 50)->nullable();
-            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamps();
         });
     }
 

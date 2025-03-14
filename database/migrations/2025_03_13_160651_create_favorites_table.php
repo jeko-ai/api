@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->uuid('user_id');
             $table->uuid('item_id');
             $table->string('item_type', 50);
-            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamps();
         });
     }
 

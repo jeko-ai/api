@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->decimal('predicted_price', 18, 4);
             $table->timestamp('prediction_date');
             $table->decimal('confidence_level', 5);
-            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamps();
         });
     }
 
