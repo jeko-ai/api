@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Static;
 
-use App\Models\MarketMoversGainers;
+use App\Models\MarketMoversGainer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 
@@ -11,7 +11,7 @@ class GetBestAction
     public function __invoke(string $market): JsonResponse
     {
         $items = Cache::remember("best-{$market}", 1440, function () use ($market) {
-            return MarketMoversGainers::where('market_id', $market)->get();
+            return MarketMoversGainer::where('market_id', $market)->get();
         });
 
         $count = $items->count();
