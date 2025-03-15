@@ -14,7 +14,6 @@ class Portfolio extends Model
     protected $fillable = [
         'name',
         'description',
-        'created_at',
         'is_default',
         'currency',
         'total_value',
@@ -22,7 +21,7 @@ class Portfolio extends Model
 
     public function assets(): HasMany
     {
-        return $this->hasMany(PortfolioAssets::class, 'portfolio_id');
+        return $this->hasMany(PortfolioAsset::class, 'portfolio_id');
     }
 
     public function histories(): HasMany
