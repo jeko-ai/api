@@ -17,6 +17,5 @@ class Country extends Model
         'currency_en',
         'currency_ar',
         'currency_code',
-        'created_at',
     ];
 }
