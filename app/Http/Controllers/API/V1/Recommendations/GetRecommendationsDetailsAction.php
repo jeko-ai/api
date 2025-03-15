@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API\V1\Recommendations;
 
-use App\Models\Recommendations;
+use App\Models\Recommendation;
 
 class GetRecommendationsDetailsAction
 {
     public function __invoke(string $slug)
     {
-        $recommendation = Recommendations::where('slug', $slug)->firstOrFail();
+        $recommendation = Recommendation::where('slug', $slug)->firstOrFail();
 
         return response()->json($recommendation);
     }

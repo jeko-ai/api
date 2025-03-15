@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Recommendations;
 
-use App\Models\Recommendations;
+use App\Models\Recommendation;
 use Illuminate\Support\Facades\Cache;
 
 class GetRecommendationsByTimeframeAction
@@ -20,7 +20,7 @@ class GetRecommendationsByTimeframeAction
         } else {
             $select = array_merge($select, ['title', 'description', 'points']);
         }
-        $query = Recommendations::query()->select($select);
+        $query = Recommendation::query()->select($select);
         if ($market_id) {
             $query->where('market_id', $market_id);
         }
