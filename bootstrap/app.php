@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\ValidateSupabaseToken;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -22,7 +21,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'cacheResponse' => CacheResponse::class,
             'doNotCacheResponse' => DoNotCacheResponse::class,
-            'supabase.auth' => ValidateSupabaseToken::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

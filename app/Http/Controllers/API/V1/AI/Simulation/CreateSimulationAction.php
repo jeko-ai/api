@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API\V1\AI\Simulation;
 
 use App\Http\Requests\CreateSimulationRequest;
-use App\Models\Markets;
-use App\Models\TradingSimulationRequests;
+use App\Models\Market;
+use App\Models\TradingSimulationRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,13 +13,13 @@ class CreateSimulationAction
     public function __invoke(CreateSimulationRequest $request)
     {
         $markets = Cache::rememberForever('markets', function () {
-            return Markets::all();
+            return Market::all();
         });
 
         $market = collect($markets)->keyBy('id')->get($request->market_id);
 
-        TradingSimulationRequests::create([
-            'user_id' => $request->attributes->get('user_id'),
+        TradingSimulationRequest::create([
+            'user_id' => $request->user()->id,
             'market_id' => $request->market_id,
             'symbols' => $request->symbols,
             'sectors' => $request->sectors,

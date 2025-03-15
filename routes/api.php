@@ -7,6 +7,10 @@ use App\Http\Controllers\API\V1\AI\Prediction\GetSymbolPredictionAction;
 use App\Http\Controllers\API\V1\AI\Simulation\CreateSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
+use App\Http\Controllers\API\V1\Auth\GetUserAction;
+use App\Http\Controllers\API\V1\Auth\LoginAction;
+use App\Http\Controllers\API\V1\Auth\LogoutAction;
+use App\Http\Controllers\API\V1\Auth\VerifyAction;
 use App\Http\Controllers\API\V1\GetInvitationsAction;
 use App\Http\Controllers\API\V1\GetSymbolPriceAction;
 use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
@@ -50,6 +54,14 @@ use App\Http\Controllers\API\V1\UpdateUserSettingsAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('login', LoginAction::class)->middleware(['throttle:5,1']);
+        Route::post('verify', VerifyAction::class);
+        Route::middleware('auth:api')->group(function () {
+            Route::post('logout', LogoutAction::class);
+            Route::get('me', GetUserAction::class);
+        });
+    });
     Route::prefix('static')->group(function () {
         Route::middleware('cacheResponse:3600')->group(function () {
             Route::get('countries', GetCountriesAction::class);
@@ -95,7 +107,7 @@ Route::prefix('v1')->group(function () {
             Route::get('technical/{timeframe}', GetSymbolTechnicalAction::class)
                 ->where('timeframe', '5m|15m|30m|1h|5h|1d|1w|1mo');
 
-            Route::middleware('supabase.auth')->group(function () {
+            Route::middleware('auth:api')->group(function () {
                 Route::get('check', CheckIfUserOwnSymbolAction::class);
                 Route::get('alerts', GetSymbolAlertsAction::class);
                 Route::post('alerts', CreateSymbolAlertAction::class);
@@ -116,7 +128,7 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    Route::middleware('supabase.auth')->group(function () {
+    Route::middleware('auth:api')->group(function () {
         Route::post('settings', UpdateUserSettingsAction::class);
         Route::get('invitations', GetInvitationsAction::class);
         Route::get('profile', GetUserProfileAction::class);

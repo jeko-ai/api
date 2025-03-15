@@ -11,7 +11,6 @@ use Illuminate\Http\JsonResponse;
  *     summary="Get symbol alerts for the authenticated user",
  *     description="Retrieves alert settings for a specific symbol for the authenticated user",
  *     tags={"symbols"},
- *     security={"supabase_auth": {}},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",
@@ -65,7 +64,7 @@ class GetSymbolAlertsAction
     {
         $alerts = UserSymbolAlert::where([
             'symbol_id' => $symbol,
-            'user_id' => request()->attributes->get('user_id'),
+            'user_id' => request()->user()->id,
         ])->first();
 
         return response()->json($alerts);

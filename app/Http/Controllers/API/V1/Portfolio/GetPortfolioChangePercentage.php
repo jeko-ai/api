@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Portfolio;
 
-use App\Models\Portfolios;
+use App\Models\Portfolio;
 use DB;
 use Illuminate\Support\Carbon;
 
@@ -13,7 +13,7 @@ class GetPortfolioChangePercentage
         $dateToday = Carbon::today()->toDateString();
         $dateYesterday = Carbon::yesterday()->toDateString();
 
-        $latestPortfolio = Portfolios::where('user_id', request()->attributes->get('user_id'))
+        $latestPortfolio = Portfolio::where('user_id', request()->user()->id)
             ->where('is_default', true)
             ->orderBy('created_at', 'desc')
             ->first();

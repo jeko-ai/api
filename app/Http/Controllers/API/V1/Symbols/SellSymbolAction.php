@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API\V1\Symbols;
 
 use App\Http\Requests\SellSymbolRequest;
-use App\Models\PortfolioAssets;
-use App\Models\Portfolios;
-use App\Models\PortfolioTransactions;
+use App\Models\Portfolio;
+use App\Models\PortfolioAsset;
+use App\Models\PortfolioTransaction;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -13,10 +13,10 @@ class SellSymbolAction
 {
     public function __invoke(SellSymbolRequest $request, string $symbol)
     {
-        $userId = $request->attributes->get('user_id');
+        $userId = $request->user()->id;
 
         // Get user's default portfolio
-        $userPortfolio = Portfolios::where('user_id', $userId)
+        $userPortfolio = Portfolio::where('user_id', $userId)
             ->where('is_default', true)
             ->first();
 
@@ -25,7 +25,7 @@ class SellSymbolAction
         }
 
         // Find the asset in the portfolio
-        $existingAsset = PortfolioAssets::where('portfolio_id', $userPortfolio->id)
+        $existingAsset = PortfolioAsset::where('portfolio_id', $userPortfolio->id)
             ->where('symbol_id', $request->id)
             ->first();
 
@@ -51,7 +51,7 @@ class SellSymbolAction
                 }
 
                 // Insert transaction record
-                PortfolioTransactions::create([
+                PortfolioTransaction::create([
                     'portfolio_id' => $userPortfolio->id,
                     'symbol_id' => $request->id,
                     'user_id' => $userId,

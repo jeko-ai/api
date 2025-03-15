@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\V1\Symbols;
 
 use App\Http\Requests\CreateSymbolAlertRequest;
-use App\Models\Symbols;
+use App\Models\Symbol;
 use App\Models\UserSymbolAlert;
 use Illuminate\Http\JsonResponse;
 
@@ -13,7 +13,6 @@ use Illuminate\Http\JsonResponse;
  *     summary="Create or update symbol alerts for the authenticated user",
  *     description="Creates or updates alert settings for a specific symbol for the authenticated user",
  *     tags={"symbols"},
- *     security={"supabase_auth": {}},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",
@@ -97,12 +96,12 @@ class CreateSymbolAlertAction
 {
     public function __invoke(CreateSymbolAlertRequest $request, string $symbol): JsonResponse
     {
-        $userId = $request->attributes->get('user_id');
+        $userId = $request->user()->id;
 
         $symbolId = $request->input('id');
 
         // Fetch symbol details
-        $symbol = Symbols::select('inv_id', 'tv_id')->where('id', $symbolId)->first();
+        $symbol = Symbol::select('inv_id', 'tv_id')->where('id', $symbolId)->first();
         if (!$symbol) {
             return response()->json(['error' => 'invalid_symbol'], 400);
         }

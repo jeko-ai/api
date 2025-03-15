@@ -3,15 +3,24 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\UpdateUserSettingsRequest;
-use App\Models\Profiles;
 
 class UpdateUserSettingsAction
 {
     public function __invoke(UpdateUserSettingsRequest $request)
     {
-        $profile = Profiles::find($request->attributes->get('user_id'));
-        $profile->update($request->validated());
+        $user = $request->user();
+        $user->update($request->validated());
 
-        return response()->json($profile->refresh());
+        if ($request->has('phone')) {
+            $user->phone_verified_at = now();
+            $user->save();
+        }
+        if ($request->has('country_id')) {
+            $user->portfolio()->update([
+                'currency' => $user->country?->currency_code
+            ]);
+        }
+
+        return response()->json($user->refresh());
     }
 }
