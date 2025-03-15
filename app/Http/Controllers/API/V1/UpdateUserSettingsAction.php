@@ -16,8 +16,9 @@ class UpdateUserSettingsAction
             $user->save();
         }
         if ($request->has('country_id')) {
-            $user->portfolio = $user->country?->currency_code;
-            $user->save();
+            $user->portfolio()->update([
+                'currency' => $user->country?->currency_code
+            ]);
         }
 
         return response()->json($user->refresh());
