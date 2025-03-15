@@ -11,7 +11,6 @@ use Illuminate\Http\JsonResponse;
  *     summary="Get symbol transactions",
  *     description="Retrieves all transactions for a specific symbol ordered by execution date",
  *     tags={"symbols"},
- *     security={"supabase_auth": {}},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

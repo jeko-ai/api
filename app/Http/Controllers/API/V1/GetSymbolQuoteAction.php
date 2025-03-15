@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Models\Quotes;
-use App\Models\Symbols;
+use App\Models\Quote;
+use App\Models\Symbol;
 use Http;
 use Illuminate\Support\Facades\Cache;
 use Str;
@@ -17,11 +17,11 @@ class GetSymbolQuoteAction
         }
 
         $symbols = Cache::rememberForever('symbols', function () {
-            return Symbols::where('type', 'stock')->get();
+            return Symbol::where('type', 'stock')->get();
         });
         $symbol = collect($symbols)->keyBy('id')->get($id);
 
-        $quote = Quotes::where('symbol_id', $id)->first();
+        $quote = Quote::where('symbol_id', $id)->first();
 
         if ($quote) {
             if (now()->diffInMinutes($quote->created_at) < 15) {
@@ -31,7 +31,7 @@ class GetSymbolQuoteAction
 
         if (!$symbol) {
             $indices = Cache::rememberForever('indices', function () {
-                return Symbols::where('type', 'index')->get();
+                return Symbol::where('type', 'index')->get();
             });
             $symbol = collect($indices)->keyBy('id')->get($id);
         }
@@ -47,7 +47,7 @@ class GetSymbolQuoteAction
 
         $jsonData = $res['d'][0]['v'];
 
-        $quote = Quotes::firstOrCreate([
+        $quote = Quote::firstOrCreate([
             'symbol_id' => $id,
         ],
             [

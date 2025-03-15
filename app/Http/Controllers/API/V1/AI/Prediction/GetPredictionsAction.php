@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API\V1\AI\Prediction;
 
-use App\Models\PricePredictionRequests;
+use App\Models\PricePredictionRequest;
 
 class GetPredictionsAction
 {
     public function __invoke()
     {
-        return PricePredictionRequests::where('user_id', request()->attributes->get('user_id'))
+        return PricePredictionRequest::where('user_id', request()->user()->id)
             ->select([
                 'id',
                 'user_id',

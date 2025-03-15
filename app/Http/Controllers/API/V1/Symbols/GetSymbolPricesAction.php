@@ -14,7 +14,6 @@ use Str;
  *     summary="Get symbol prices for a specific time range",
  *     description="Retrieves price data for a specific symbol within the given time range",
  *     tags={"symbols"},
- *     security={"supabase_auth": {}},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

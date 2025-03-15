@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Models\Profiles;
+use App\Models\Profile;
 
 class GetUserProfileAction
 {
     public function __invoke()
     {
-        $profile = Profiles::find(request()->attributes->get('user_id'));
+        $profile = Profile::find(request()->user()->id);
         return response()->json($profile);
     }
 }
