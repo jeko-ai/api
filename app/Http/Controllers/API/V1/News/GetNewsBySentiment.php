@@ -13,7 +13,7 @@ class GetNewsBySentiment
         $limit = request('limit');
         $market_id = request('market_id');
 
-        $query = News::query()->select([
+        $query = News::isRewritten()->select([
             'slug', 'title', 'small_image_url', 'symbol_id', 'market_id', 'description', 'sentiment', 'date'
         ])->where('sentiment', $sentiment)->where('language', $locale)->orderByDesc('created_at');
 

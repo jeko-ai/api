@@ -48,4 +48,9 @@ class News extends Model
         'negative_aspects' => 'array',
         'positive_aspects' => 'array',
     ];
+
+    public function scopeIsRewritten($query, $isRewritten = true)
+    {
+        return $query->where('is_rewritten', $isRewritten);
+    }
 }

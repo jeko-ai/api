@@ -13,7 +13,7 @@ class GetNewsAction
         $market_id = request('market_id');
         $search = request('search');
 
-        $query = News::query()
+        $query = News::isRewritten()
             ->where('language', $language)->select([
                 'slug', 'title', 'small_image_url', 'symbol_id', 'market_id', 'description', 'sentiment', 'date'
             ])
