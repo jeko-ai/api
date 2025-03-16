@@ -91,7 +91,7 @@ return [
             /*
              * Edit to set the api's base path
              */
-            'base' => env('L5_SWAGGER_BASE_PATH', null),
+            'base' => env('L5_SWAGGER_BASE_PATH', 'https://api.kira.ws'),
 
             /*
              * Edit to set the api's scheme
