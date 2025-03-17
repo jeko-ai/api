@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\JsonResponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,6 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: '',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append([
+            JsonResponse::class,
+        ]);
+
         $middleware->api([
 //            ValidateApiKey::class,
 //            EncryptResponse::class,
