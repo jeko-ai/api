@@ -10,6 +10,8 @@ class GetPortfolioRecommendationsAction
 {
     public function __invoke(string $timeframe)
     {
+        $userId = auth()->user()->id;
+
         $locale = request()->header('Accept-Language', request('locale', 'en'));
         $limit = request('limit');
         $select = [
@@ -20,14 +22,13 @@ class GetPortfolioRecommendationsAction
         } else {
             $select = array_merge($select, ['title', 'description', 'points']);
         }
-        $assets = PortfolioAsset::where('user_id', auth()->id)->get(['symbol_id'])->pluck('symbol_id');
+        $assets = PortfolioAsset::where('user_id', $userId)->get(['symbol_id'])->pluck('symbol_id');
 
         $query = Recommendation::query()->where('symbol_id', $assets)->select($select);
 
         if ($limit) {
             $query->limit($limit);
         }
-        $userId = auth()->user()->id;
 
         return Cache::remember("recommendations-$timeframe-$limit-$locale-$userId", 20 * 24 * 60 * 60, function () use ($query, $timeframe) {
             return $query->where('timeframe', $timeframe)->get();
