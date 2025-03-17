@@ -19,6 +19,8 @@ use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
 use App\Http\Controllers\API\V1\News\GetNewsDetailsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetPortfolioChangePercentage;
+use App\Http\Controllers\API\V1\Portfolio\GetPortfolioNewsAction;
+use App\Http\Controllers\API\V1\Portfolio\GetPortfolioRecommendationsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAssetsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioTransactionsAction;
@@ -46,7 +48,9 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolAlertsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolChartInfoAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolHistoryAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolInfoAction;
+use App\Http\Controllers\API\V1\Symbols\GetSymbolNewsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolPricesAction;
+use App\Http\Controllers\API\V1\Symbols\GetSymbolRecommendationsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTransactionsAction;
 use App\Http\Controllers\API\V1\Symbols\SellSymbolAction;
@@ -107,6 +111,12 @@ Route::prefix('v1')->group(function () {
             Route::get('technical/{timeframe}', GetSymbolTechnicalAction::class)
                 ->where('timeframe', '5m|15m|30m|1h|5h|1d|1w|1mo');
 
+            Route::get('news/{sentiment}', GetSymbolNewsAction::class)
+                ->where('sentiment', 'negative|positive|neutral')->middleware('cacheResponse:3600');
+
+            Route::get('recommendations/{timeframe}', GetSymbolRecommendationsAction::class)->where('timeframe', 'month|quarter|biannual|year');
+
+
             Route::middleware('auth:api')->group(function () {
                 Route::get('check', CheckIfUserOwnSymbolAction::class);
                 Route::get('alerts', GetSymbolAlertsAction::class);
@@ -134,6 +144,11 @@ Route::prefix('v1')->group(function () {
         Route::get('profile', GetUserProfileAction::class);
         Route::prefix('portfolio')->group(function () {
             Route::get('', GetUserPortfolioAction::class);
+            Route::get('news/{sentiment}', GetPortfolioNewsAction::class)
+                ->where('sentiment', 'negative|positive|neutral')->middleware('cacheResponse:3600');
+
+            Route::get('recommendations/{timeframe}', GetPortfolioRecommendationsAction::class)->where('timeframe', 'month|quarter|biannual|year');
+
             Route::get('assets', GetUserPortfolioAssetsAction::class);
             Route::get('transactions', GetUserPortfolioTransactionsAction::class);
             Route::get('change-percentage', GetPortfolioChangePercentage::class);
