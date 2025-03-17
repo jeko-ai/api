@@ -24,7 +24,7 @@ class GetPortfolioRecommendationsAction
         }
         $assets = PortfolioAsset::where('user_id', $userId)->get(['symbol_id'])->pluck('symbol_id');
 
-        $query = Recommendation::query()->where('symbol_id', $assets)->select($select);
+        $query = Recommendation::query()->whereIn('symbol_id', $assets)->select($select);
 
         if ($limit) {
             $query->limit($limit);
