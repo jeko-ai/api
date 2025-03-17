@@ -12,8 +12,6 @@ use App\Http\Controllers\API\V1\Auth\LoginAction;
 use App\Http\Controllers\API\V1\Auth\LogoutAction;
 use App\Http\Controllers\API\V1\Auth\VerifyAction;
 use App\Http\Controllers\API\V1\GetInvitationsAction;
-use App\Http\Controllers\API\V1\GetSymbolPriceAction;
-use App\Http\Controllers\API\V1\GetSymbolQuoteAction;
 use App\Http\Controllers\API\V1\GetUserProfileAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
@@ -24,6 +22,10 @@ use App\Http\Controllers\API\V1\Portfolio\GetPortfolioRecommendationsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioAssetsAction;
 use App\Http\Controllers\API\V1\Portfolio\GetUserPortfolioTransactionsAction;
+use App\Http\Controllers\API\V1\Pricing\GetPricesAction;
+use App\Http\Controllers\API\V1\Pricing\GetQuotesAction;
+use App\Http\Controllers\API\V1\Pricing\GetSymbolPriceAction;
+use App\Http\Controllers\API\V1\Pricing\GetSymbolQuoteAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsByTimeframeAction;
 use App\Http\Controllers\API\V1\Recommendations\GetRecommendationsDetailsAction;
@@ -85,8 +87,17 @@ Route::prefix('v1')->group(function () {
         })->middleware('cacheResponse:1440');
     });
 
-    Route::get('prices/{id}', GetSymbolPriceAction::class)->middleware('cacheResponse:300');
-    Route::get('quotes/{id}', GetSymbolQuoteAction::class)->middleware('cacheResponse:300');
+    Route::middleware('cacheResponse:300')->group(function () {
+        Route::prefix('quotes')->group(function () {
+            Route::get('', GetQuotesAction::class);
+            Route::get('{id}', GetSymbolQuoteAction::class);
+        });
+        Route::prefix('prices')->group(function () {
+            Route::get('', GetPricesAction::class);
+            Route::get('{id}', GetSymbolPriceAction::class);
+        });
+    });
+
 
 
     Route::prefix('recommendations')->group(function () {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V1\Pricing;
 
 use App\Models\Quote;
 use App\Models\Symbol;
@@ -21,6 +21,13 @@ class GetSymbolQuoteAction
         });
         $symbol = collect($symbols)->keyBy('id')->get($id);
 
+        if (!$symbol) {
+            $indices = Cache::rememberForever('indices', function () {
+                return Symbol::where('type', 'index')->get();
+            });
+            $symbol = collect($indices)->keyBy('id')->get($id);
+        }
+
         $quote = Quote::where('symbol_id', $id)->first();
 
         if ($quote) {
@@ -29,12 +36,7 @@ class GetSymbolQuoteAction
             }
         }
 
-        if (!$symbol) {
-            $indices = Cache::rememberForever('indices', function () {
-                return Symbol::where('type', 'index')->get();
-            });
-            $symbol = collect($indices)->keyBy('id')->get($id);
-        }
+
         $time = time();
         $uuid = Str::uuid()->getHex()->toString();
         $url = "https://tvc4.investing.com/$uuid/$time/1/1/8/quotes?symbols={$symbol->full_name}";
@@ -47,7 +49,7 @@ class GetSymbolQuoteAction
 
         $jsonData = $res['d'][0]['v'];
 
-        $quote = Quote::firstOrCreate([
+        $quote = Quote::updateOrCreate([
             'symbol_id' => $id,
         ],
             [
@@ -67,7 +69,6 @@ class GetSymbolQuoteAction
                 'ask_price' => $this->cleanNumericValue($jsonData['ask']) ?? 0,
                 'bid_price' => $this->cleanNumericValue($jsonData['bid']) ?? 0,
                 'spread' => $this->cleanNumericValue($jsonData['spread']) ?? 0,
-                'created_at' => now(),
             ]);
         return Cache::remember("quotes-$id", 5 * 60, function () use ($quote) {
             return $quote;
