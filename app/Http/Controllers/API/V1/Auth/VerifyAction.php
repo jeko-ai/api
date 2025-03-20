@@ -46,7 +46,6 @@ class VerifyAction
         $validation = (new Otp)->validate($request->identifier, $request->token);
 
         if ($validation->status) {
-            //
             $user = User::firstOrCreate([
                 'email' => $request->identifier
             ]);
