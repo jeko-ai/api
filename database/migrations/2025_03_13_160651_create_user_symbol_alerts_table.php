@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -16,7 +15,7 @@ return new class extends Migration {
             $table->uuid('user_id');
             $table->uuid('symbol_id');
             $table->string('tv_id', 50)->nullable()->index('idx_tv_id');
-            $table->decimal('price_alert', 10)->nullable();
+            $table->decimal('price_alert', 18, 8)->nullable();
             $table->boolean('new_recommendation')->nullable()->default(false);
             $table->boolean('latest_news')->nullable()->default(false);
             $table->boolean('new_predictions')->nullable()->default(false);

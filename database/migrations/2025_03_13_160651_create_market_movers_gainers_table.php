@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('price', 50)->nullable();
             $table->string('change_percent', 20)->nullable();
             $table->string('volume', 50)->nullable();
-            $table->decimal('rel_volume', 10)->nullable();
+            $table->decimal('rel_volume', 18, 8)->nullable();
             $table->string('market_cap', 50)->nullable();
             $table->string('pe_ratio', 20)->nullable();
             $table->string('eps_dil_ttm', 20)->nullable();

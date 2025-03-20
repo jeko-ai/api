@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -17,7 +16,7 @@ return new class extends Migration {
             $table->string('name_en');
             $table->text('description_ar')->nullable();
             $table->text('description_en')->nullable();
-            $table->decimal('price', 10);
+            $table->decimal('price', 18, 8);
             $table->text('billing_cycle');
             $table->integer('trial_days')->nullable()->default(0);
             $table->jsonb('features');
