@@ -31,7 +31,12 @@ use App\Http\Requests\UpdateUserSettingsRequest;
  *     @OA\Response(
  *         response=200,
  *         description="User settings updated successfully",
- *         @OA\JsonContent(ref="#/components/schemas/User")
+ *         @OA\JsonContent(
+ *              @OA\Property(property="id", type="string", format="uuid"),
+ *              @OA\Property(property="email", type="string", format="email"),
+ *              @OA\Property(property="created_at", type="string", format="date-time"),
+ *              @OA\Property(property="updated_at", type="string", format="date-time")
+ *          )
  *     ),
  *     @OA\Response(
  *         response=401,
