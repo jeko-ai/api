@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\Invitation;
-use App\Models\Invitations;
 
 class GetInvitationsAction
 {

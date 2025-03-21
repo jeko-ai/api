@@ -10,9 +10,9 @@ use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
 use App\Http\Controllers\API\V1\Auth\GetUserAction;
 use App\Http\Controllers\API\V1\Auth\LoginAction;
 use App\Http\Controllers\API\V1\Auth\LogoutAction;
+use App\Http\Controllers\API\V1\Auth\UpdateUserSettingsAction;
 use App\Http\Controllers\API\V1\Auth\VerifyAction;
 use App\Http\Controllers\API\V1\GetInvitationsAction;
-use App\Http\Controllers\API\V1\GetUserProfileAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
 use App\Http\Controllers\API\V1\News\GetNewsDetailsAction;
@@ -56,7 +56,6 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolRecommendationsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTransactionsAction;
 use App\Http\Controllers\API\V1\Symbols\SellSymbolAction;
-use App\Http\Controllers\API\V1\UpdateUserSettingsAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -66,6 +65,7 @@ Route::prefix('v1')->group(function () {
         Route::middleware('auth:api')->group(function () {
             Route::post('logout', LogoutAction::class);
             Route::get('me', GetUserAction::class);
+            Route::post('settings', UpdateUserSettingsAction::class);
         });
     });
     Route::prefix('static')->group(function () {
@@ -150,9 +150,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware('auth:api')->group(function () {
-        Route::post('settings', UpdateUserSettingsAction::class);
         Route::get('invitations', GetInvitationsAction::class);
-        Route::get('profile', GetUserProfileAction::class);
         Route::prefix('portfolio')->group(function () {
             Route::get('', GetUserPortfolioAction::class);
             Route::get('news/{sentiment}', GetPortfolioNewsAction::class)

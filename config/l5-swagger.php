@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'Kira API Documentation',
+                'title' => 'L5 Swagger UI',
             ],
 
             'routes' => [
@@ -91,12 +91,7 @@ return [
             /*
              * Edit to set the api's base path
              */
-            'base' => env('L5_SWAGGER_BASE_PATH', 'https://api.kira.ws'),
-
-            /*
-             * Edit to set the api's scheme
-             */
-            'schemes' => ['https'],
+            'base' => env('L5_SWAGGER_BASE_PATH', null),
 
             /*
              * Absolute path to directories that should be excluded from scanning
@@ -317,7 +312,7 @@ return [
          * Constants which can be used in annotations
          */
         'constants' => [
-            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'https://api.kira.ws'),
+            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
         ],
     ],
 ];
