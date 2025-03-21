@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PricePredictionRequest extends Model
@@ -21,13 +22,8 @@ class PricePredictionRequest extends Model
         'prediction_start_date',
         'prediction_end_date',
         'status',
-        'prediction_result',
         'created_at',
         'updated_at',
-    ];
-
-    protected $casts = [
-        'prediction_result' => 'array'
     ];
 
     public function symbol(): HasOne
@@ -38,5 +34,10 @@ class PricePredictionRequest extends Model
     public function quote(): HasOne
     {
         return $this->hasOne(Quote::class, 'symbol_id', 'symbol_id');
+    }
+
+    public function results(): HasMany
+    {
+        return $this->hasMany(PricePredictionRequestResult::class, 'request_id', 'id');
     }
 }

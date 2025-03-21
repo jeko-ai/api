@@ -16,7 +16,7 @@ class GetPredictionAction
 
         if (!$prediction) {
             // Retrieve the prediction from the database
-            $prediction = PricePredictionRequest::find($id);
+            $prediction = PricePredictionRequest::with('results')->find($id);
 
             // Cache the prediction if the status is "completed"
             if ($prediction && $prediction->status === 'completed') {
