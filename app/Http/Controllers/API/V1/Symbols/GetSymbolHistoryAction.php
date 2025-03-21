@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Symbols;
 
-use App\Models\Symbols;
+use App\Models\Symbol;
 use Http;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
@@ -71,13 +71,13 @@ class GetSymbolHistoryAction
     public function __invoke($symbol): JsonResponse
     {
         $symbols = Cache::rememberForever('symbols', function () {
-            return Symbols::where('type', 'stock')->get();
+            return Symbol::where('type', 'stock')->get();
         });
         $symbolObject = collect($symbols)->keyBy('id')->get($symbol);
 
         if (!$symbolObject) {
             $indices = Cache::rememberForever('indices', function () {
-                return Symbols::where('type', 'index')->get();
+                return Symbol::where('type', 'index')->get();
             });
             $symbolObject = collect($indices)->keyBy('id')->get($symbol);
         }

@@ -27,6 +27,6 @@ class PortfolioAsset extends Model
 
     public function symbol(): HasOne
     {
-        return $this->hasOne(Symbols::class, 'id', 'symbol_id');
+        return $this->hasOne(Symbol::class, 'id', 'symbol_id');
     }
 }

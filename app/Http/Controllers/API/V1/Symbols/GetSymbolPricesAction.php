@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Symbols;
 
-use App\Models\Symbols;
+use App\Models\Symbol;
 use Http;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
@@ -68,7 +68,7 @@ class GetSymbolPricesAction
     public function __invoke(string $symbol, int $from, int $to): JsonResponse
     {
         $symbols = Cache::rememberForever('symbols', function () {
-            return Symbols::where('type', 'stock')->get();
+            return Symbol::where('type', 'stock')->get();
         });
         $symbol = collect($symbols)->keyBy('id')->get($symbol);
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\AI\Prediction;
 
-use App\Models\PricePredictionRequests;
+use App\Models\PricePredictionRequest;
 use Illuminate\Support\Facades\Cache;
 
 class GetPredictionAction
@@ -16,7 +16,7 @@ class GetPredictionAction
 
         if (!$prediction) {
             // Retrieve the prediction from the database
-            $prediction = PricePredictionRequests::find($id);
+            $prediction = PricePredictionRequest::find($id);
 
             // Cache the prediction if the status is "completed"
             if ($prediction && $prediction->status === 'completed') {

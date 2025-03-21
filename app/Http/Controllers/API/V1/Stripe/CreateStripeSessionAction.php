@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\Stripe;
 
 use App\Http\Requests\CreateStripeSessionRequest;
+use App\Models\Plan;
 use App\Models\Plans;
 use Exception;
 use Stripe\Checkout\Session;
@@ -14,7 +15,7 @@ class CreateStripeSessionAction
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
-        $plan = Plans::find($request->plan_id);
+        $plan = Plan::find($request->plan_id);
 
         $plans = [
             "professional" => [

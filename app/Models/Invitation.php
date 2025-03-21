@@ -21,8 +21,13 @@ class Invitation extends Model
         'updated_at',
     ];
 
-    public function profile(): HasOne
+    public function invitee(): HasOne
     {
-        return $this->hasOne(Profiles::class, 'id', 'invitee_id');
+        return $this->hasOne(User::class, 'id', 'invitee_id');
+    }
+
+    public function inviter(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'inviter_id');
     }
 }

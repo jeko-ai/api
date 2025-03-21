@@ -42,11 +42,11 @@ class Symbol extends Model
 
     public function quote(): HasOne
     {
-        return $this->hasOne(Quotes::class, 'symbol_id', 'id');
+        return $this->hasOne(Quote::class, 'symbol_id', 'id');
     }
 
     public function market(): BelongsTo
     {
-        return $this->belongsTo(Markets::class, 'market_id', 'id');
+        return $this->belongsTo(Market::class, 'market_id', 'id');
     }
 }

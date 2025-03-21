@@ -32,11 +32,11 @@ class PricePredictionRequest extends Model
 
     public function symbol(): HasOne
     {
-        return $this->hasOne(Symbols::class, 'id', 'symbol_id');
+        return $this->hasOne(Symbol::class, 'id', 'symbol_id');
     }
 
     public function quote(): HasOne
     {
-        return $this->hasOne(Quotes::class, 'symbol_id', 'symbol_id');
+        return $this->hasOne(Quote::class, 'symbol_id', 'symbol_id');
     }
 }
