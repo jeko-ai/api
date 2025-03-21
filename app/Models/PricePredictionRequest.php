@@ -38,6 +38,6 @@ class PricePredictionRequest extends Model
 
     public function results(): HasMany
     {
-        return $this->hasMany(PricePredictionRequestResult::class, 'request_id', 'id');
+        return $this->hasMany(PricePredictionRequestResult::class, 'request_id', 'id')->orderBy('prediction_date');
     }
 }
