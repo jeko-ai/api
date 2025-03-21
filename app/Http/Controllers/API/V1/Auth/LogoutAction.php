@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 /**
  * @OA\Post(
- *     path="/api/v1/auth/logout",
+ *     path="/v1/auth/logout",
  *     summary="Logout user and revoke access token",
  *     tags={"Auth"},
  *     security={{

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 /**
  * @OA\Get(
- *     path="/api/v1/auth/me",
+ *     path="/v1/auth/me",
  *     summary="Get authenticated user information",
  *     tags={"Auth"},
  *     security={{

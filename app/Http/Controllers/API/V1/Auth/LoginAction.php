@@ -7,7 +7,7 @@ use App\Jobs\SendOtpJob;
 
 /**
  * @OA\Post(
- *     path="/api/v1/auth/login",
+ *     path="/v1/auth/login",
  *     summary="Login with identifier (email)",
  *     tags={"Auth"},
  *     @OA\RequestBody(

@@ -8,7 +8,7 @@ use Ichtrojan\Otp\Otp;
 
 /**
  * @OA\Post(
- *     path="/api/v1/auth/verify",
+ *     path="/v1/auth/verify",
  *     summary="Verify OTP and create/login user",
  *     tags={"Auth"},
  *     @OA\RequestBody(
