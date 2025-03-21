@@ -18,7 +18,7 @@ class CreatePredictionAction
         $symbol = collect($symbols)->keyBy('id')->get($request->id);
         $market = $symbol?->market;
 
-        PricePredictionRequest::create([
+        $prediction = PricePredictionRequest::create([
             'user_id' => $request->user()->id,
             'symbol_id' => $symbol?->id,
             'symbol' => $symbol?->symbol,
@@ -27,6 +27,7 @@ class CreatePredictionAction
             'prediction_start_date' => Carbon::parse($request->prediction_start_date)->setTimeFromTimeString($market->open_at),
             'prediction_end_date' => Carbon::parse($request->prediction_end_date)->setTimeFromTimeString($market->close_at),
         ]);
-        return response()->json([]);
+
+        return response()->json($prediction);
     }
 }
