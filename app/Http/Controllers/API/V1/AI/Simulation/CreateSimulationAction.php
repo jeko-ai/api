@@ -18,7 +18,7 @@ class CreateSimulationAction
 
         $market = collect($markets)->keyBy('id')->get($request->market_id);
 
-        TradingSimulationRequest::create([
+        $simulation = TradingSimulationRequest::create([
             'user_id' => $request->user()->id,
             'market_id' => $request->market_id,
             'symbols' => $request->symbols,
@@ -33,7 +33,7 @@ class CreateSimulationAction
             'stop_loss_percentage' => $request->stop_loss_percentage,
             'selected_type' => $request->selected_type,
         ]);
-        return response()->json([]);
+        return response()->json($simulation);
 
     }
 }
