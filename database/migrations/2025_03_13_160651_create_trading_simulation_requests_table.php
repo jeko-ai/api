@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -25,10 +24,22 @@ return new class extends Migration {
             $table->timestamp('end_time');
             $table->decimal('expected_return_percentage', 18)->nullable()->default(0);
             $table->decimal('stop_loss_percentage', 18)->nullable()->default(0);
-            $table->string('status', 20)->nullable()->default('pending');
+            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
             $table->string('selected_type', 10);
-            $table->jsonb('results')->nullable();
+            $table->jsonb('stock_selections')->nullable();
+            $table->jsonb('portfolio_value_over_time')->nullable();
+            $table->jsonb('final_portfolio_status')->nullable();
+            $table->jsonb('performance_metrics')->nullable();
+            $table->text('strategy_analysis_en')->nullable();
+            $table->text('strategy_analysis_ar')->nullable();
+            $table->text('expected_return_analysis_en')->nullable();
+            $table->text('expected_return_analysis_ar')->nullable();
+            $table->text('overall_summary_and_learnings_en')->nullable();
+            $table->text('overall_summary_and_learnings_ar')->nullable();
             $table->timestamps();
+
+            $table->index(['user_id', 'status']);
+            $table->index(['market_id', 'strategy']);
         });
     }
 

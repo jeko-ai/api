@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TradingSimulationRequest extends Model
 {
@@ -25,7 +26,16 @@ class TradingSimulationRequest extends Model
         'stop_loss_percentage',
         'status',
         'selected_type',
-        'results',
+        'stock_selections',
+        'portfolio_value_over_time',
+        'final_portfolio_status',
+        'performance_metrics',
+        'strategy_analysis_en',
+        'strategy_analysis_ar',
+        'expected_return_analysis_en',
+        'expected_return_analysis_ar',
+        'overall_summary_and_learnings_en',
+        'overall_summary_and_learnings_ar',
         'created_at',
         'updated_at',
     ];
@@ -33,5 +43,17 @@ class TradingSimulationRequest extends Model
     protected $casts = [
         'symbols' => 'array',
         'sectors' => 'array',
+        'stock_selections' => 'array',
+        'portfolio_value_over_time' => 'array',
+        'final_portfolio_status' => 'array',
+        'performance_metrics' => 'array',
     ];
+
+    /**
+     * Get the transactions for the trading simulation request.
+     */
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(TradingSimulationTransaction::class, 'trading_simulation_request_id');
+    }
 }
