@@ -38,7 +38,7 @@ class GetSectorsAction
     public function __invoke(): JsonResponse
     {
         $sectors = Cache::rememberForever('sectors', function () {
-            return Sector::all();
+            return Sector::whereHas('symbols')->get();
         });
 
         return response()->json($sectors);
