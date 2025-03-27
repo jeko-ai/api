@@ -51,7 +51,7 @@ class VerifyAction
                 'email' => $request->identifier
             ]);
             $standardPlan = Plan::where('slug', 'standard')->first();
-            $user->newPlanSubscription('trial', $standardPlan);
+            $user->newPlanSubscription('main', $standardPlan);
 
             return response()->json([
                 'message' => 'OTP verified',
