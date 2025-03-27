@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Requests\VerifyRequest;
+use App\Models\Plan;
 use App\Models\User;
 use Ichtrojan\Otp\Otp;
 
@@ -49,6 +50,9 @@ class VerifyAction
             $user = User::firstOrCreate([
                 'email' => $request->identifier
             ]);
+            $standardPlan = Plan::where('slug', 'standard')->first();
+            $user->newPlanSubscription('trial', $standardPlan);
+
             return response()->json([
                 'message' => 'OTP verified',
                 'status' => true,
