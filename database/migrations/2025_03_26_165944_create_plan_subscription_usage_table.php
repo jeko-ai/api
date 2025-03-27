@@ -10,7 +10,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create(config('laravel-subscriptions.tables.subscription_usage'), function (Blueprint $table): void {
-            $table->id();
+            $table->uuid();
 
             $table->foreignIdFor(config('laravel-subscriptions.models.subscription'));
             $table->foreignIdFor(config('laravel-subscriptions.models.feature'));
