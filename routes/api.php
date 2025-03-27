@@ -56,6 +56,11 @@ use App\Http\Controllers\API\V1\Symbols\GetSymbolRecommendationsAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTechnicalAction;
 use App\Http\Controllers\API\V1\Symbols\GetSymbolTransactionsAction;
 use App\Http\Controllers\API\V1\Symbols\SellSymbolAction;
+use App\Http\Controllers\Webhook\Fawaterk\CancellationAction;
+use App\Http\Controllers\Webhook\Fawaterk\FailedAction;
+use App\Http\Controllers\Webhook\Fawaterk\PaidAction;
+use App\Http\Controllers\Webhook\Fawaterk\RefundAction;
+use App\Http\Controllers\Webhook\Fawaterk\TokenizationAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -178,5 +183,15 @@ Route::prefix('v1')->group(function () {
         Route::prefix('stripe')->group(function () {
             Route::post('create-checkout-session', CreateStripeSessionAction::class);
         });
+    });
+});
+
+Route::prefix('webhook')->group(function () {
+    Route::prefix('fawaterk')->group(function () {
+        Route::get('paid', PaidAction::class);
+        Route::get('tokenization', TokenizationAction::class);
+        Route::get('cancellation', CancellationAction::class);
+        Route::get('failed', FailedAction::class);
+        Route::get('refund', RefundAction::class);
     });
 });
