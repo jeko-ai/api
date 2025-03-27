@@ -11,7 +11,7 @@ class GetPlansAction
     public function __invoke(): JsonResponse
     {
         $plans = Cache::rememberForever("plans", function () {
-            return Plan::with('features')->orderBy('sort_order')->get()->toArray();
+            return Plan::with('features')->orderBy('sort_order')->get()->toJson();
         });
 
         return response()->json($plans);
