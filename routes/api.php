@@ -77,8 +77,7 @@ Route::prefix('v1')->group(function () {
             Route::get('indices', GetIndicesAction::class);
             Route::get('predictions', GetLastPredictionsAction::class);
         });
-        $locale = request()->header('Accept-Language', request('locale', 'en'));
-        Route::get('plans', GetPlansAction::class)->middleware("cacheResponse:3600,$locale");
+        Route::get('plans', GetPlansAction::class);
 
 
         Route::prefix('{market}')->group(function () {
