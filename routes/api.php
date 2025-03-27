@@ -69,7 +69,7 @@ Route::prefix('v1')->group(function () {
         });
     });
     Route::prefix('static')->group(function () {
-        Route::middleware('cacheResponse:3600')->group(function () {
+        Route::group([], function () {
             Route::get('countries', GetCountriesAction::class);
             Route::get('markets', GetMarketsAction::class);
             Route::get('sectors', GetSectorsAction::class);
@@ -78,6 +78,7 @@ Route::prefix('v1')->group(function () {
             Route::get('plans', GetPlansAction::class);
             Route::get('predictions', GetLastPredictionsAction::class);
         });
+
         Route::prefix('{market}')->group(function () {
             Route::get('best', GetBestAction::class);
             Route::get('companies', GetCompaniesAction::class);
@@ -97,7 +98,6 @@ Route::prefix('v1')->group(function () {
             Route::get('{id}', GetSymbolPriceAction::class);
         });
     });
-
 
 
     Route::prefix('recommendations')->group(function () {
