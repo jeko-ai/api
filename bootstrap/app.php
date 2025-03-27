@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AcceptLanguage;
 use App\Http\Middleware\JsonResponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->api([
+            AcceptLanguage::class
 //            ValidateApiKey::class,
 //            EncryptResponse::class,
         ]);
