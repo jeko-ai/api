@@ -16,6 +16,7 @@ class AcceptLanguage
     public function handle(Request $request, Closure $next): Response
     {
         $locale = request()->header('Accept-Language', request('locale', 'en'));
+        $locale = strtok($locale, ','); // Extract the first locale from the header
         app()->setLocale($locale);
         $request->setLocale($locale);
 
