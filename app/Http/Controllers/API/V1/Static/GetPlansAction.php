@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\API\V1\Static;
 
-use App\Models\Plan;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Laravelcm\Subscriptions\Models\Plan;
 
 class GetPlansAction
 {
     public function __invoke(): JsonResponse
     {
         $plans = Cache::rememberForever('plans', function () {
-            return Plan::orderBy('price')->get();
+            return Plan::with('features')->orderBy('sort_order')->get();
         });
 
         return response()->json($plans);
