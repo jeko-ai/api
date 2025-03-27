@@ -79,7 +79,6 @@ Route::prefix('v1')->group(function () {
         });
         Route::get('plans', GetPlansAction::class);
 
-
         Route::prefix('{market}')->group(function () {
             Route::get('best', GetBestAction::class);
             Route::get('companies', GetCompaniesAction::class);

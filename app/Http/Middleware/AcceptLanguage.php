@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,10 +16,15 @@ class AcceptLanguage
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = request()->header('Accept-Language', request('locale', 'en'));
+        $locale = request()->header('Accept-Language', request('locale', 'en')) ?? 'en';
         $locale = strtok($locale, ','); // Extract the first locale from the header
-        app()->setLocale($locale);
-        $request->setLocale($locale);
+        try {
+            app()->setLocale($locale);
+            $request->setLocale($locale);
+        } catch (Exception $e) {
+            app()->setLocale('en');
+            $request->setLocale('en');
+        }
 
         return $next($request);
     }
