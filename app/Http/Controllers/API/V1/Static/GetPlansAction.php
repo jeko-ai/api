@@ -10,10 +10,8 @@ class GetPlansAction
 {
     public function __invoke(): JsonResponse
     {
-        $locale = request()->header('Accept-Language', request('locale', 'en'));
-
-        $plans = Cache::rememberForever("plans-$locale", function () {
-            return Plan::with('features')->orderBy('sort_order')->get();
+        $plans = Cache::rememberForever("plans", function () {
+            return Plan::with('features')->orderBy('sort_order')->get()->toArray();
         });
 
         return response()->json($plans);
