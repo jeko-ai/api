@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'fawaterk' => [
+        'api_key' => env('FAWATERK_API_KEY'),
+        'provider_key' => env('FAWATERK_PROVIDER_KEY'),
+        'domain' => env('FAWATERK_DOMAIN'),
+    ]
+
 ];
