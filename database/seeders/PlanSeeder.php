@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Plan;
 use Illuminate\Database\Seeder;
 use Laravelcm\Subscriptions\Interval;
-use Laravelcm\Subscriptions\Models\Plan;
 
 class PlanSeeder extends Seeder
 {
