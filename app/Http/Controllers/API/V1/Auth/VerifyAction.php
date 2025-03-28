@@ -57,7 +57,7 @@ class VerifyAction
             return response()->json([
                 'message' => 'OTP verified',
                 'status' => true,
-                'user' => UserResource::make($user),
+                'user' => UserResource::make($user->load('planSubscriptions')),
                 'portfolio' => $user->portfolio()->firstOrCreate([], [
                     'name' => 'Default Portfolio',
                     'description' => 'This is your default portfolio',
