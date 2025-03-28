@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->dateTime('ends_at')->nullable();
             $table->dateTime('cancels_at')->nullable();
             $table->dateTime('canceled_at')->nullable();
+            $table->jsonb('features')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
