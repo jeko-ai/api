@@ -19,6 +19,8 @@ class UserPlanResource extends JsonResource
             'ends_at' => $this->ends_at,
             'starts_at' => $this->starts_at,
             'trial_ends_at' => $this->trial_ends_at,
+            'active' => $this->active,
+            'features' => $this->plan->features,
         ];
     }
 }
