@@ -14,6 +14,11 @@ class UserPlanResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'slug' => $this->slug,
+            'ends_at' => $this->ends_at,
+            'starts_at' => $this->starts_at,
+            'trial_ends_at' => $this->trial_ends_at,
+        ];
     }
 }
