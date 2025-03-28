@@ -59,7 +59,7 @@ class SubscribeAction
                 ]
             ]);
 
-        echo $response->body();
+        echo $response->json();
 
     }
 }
