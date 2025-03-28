@@ -58,8 +58,6 @@ class SubscribeAction
                     'discount' => $discount,
                 ]
             ]);
-
-        echo $response->json();
-
+        return response()->json($response->json());
     }
 }
