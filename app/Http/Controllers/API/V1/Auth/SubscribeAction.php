@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Requests\SubscribeRequest;
 use App\Models\Plan;
+use F9Web\ApiResponseHelpers;
 use Illuminate\Support\Facades\Http;
 
 class SubscribeAction
 {
+    use ApiResponseHelpers;
+
     public function __invoke(SubscribeRequest $request)
     {
         $plan = Plan::find($request->plan_id);
@@ -61,6 +64,11 @@ class SubscribeAction
                     'discount' => $discount,
                 ]
             ]);
-        return response()->json($response->json());
+        if ($response->ok()) {
+            return $this->respondWithSuccess([
+                'url' => $response->json('data')['url'],
+            ]);
+        }
+        return $this->respondError('invalid_request');
     }
 }
