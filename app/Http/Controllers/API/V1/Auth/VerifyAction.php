@@ -52,7 +52,19 @@ class VerifyAction
                 'email' => $request->identifier
             ]);
             $standardPlan = Plan::where('slug', 'standard')->first();
-            $user->newPlanSubscription($standardPlan->slug, $standardPlan);
+            $subscription = $user->newPlanSubscription($standardPlan->slug, $standardPlan);
+            $subscription->forceFill([
+                'feature' => $standardPlan->features->map(function ($feature) {
+                    return $feature->only([
+                        'slug',
+                        'name',
+                        'description',
+                        'value',
+                        'resettable_period',
+                        'resettable_interval',
+                    ]);
+                }),
+            ]);
 
             return response()->json([
                 'message' => 'OTP verified',
