@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
+use App\Http\Resources\API\V1\Auth\UserResource;
+
 /**
  * @OA\Get(
  *     path="/v1/auth/me",
@@ -33,10 +35,6 @@ class GetUserAction
 {
     public function __invoke()
     {
-        $user = auth()->user();
-        return response()->json([
-            $user,
-            ...$user->activePlanSubscriptions()
-        ]);
+        return response()->json(UserResource::make(auth()->user()));
     }
 }

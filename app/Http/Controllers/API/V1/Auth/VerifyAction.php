@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Requests\VerifyRequest;
+use App\Http\Resources\API\V1\Auth\UserResource;
 use App\Models\Plan;
 use App\Models\User;
 use Ichtrojan\Otp\Otp;
@@ -56,7 +57,7 @@ class VerifyAction
             return response()->json([
                 'message' => 'OTP verified',
                 'status' => true,
-                'user' => $user,
+                'user' => UserResource::make(auth()->user()),
                 'portfolio' => $user->portfolio()->firstOrCreate([], [
                     'name' => 'Default Portfolio',
                     'description' => 'This is your default portfolio',
