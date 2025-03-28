@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Resources\API\V1\Auth\UserResource;
+use App\Models\Plan;
 
 /**
  * @OA\Get(
@@ -35,6 +36,12 @@ class GetUserAction
 {
     public function __invoke()
     {
+        $user = auth()->user();
+        $plan = $user->activePlanSubscriptions()->first();
+        if (!$plan) {
+            $freePlan = Plan::where('slug', 'free')->first();
+            $user->newPlanSubscription('main', $freePlan);
+        }
         return response()->json(UserResource::make(auth()->user()));
     }
 }
