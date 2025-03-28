@@ -64,7 +64,7 @@ class VerifyAction
                         'resettable_interval',
                     ]);
                 }),
-            ]);
+            ])->save();
 
             return response()->json([
                 'message' => 'OTP verified',
