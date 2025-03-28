@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "darkaonline/l5-swagger": "^8.6",
+        "f9webltd/laravel-api-response-helpers": "^2.1",
         "filament/filament": "^3.3",
         "ichtrojan/laravel-otp": "^2.0",
         "laravel/framework": "^11.44",
