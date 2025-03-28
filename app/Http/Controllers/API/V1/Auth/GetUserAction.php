@@ -39,8 +39,25 @@ class GetUserAction
         $user = auth()->user();
         $plan = $user->activePlanSubscriptions()->first();
         if (!$plan) {
-            $freePlan = Plan::where('slug', 'free')->first();
-            $user->newPlanSubscription($freePlan->slug, $freePlan);
+            $subscription = $user->planSubscription('free');
+            if ($subscription) {
+                $subscription->renew();
+            } else {
+                $freePlan = Plan::where('slug', 'free')->first();
+                $subscription = $user->newPlanSubscription($freePlan->slug, $freePlan);
+                $subscription->forceFill([
+                    'feature' => $freePlan->features->map(function ($feature) {
+                        return $feature->only([
+                            'slug',
+                            'name',
+                            'description',
+                            'value',
+                            'resettable_period',
+                            'resettable_interval',
+                        ]);
+                    }),
+                ])->save();
+            }
         }
         return response()->json(UserResource::make($user->load('planSubscriptions')));
     }
