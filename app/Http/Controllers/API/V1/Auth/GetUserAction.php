@@ -33,6 +33,10 @@ class GetUserAction
 {
     public function __invoke()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+        return response()->json([
+            $user,
+            ...$user->activePlanSubscriptions()
+        ]);
     }
 }
