@@ -46,7 +46,7 @@ class GetUserAction
                 $freePlan = Plan::where('slug', 'free')->first();
                 $subscription = $user->newPlanSubscription($freePlan->slug, $freePlan);
                 $subscription->forceFill([
-                    'feature' => $freePlan->features->map(function ($feature) {
+                    'features' => $freePlan->features->map(function ($feature) {
                         return $feature->only([
                             'slug',
                             'name',

@@ -54,7 +54,7 @@ class VerifyAction
             $standardPlan = Plan::where('slug', 'standard')->first();
             $subscription = $user->newPlanSubscription($standardPlan->slug, $standardPlan);
             $subscription->forceFill([
-                'feature' => $standardPlan->features->map(function ($feature) {
+                'features' => $standardPlan->features->map(function ($feature) {
                     return $feature->only([
                         'slug',
                         'name',
