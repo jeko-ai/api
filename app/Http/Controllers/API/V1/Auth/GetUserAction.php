@@ -40,7 +40,7 @@ class GetUserAction
         $plan = $user->activePlanSubscriptions()->first();
         if (!$plan) {
             $freePlan = Plan::where('slug', 'free')->first();
-            $user->newPlanSubscription('main', $freePlan);
+            $user->newPlanSubscription($freePlan->slug, $freePlan);
         }
         return response()->json(UserResource::make($user->load('planSubscriptions')));
     }
