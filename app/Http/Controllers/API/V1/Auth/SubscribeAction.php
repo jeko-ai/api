@@ -28,6 +28,8 @@ class SubscribeAction
         };
         $cartTotal = $plan->price * $multiplier;
         $cartTotal -= ($cartTotal * $discount) / 100;
+        $firstName = explode(' ', $user->name)[0] ?? '-';
+        $lastName = explode(' ', $user->name)[1] ?? '-';
         $response = Http::asJson()
             ->acceptJson()
             ->withToken('Bearer ' . config('services.fawaterk.api_key'))
@@ -35,8 +37,8 @@ class SubscribeAction
                 'cartTotal' => $cartTotal,
                 'currency' => 'USD',
                 'customer' => [
-                    'first_name' => $user->name,
-                    'last_name' => '',
+                    'first_name' => $firstName,
+                    'last_name' => $lastName,
                     'email' => $user->email,
                     'phone' => $user->phone,
                     'address' => '',
