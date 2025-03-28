@@ -30,6 +30,7 @@ class SubscribeAction
         $cartTotal -= ($cartTotal * $discount) / 100;
         $response = Http::asJson()
             ->acceptJson()
+            ->withToken('Bearer ' . config('services.fawaterk.api_key'))
             ->post('https://staging.fawaterk.com/api/v2/createInvoiceLink', [
                 'cartTotal' => $cartTotal,
                 'currency' => 'USD',
