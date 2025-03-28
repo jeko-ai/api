@@ -42,6 +42,6 @@ class GetUserAction
             $freePlan = Plan::where('slug', 'free')->first();
             $user->newPlanSubscription('main', $freePlan);
         }
-        return response()->json(UserResource::make(auth()->user()));
+        return response()->json(UserResource::make($user));
     }
 }
