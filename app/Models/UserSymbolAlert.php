@@ -29,4 +29,21 @@ class UserSymbolAlert extends Model
         'market_movement_alert',
         'ai_smart_alert',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'enable_price_alert' => 'boolean',
+            'new_recommendation' => 'boolean',
+            'latest_news' => 'boolean',
+            'new_predictions' => 'boolean',
+            'unusual_volume_alert' => 'boolean',
+            'volatility_alert' => 'boolean',
+            'earnings_report_alert' => 'boolean',
+            'analyst_rating_alert' => 'boolean',
+            'corporate_events_alert' => 'boolean',
+            'market_movement_alert' => 'boolean',
+            'ai_smart_alert' => 'boolean',
+        ];
+    }
 }
