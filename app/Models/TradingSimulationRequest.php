@@ -54,6 +54,6 @@ class TradingSimulationRequest extends Model
      */
     public function transactions(): HasMany
     {
-        return $this->hasMany(TradingSimulationTransaction::class, 'trading_simulation_request_id');
+        return $this->hasMany(TradingSimulationTransaction::class, 'trading_simulation_request_id')->orderBy('timestamp');
     }
 }
