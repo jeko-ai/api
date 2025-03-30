@@ -8,6 +8,13 @@ class GetSimulationsAction
 {
     public function __invoke()
     {
-        return TradingSimulationRequest::where('user_id', request()->user()->id)->orderByDesc('created_at')->get();
+        return TradingSimulationRequest::where('user_id', request()->user()->id)
+            ->select([
+                'id',
+                'user_id',
+                'market_id',
+                'status',
+                'created_at',
+            ])->orderByDesc('created_at')->get();
     }
 }
