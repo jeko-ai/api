@@ -29,8 +29,8 @@ class NotifyBrainAboutNewRequestJob implements ShouldQueue
     {
         if (config('services.brain.api_url') && config('services.brain.api_key')) {
             $url = match ($this->type) {
-                PricePredictionRequest::class => config('services.brain.api_url') . '/api/new-prediction',
-                TradingSimulationRequest::class => config('services.brain.api_url') . '/api/new-simulation',
+                PricePredictionRequest::class => config('services.brain.api_url') . 'api/new-prediction',
+                TradingSimulationRequest::class => config('services.brain.api_url') . 'api/new-simulation',
                 default => null,
             };
             if ($url) {
