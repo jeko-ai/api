@@ -42,7 +42,6 @@ use App\Http\Controllers\API\V1\Static\GetPlansAction;
 use App\Http\Controllers\API\V1\Static\GetSectorsAction;
 use App\Http\Controllers\API\V1\Static\GetSymbolsAction;
 use App\Http\Controllers\API\V1\Static\GetWorstAction;
-use App\Http\Controllers\API\V1\Stripe\CreateStripeSessionAction;
 use App\Http\Controllers\API\V1\Symbols\AddSymbolToPortfolioAction;
 use App\Http\Controllers\API\V1\Symbols\BuySymbolAction;
 use App\Http\Controllers\API\V1\Symbols\CheckIfUserOwnSymbolAction;
@@ -62,6 +61,7 @@ use App\Http\Controllers\Webhook\Fawaterk\FailedAction;
 use App\Http\Controllers\Webhook\Fawaterk\PaidAction;
 use App\Http\Controllers\Webhook\Fawaterk\RefundAction;
 use App\Http\Controllers\Webhook\Fawaterk\TokenizationAction;
+use App\Http\Controllers\Webhook\HandelNewsAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -181,10 +181,6 @@ Route::prefix('v1')->group(function () {
                 Route::post('', CreateSimulationAction::class);
             });
         });
-
-        Route::prefix('stripe')->group(function () {
-            Route::post('create-checkout-session', CreateStripeSessionAction::class);
-        });
     });
 });
 
@@ -196,4 +192,6 @@ Route::prefix('webhook')->group(function () {
         Route::get('failed', FailedAction::class);
         Route::get('refund', RefundAction::class);
     });
+
+    Route::get('news/{id}', HandelNewsAction::class);
 });
