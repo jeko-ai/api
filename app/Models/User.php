@@ -57,6 +57,11 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'phone_verified_at' => 'datetime',
+            'is_notification_enabled' => 'boolean',
+            'is_price_alerts_enabled' => 'boolean',
+            'is_new_recommendations_alerts_enabled' => 'boolean',
+            'is_portfolio_update_alerts_enabled' => 'boolean',
+            'is_market_sentiment_alerts_enabled' => 'boolean',
         ];
     }
 
