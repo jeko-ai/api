@@ -193,5 +193,5 @@ Route::prefix('webhook')->group(function () {
         Route::get('refund', RefundAction::class);
     });
 
-    Route::get('news/{id}', HandelNewsAction::class);
+    Route::post('news/{id}', HandelNewsAction::class);
 });
