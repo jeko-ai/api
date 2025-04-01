@@ -39,6 +39,10 @@ return [
         'api_key' => env('FAWATERK_API_KEY'),
         'provider_key' => env('FAWATERK_PROVIDER_KEY'),
         'domain' => env('FAWATERK_DOMAIN'),
-    ]
+    ],
 
+    'brain' => [
+        'api_key' => env('BRAIN_API_KEY'),
+        'api_url' => env('BRAIN_API_URL'),
+    ]
 ];
