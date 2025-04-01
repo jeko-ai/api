@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -20,7 +19,7 @@ return new class extends Migration {
             $table->string('prediction_type', 20);
             $table->timestamp('prediction_start_date');
             $table->timestamp('prediction_end_date');
-            $table->string('status', 20)->nullable()->default('pending')->index('idx_price_prediction_requests_status');
+            $table->enum('status', ['pending', 'in_progress', 'partially_completed', 'completed', 'failed'])->default('pending')->index('idx_price_prediction_requests_status');
             $table->timestamps();
         });
     }

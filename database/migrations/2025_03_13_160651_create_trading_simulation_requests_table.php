@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->timestamp('end_time');
             $table->decimal('expected_return_percentage', 18)->nullable()->default(0);
             $table->decimal('stop_loss_percentage', 18)->nullable()->default(0);
-            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
+            $table->enum('status', ['pending', 'in_progress', 'partially_completed', 'completed', 'failed'])->default('pending')->index('idx_trading_simulation_requests_status');
             $table->string('selected_type', 10);
             $table->jsonb('stock_selections')->nullable();
             $table->jsonb('portfolio_value_over_time')->nullable();
