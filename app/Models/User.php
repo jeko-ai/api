@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function symbolAlerts(): HasMany
+    {
+        return $this->hasMany(UserSymbolAlert::class);
+    }
 }
