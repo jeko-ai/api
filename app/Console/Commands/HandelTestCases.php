@@ -30,11 +30,13 @@ class HandelTestCases extends Command
         $user = User::where('email', 'yasoesr@gmail.com')->first();
 
         $symbols = Symbol::all();
+        $this->output->progressStart($symbols->count());
 
         foreach ($symbols as $symbol) {
-            $user->symbolAlerts()->create([
+            $user->symbolAlerts()->updateOrCreate([
                 'user_id' => $user->id,
                 'symbol_id' => $symbol->id,
+            ], [
                 'inv_id' => $symbol->inv_id,
                 'tv_id' => $symbol->tv_id,
                 'enable_price_alert' => true,
@@ -50,6 +52,9 @@ class HandelTestCases extends Command
                 'market_movement_alert' => true,
                 'ai_smart_alert' => true,
             ]);
+            $this->output->progressAdvance();
         }
+        $this->output->progressFinish();
+
     }
 }
