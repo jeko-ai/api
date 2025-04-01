@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\News;
 use App\Models\Symbol;
 use App\Models\User;
+use Http;
 use Illuminate\Console\Command;
 
 class HandelTestCases extends Command
@@ -26,6 +28,17 @@ class HandelTestCases extends Command
      * Execute the console command.
      */
     public function handle()
+    {
+        $this->postNewsToFlow();
+    }
+
+    private function postNewsToFlow()
+    {
+        $news = News::inRandomOrder()->where('is_rewritten', true)->first();
+        Http::post('http://localhost:5678/webhook-test/864977a8-7d04-4953-a816-117182c68328', $news->toArray());
+    }
+
+    private function assignSymbolsToUser()
     {
         $user = User::where('email', 'yasoesr@gmail.com')->first();
 
@@ -55,6 +68,5 @@ class HandelTestCases extends Command
             $this->output->progressAdvance();
         }
         $this->output->progressFinish();
-
     }
 }
