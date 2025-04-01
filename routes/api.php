@@ -61,7 +61,9 @@ use App\Http\Controllers\Webhook\Fawaterk\FailedAction;
 use App\Http\Controllers\Webhook\Fawaterk\PaidAction;
 use App\Http\Controllers\Webhook\Fawaterk\RefundAction;
 use App\Http\Controllers\Webhook\Fawaterk\TokenizationAction;
-use App\Http\Controllers\Webhook\HandelNewsAction;
+use App\Http\Controllers\Webhook\Notifications\AI\HandelPredictionsAction;
+use App\Http\Controllers\Webhook\Notifications\AI\HandelSimulationsAction;
+use App\Http\Controllers\Webhook\Notifications\HandelNewsAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -193,5 +195,9 @@ Route::prefix('webhook')->group(function () {
         Route::get('refund', RefundAction::class);
     });
 
-    Route::post('news/{id}', HandelNewsAction::class);
+    Route::prefix('notifications')->group(function () {
+        Route::post('news/{id}', HandelNewsAction::class);
+        Route::post('predictions/{id}', HandelPredictionsAction::class);
+        Route::post('simulations/{id}', HandelSimulationsAction::class);
+    });
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Webhook;
+namespace App\Http\Controllers\Webhook\Notifications;
 
 use App\Jobs\ProcessNewsNotification;
 use App\Models\News;
