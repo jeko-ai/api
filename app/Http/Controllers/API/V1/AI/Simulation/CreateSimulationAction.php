@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\AI\Simulation;
 
 use App\Http\Requests\CreateSimulationRequest;
+use App\Jobs\NotifyBrainAboutNewRequestJob;
 use App\Models\Market;
 use App\Models\TradingSimulationRequest;
 use Carbon\Carbon;
@@ -33,6 +34,8 @@ class CreateSimulationAction
             'stop_loss_percentage' => $request->stop_loss_percentage,
             'selected_type' => $request->selected_type,
         ]);
+        // Notify Brain about the new simulation request
+        NotifyBrainAboutNewRequestJob::dispatch(TradingSimulationRequest::class);
         return response()->json($simulation);
 
     }

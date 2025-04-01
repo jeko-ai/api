@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Webhook\Notifications;
 
-use App\Jobs\ProcessNewsNotification;
+use App\Jobs\ProcessNewsNotificationJob;
 use App\Models\News;
 use F9Web\ApiResponseHelpers;
 use Illuminate\Http\JsonResponse;
@@ -19,7 +19,7 @@ class HandelNewsAction
      */
     public function __invoke(News $id)
     {
-        ProcessNewsNotification::dispatch($id);
+        ProcessNewsNotificationJob::dispatch($id);
 
         return $this->respondOk('News received successfully');
     }

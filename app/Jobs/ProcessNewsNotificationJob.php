@@ -6,7 +6,7 @@ use App\Models\News;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class ProcessNewsNotification implements ShouldQueue
+class ProcessNewsNotificationJob implements ShouldQueue
 {
     use Queueable;
 

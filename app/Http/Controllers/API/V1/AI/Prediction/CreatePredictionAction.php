@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\AI\Prediction;
 
 use App\Http\Requests\API\V1\CreatePredictionRequest;
+use App\Jobs\NotifyBrainAboutNewRequestJob;
 use App\Models\PricePredictionRequest;
 use App\Models\Symbol;
 use Carbon\Carbon;
@@ -27,7 +28,8 @@ class CreatePredictionAction
             'prediction_start_date' => Carbon::parse($request->prediction_start_date)->setTimeFromTimeString($market->open_at),
             'prediction_end_date' => Carbon::parse($request->prediction_end_date)->setTimeFromTimeString($market->close_at),
         ]);
-
+        // Notify Brain about the new prediction request
+        NotifyBrainAboutNewRequestJob::dispatch(PricePredictionRequest::class);
         return response()->json($prediction);
     }
 }
