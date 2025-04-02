@@ -4,10 +4,10 @@ namespace App\Jobs;
 
 use App\Models\PricePredictionRequest;
 use App\Models\TradingSimulationRequest;
-use Http;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Facades\Redis;
 
 class NotifyBrainAboutNewRequestJob implements ShouldQueue
 {
@@ -27,15 +27,14 @@ class NotifyBrainAboutNewRequestJob implements ShouldQueue
      */
     public function handle(): void
     {
-        if (config('services.brain.api_url') && config('services.brain.api_key')) {
-            $url = match ($this->type) {
-                PricePredictionRequest::class => config('services.brain.api_url') . 'api/new-prediction',
-                TradingSimulationRequest::class => config('services.brain.api_url') . 'api/new-simulation',
-                default => null,
-            };
-            if ($url) {
-                Http::post($url, []);
-            }
+        $type = match ($this->type) {
+            PricePredictionRequest::class => 'new_prediction',
+            TradingSimulationRequest::class => 'new_simulation',
+            default => null,
+        };
+
+        if ($type) {
+            Redis::publish('new_requests', $type);
         }
     }
 }

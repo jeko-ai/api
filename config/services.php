@@ -41,11 +41,6 @@ return [
         'domain' => env('FAWATERK_DOMAIN'),
     ],
 
-    'brain' => [
-        'api_key' => env('BRAIN_API_KEY'),
-        'api_url' => env('BRAIN_API_URL'),
-    ],
-
     'webhooks' => [
         'social_publisher' => env('SOCIAL_PUBLISHER_WEBHOOK_URL'),
     ],
