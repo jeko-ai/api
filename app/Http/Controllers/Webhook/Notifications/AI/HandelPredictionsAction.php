@@ -10,9 +10,9 @@ class HandelPredictionsAction
 {
     use ApiResponseHelpers;
 
-    public function __invoke(PricePredictionRequest $predictionRequest, string $type)
+    public function __invoke(PricePredictionRequest $id, string $type)
     {
-        $predictionRequest->user->notify(new PricePredictionRequestStatusUpdated($predictionRequest));
+        $id->user->notify(new PricePredictionRequestStatusUpdated($id));
         return $this->respondOk('update received successfully');
     }
 }
