@@ -197,7 +197,7 @@ Route::prefix('webhook')->group(function () {
 
     Route::prefix('notifications')->group(function () {
         Route::post('news/{id}', HandelNewsAction::class);
-        Route::post('predictions/{id}', HandelPredictionsAction::class);
-        Route::post('simulations/{id}', HandelSimulationsAction::class);
+        Route::post('predictions/{id}/{type}', HandelPredictionsAction::class)->where('type', 'update|partially_completed|completed|failed|new');
+        Route::post('simulations/{id}/{type}', HandelSimulationsAction::class)->where('type', 'update|partially_completed|completed|failed|new');
     });
 });
