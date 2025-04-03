@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Webhook\Notifications\AI;
 
+use App\Jobs\ProcessPricePredictionRequestNotification;
 use App\Models\PricePredictionRequest;
-use App\Notifications\PricePredictionRequestStatusUpdated;
 use F9Web\ApiResponseHelpers;
 
 class HandelPredictionsAction
@@ -12,7 +12,7 @@ class HandelPredictionsAction
 
     public function __invoke(PricePredictionRequest $id, string $type)
     {
-        $id->user->notify(new PricePredictionRequestStatusUpdated($id));
+        ProcessPricePredictionRequestNotification::dispatch($id, $type);
         return $this->respondOk('update received successfully');
     }
 }
