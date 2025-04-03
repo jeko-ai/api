@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PricePredictionRequestPartiallyCompleted extends Notification implements ShouldQueue
+class PricePredictionRequestStatusUpdated extends Notification implements ShouldQueue
 {
     use Queueable;
 
