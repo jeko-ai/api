@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class News extends Model
 {
@@ -52,5 +53,15 @@ class News extends Model
     public function scopeIsRewritten($query, $isRewritten = true)
     {
         return $query->where('is_rewritten', $isRewritten);
+    }
+
+    public function symbol(): BelongsTo
+    {
+        return $this->belongsTo(Symbol::class, 'symbol_id', 'id');
+    }
+
+    public function market(): BelongsTo
+    {
+        return $this->belongsTo(Market::class, 'market_id', 'id');
     }
 }

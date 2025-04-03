@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\News;
 use App\Models\User;
 use App\Notifications\SymbolHasNews;
+use Http;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Notification;
@@ -37,5 +38,9 @@ class ProcessNewsNotificationJob implements ShouldQueue
         })->get();
 
         Notification::send($users, new SymbolHasNews($this->news));
+
+        if ($url = config('services.webhooks.social_publisher')) {
+            Http::post($url, $this->news->load(['symbol', 'market'])->toArray());
+        }
     }
 }
