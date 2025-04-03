@@ -14,6 +14,7 @@ class HandelPredictionsAction
 
     public function __invoke(PricePredictionRequest $predictionRequest, string $type)
     {
+        dump($type);
         switch ($type) {
             case 'partially_completed':
                 $predictionRequest->user->notify(new PricePredictionRequestPartiallyCompleted($predictionRequest));
