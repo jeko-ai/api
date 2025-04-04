@@ -23,6 +23,10 @@ class CreatePredictionAction
             return $this->respondError(__("Subscription not found"));
         }
 
+        if ($subscription->canUseFeature('ai-stock-predictions')) {
+            return $this->respondError(__('You have reached the limit of your plan for this feature'));
+        }
+
         $symbols = Cache::rememberForever('symbols', function () {
             return Symbol::where('type', 'stock')->get();
         });
