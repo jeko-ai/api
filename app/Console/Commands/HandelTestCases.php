@@ -34,7 +34,10 @@ class HandelTestCases extends Command
 
     private function postNewsToFlow()
     {
-        $news = News::inRandomOrder()->where('is_rewritten', true)->first();
+        $news = News::inRandomOrder()->where('is_rewritten', true)->with([
+            'symbol',
+            'market',
+        ])->first();
         $res = Http::post('http://localhost:5678/webhook-test/864977a8-7d04-4953-a816-117182c68328', $news->toArray());
         if ($res->ok()) {
             $this->info('News posted successfully');
