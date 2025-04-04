@@ -5,14 +5,24 @@ namespace App\Http\Controllers\API\V1\AI\Simulation;
 use App\Http\Requests\CreateSimulationRequest;
 use App\Jobs\NotifyBrainAboutNewRequestJob;
 use App\Models\Market;
+use App\Models\Subscription;
 use App\Models\TradingSimulationRequest;
 use Carbon\Carbon;
+use F9Web\ApiResponseHelpers;
 use Illuminate\Support\Facades\Cache;
 
 class CreateSimulationAction
 {
+    use ApiResponseHelpers;
+
     public function __invoke(CreateSimulationRequest $request)
     {
+        /** @var Subscription $subscription */
+        $subscription = $request->user()->activePlanSubscriptions()->first();
+        if (!$subscription) {
+            return $this->respondError(__("Subscription not found"));
+        }
+
         $markets = Cache::rememberForever('markets', function () {
             return Market::all();
         });
@@ -36,6 +46,9 @@ class CreateSimulationAction
         ]);
         // Notify Brain about the new simulation request
         NotifyBrainAboutNewRequestJob::dispatch(TradingSimulationRequest::class);
+
+        $subscription->recordFeatureUsage('ai-trading-simulations');
+
         return response()->json($simulation);
 
     }

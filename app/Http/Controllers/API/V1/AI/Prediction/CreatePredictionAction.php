@@ -5,14 +5,24 @@ namespace App\Http\Controllers\API\V1\AI\Prediction;
 use App\Http\Requests\API\V1\CreatePredictionRequest;
 use App\Jobs\NotifyBrainAboutNewRequestJob;
 use App\Models\PricePredictionRequest;
+use App\Models\Subscription;
 use App\Models\Symbol;
 use Carbon\Carbon;
+use F9Web\ApiResponseHelpers;
 use Illuminate\Support\Facades\Cache;
 
 class CreatePredictionAction
 {
+    use ApiResponseHelpers;
+
     public function __invoke(CreatePredictionRequest $request)
     {
+        /** @var Subscription $subscription */
+        $subscription = $request->user()->activePlanSubscriptions()->first();
+        if (!$subscription) {
+            return $this->respondError(__("Subscription not found"));
+        }
+
         $symbols = Cache::rememberForever('symbols', function () {
             return Symbol::where('type', 'stock')->get();
         });
@@ -30,6 +40,9 @@ class CreatePredictionAction
         ]);
         // Notify Brain about the new prediction request
         NotifyBrainAboutNewRequestJob::dispatch(PricePredictionRequest::class);
+
+        $subscription->recordFeatureUsage('ai-stock-predictions');
+
         return response()->json($prediction);
     }
 }
