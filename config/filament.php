@@ -88,4 +88,5 @@ return [
 
     'domain' => env('FILAMENT_DOMAIN', null),
 
+    'admins'    =>  env('FILAMENT_ADMINS', null),
 ];
