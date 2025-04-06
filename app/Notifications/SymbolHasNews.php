@@ -37,6 +37,7 @@ class SymbolHasNews extends Notification implements ShouldQueue
     {
         $url = "https://kira.ws/{$this->news->language}/news/{$this->news->slug}";
         return (new MailMessage)
+            ->subject("{$this->news->symbol->symbol} : {$this->news->title}")
             ->line('The introduction to the notification.')
             ->action('Notification Action', url($url))
             ->line('Thank you for using our application!');
