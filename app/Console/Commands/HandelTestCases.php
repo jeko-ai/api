@@ -29,7 +29,10 @@ class HandelTestCases extends Command
      */
     public function handle()
     {
-        $this->postNewsToFlow();
+        $user = User::where('email', 'yasoesr@gmail.com')->first();
+        $subscription = $user->activePlanSubscriptions()->first();
+
+        dd($subscription->canUseFeature('ai-trading-simulations'));
     }
 
     private function postNewsToFlow()
