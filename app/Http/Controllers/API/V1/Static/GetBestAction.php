@@ -14,6 +14,9 @@ class GetBestAction
             return MarketMoversGainer::where('market_id', $market)->get();
         });
 
+        if (request('limit') == 0) {
+            return response()->json($items);
+        }
         $count = $items->count();
         $itemsToReturn = $count >= 8 ? $items->random(8) : $items;
 
