@@ -26,7 +26,7 @@ class CreateSimulationRequest extends FormRequest
             'market_id' => 'required|uuid|exists:markets,id',
             'symbols' => 'required_if:selected_type,user|array',
             'symbols.*' => 'required_if:selected_type,user|uuid|exists:symbols,id',
-            'sectors' => 'required_if:selected_type,user|array',
+            'sectors' => 'required_if:selected_type,ai|array',
             'sectors.*' => 'required_if:selected_type,user|uuid|exists:sectors,id',
             'investment_amount' => 'required|numeric|min:0',
             'risk_level' => 'required|in:low,medium,high',
