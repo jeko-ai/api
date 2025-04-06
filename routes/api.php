@@ -97,7 +97,7 @@ Route::prefix('v1')->group(function () {
         })->middleware('cacheResponse:1440');
     });
 
-    Route::middleware('cacheResponse:300')->group(function () {
+    Route::group([], function () {
         Route::prefix('quotes')->group(function () {
             Route::get('', GetQuotesAction::class);
             Route::get('{id}', GetSymbolQuoteAction::class);
