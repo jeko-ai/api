@@ -23,7 +23,7 @@ class CreateSimulationAction
             return $this->respondError(__("Subscription not found"));
         }
 
-        if ($subscription->canUseFeature('ai-trading-simulations')) {
+        if (!$subscription->canUseFeature('ai-trading-simulations')) {
             return $this->respondError(__('You have reached the limit of your plan for this feature'));
         }
 
