@@ -11,7 +11,7 @@ class GetSymbolQuoteAction
 {
     public function __invoke(string $id)
     {
-        $symbol = Symbol::find($id);
+        $symbol = Symbol::find($id, ['id', 'full_name']);
 
         $time = time();
         $uuid = Str::uuid()->getHex()->toString();
