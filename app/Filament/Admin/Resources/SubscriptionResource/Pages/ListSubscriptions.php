@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\SubscriptionResource\Pages;
+namespace App\Filament\Admin\Resources\SubscriptionResource\Pages;
 
-use Filament\Resources\Pages\ManageRecords;
-use App\Filament\Resources\SubscriptionResource;
+use App\Filament\Admin\Resources\SubscriptionResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
 class ListSubscriptions extends ManageRecords
 {

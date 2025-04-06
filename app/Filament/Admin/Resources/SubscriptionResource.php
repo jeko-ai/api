@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Admin\Resources;
 
-use Filament\Notifications\Notification;
-use Illuminate\Support\Carbon;
+use App\Filament\Resources\FilamentSubscriptions;
 use App\Filament\Resources\SubscriptionResource\Pages;
-use App\Models\User;
 use App\Models\Plan;
+use App\Models\Subscription;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Subscription;
+use Illuminate\Support\Carbon;
 
 class SubscriptionResource extends Resource
 {
@@ -246,7 +247,7 @@ class SubscriptionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSubscriptions::route('/')
+            'index' => \App\Filament\Admin\Resources\SubscriptionResource\Pages\ListSubscriptions::route('/')
         ];
     }
 }

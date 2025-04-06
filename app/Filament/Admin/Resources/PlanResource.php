@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Admin\Resources;
 
-use TomatoPHP\FilamentLocations\Models\Currency;
 use App\Filament\Resources\PlanResource\Pages;
 use App\Filament\Resources\PlanResource\RelationManagers;
+use App\Models\Plan;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Laravelcm\Subscriptions\Interval;
-use App\Models\Plan;
+use TomatoPHP\FilamentLocations\Models\Currency;
 use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class PlanResource extends Resource
@@ -143,16 +143,16 @@ class PlanResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\FeatureManager::class,
+            \App\Filament\Admin\Resources\PlanResource\RelationManagers\FeatureManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPlans::route('/'),
-            'create' => Pages\CreatePlan::route('/create'),
-            'edit' => Pages\EditPlan::route('/{record}/edit'),
+            'index' => \App\Filament\Admin\Resources\PlanResource\Pages\ListPlans::route('/'),
+            'create' => \App\Filament\Admin\Resources\PlanResource\Pages\CreatePlan::route('/create'),
+            'edit' => \App\Filament\Admin\Resources\PlanResource\Pages\EditPlan::route('/{record}/edit'),
         ];
     }
 }

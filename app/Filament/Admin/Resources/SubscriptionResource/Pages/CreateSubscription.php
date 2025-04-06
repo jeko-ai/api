@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Filament\Resources\SubscriptionResource\Pages;
+namespace App\Filament\Admin\Resources\SubscriptionResource\Pages;
 
-use App\Filament\Resources\SubscriptionResource;
-use Filament\Actions;
+use App\Filament\Admin\Resources\SubscriptionResource;
 use Filament\Notifications\Notification;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
 use Laravelcm\Subscriptions\Models\Plan;
 
-class EditSubscription extends EditRecord
+class CreateSubscription extends CreateRecord
 {
     protected static string $resource = SubscriptionResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\DeleteAction::make(),
-        ];
-    }
 
     protected function handleRecordCreation(array $data): Model
     {
@@ -47,8 +39,8 @@ class EditSubscription extends EditRecord
                 'canceled_at' => $data['canceled_at'] ?? null,
             ]);
         } else {
-            // Change subscription plan
-            $subscriberModel->changePlan($plan);
+            // Use the newPlanSubscription method
+            $subscriberModel->newPlanSubscription('main', $plan);
 
             $subscription = $this->getModel()::where('subscriber_type', $data['subscriber_type'])
                 ->where('subscriber_id', $data['subscriber_id'])
