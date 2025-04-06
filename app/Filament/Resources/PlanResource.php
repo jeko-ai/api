@@ -10,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Laravelcm\Subscriptions\Interval;
 use App\Models\Plan;
 use TomatoPHP\FilamentTranslationComponent\Components\Translation;

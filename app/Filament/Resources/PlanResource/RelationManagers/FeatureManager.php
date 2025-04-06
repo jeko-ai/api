@@ -7,11 +7,8 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Laravelcm\Subscriptions\Interval;
-use App\Models\Feature;
 use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class FeatureManager extends RelationManager

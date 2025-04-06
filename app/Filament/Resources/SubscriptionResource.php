@@ -5,18 +5,14 @@ namespace App\Filament\Resources;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use App\Filament\Resources\SubscriptionResource\Pages;
-use App\Filament\Resources\SubscriptionResource\RelationManagers;
 use App\Models\User;
 use App\Models\Plan;
-use App\Facades\FilamentSubscriptions;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Subscription;
 
 class SubscriptionResource extends Resource
