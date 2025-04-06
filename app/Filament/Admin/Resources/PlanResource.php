@@ -2,7 +2,6 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Resources\PlanResource\Pages;
 use App\Filament\Resources\PlanResource\RelationManagers;
 use App\Models\Plan;
 use Filament\Forms;
@@ -11,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Laravelcm\Subscriptions\Interval;
-use TomatoPHP\FilamentLocations\Models\Currency;
 use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class PlanResource extends Resource
@@ -60,7 +58,13 @@ class PlanResource extends Resource
                             ->default('USD')
                             ->searchable()
                             ->label(trans('messages.plans.columns.currency'))
-                            ->options(Currency::query()->pluck('name', 'iso')->toArray())
+                            ->options([
+                                'EGP',
+                                'USD',
+                                'EUR',
+                                'AED',
+                                'SAR',
+                            ])
                             ->required(),
                         Forms\Components\TextInput::make('price')
                             ->default(0)
