@@ -2,8 +2,6 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Resources\FilamentSubscriptions;
-use App\Filament\Resources\SubscriptionResource\Pages;
 use App\Models\Plan;
 use App\Models\Subscription;
 use App\Models\User;
@@ -51,7 +49,7 @@ class SubscriptionResource extends Resource
                 Forms\Components\Hidden::make('name'),
                 Forms\Components\Select::make('subscriber_type')
                     ->label(trans('messages.subscriptions.sections.subscriber.columns.subscriber_type'))
-                    ->options(count(FilamentSubscriptions::getOptions()) ? FilamentSubscriptions::getOptions()->pluck('name', 'model')->toArray() : [User::class => 'Users'])
+                    ->options([User::class => 'Users'])
                     ->afterStateUpdated(fn(Forms\Get $get, Forms\Set $set) => $set('subscriber_id', null))
                     ->preload()
                     ->live()
