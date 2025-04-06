@@ -56,7 +56,7 @@ class SubscriptionResource extends Resource
                     ->searchable(),
                 Forms\Components\Select::make('subscriber_id')
                     ->label(trans('messages.subscriptions.sections.subscriber.columns.subscriber'))
-                    ->options(fn(Forms\Get $get) => $get('subscriber_type') ? $get('subscriber_type')::pluck('name', 'id')->toArray() : [])
+                    ->options(fn(Forms\Get $get) => $get('subscriber_type') ? $get('subscriber_type')::pluck('email', 'id')->toArray() : [])
                     ->searchable(),
                 Forms\Components\Select::make('plan_id')
                     ->columnSpanFull()
