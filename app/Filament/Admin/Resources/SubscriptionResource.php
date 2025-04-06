@@ -26,22 +26,22 @@ class SubscriptionResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('filament-subscriptions::messages.group');
+        return trans('messages.group');
     }
 
     public static function getNavigationLabel(): string
     {
-        return trans('filament-subscriptions::messages.subscriptions.title');
+        return trans('messages.subscriptions.title');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-subscriptions::messages.subscriptions.title');
+        return trans('messages.subscriptions.title');
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-subscriptions::messages.subscriptions.title');
+        return trans('messages.subscriptions.title');
     }
 
     public static function form(Form $form): Form
@@ -50,20 +50,20 @@ class SubscriptionResource extends Resource
             ->schema( [
                 Forms\Components\Hidden::make('name'),
                 Forms\Components\Select::make('subscriber_type')
-                    ->label(trans('filament-subscriptions::messages.subscriptions.sections.subscriber.columns.subscriber_type'))
+                    ->label(trans('messages.subscriptions.sections.subscriber.columns.subscriber_type'))
                     ->options(count(FilamentSubscriptions::getOptions()) ? FilamentSubscriptions::getOptions()->pluck('name', 'model')->toArray() : [User::class => 'Users'])
                     ->afterStateUpdated(fn(Forms\Get $get, Forms\Set $set) => $set('subscriber_id', null))
                     ->preload()
                     ->live()
                     ->searchable(),
                 Forms\Components\Select::make('subscriber_id')
-                    ->label(trans('filament-subscriptions::messages.subscriptions.sections.subscriber.columns.subscriber'))
+                    ->label(trans('messages.subscriptions.sections.subscriber.columns.subscriber'))
                     ->options(fn(Forms\Get $get) => $get('subscriber_type') ? $get('subscriber_type')::pluck('name', 'id')->toArray() : [])
                     ->searchable(),
                 Forms\Components\Select::make('plan_id')
                     ->columnSpanFull()
                     ->searchable()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.sections.plan.columns.plan'))
+                    ->label(trans('messages.subscriptions.sections.plan.columns.plan'))
                     ->options(Plan::query()->where('is_active', 1)->pluck('name', 'id')->toArray())
                     ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set){
                         $set('name', $get('plan_id') ? Plan::find($get('plan_id'))->name : null);
@@ -71,24 +71,24 @@ class SubscriptionResource extends Resource
                     ->required(),
                 Forms\Components\Toggle::make('use_custom_dates')
                     ->columnSpanFull()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.sections.plan.columns.use_custom_dates'))
+                    ->label(trans('messages.subscriptions.sections.plan.columns.use_custom_dates'))
                     ->live()
                     ->required(),
                     Forms\Components\DatePicker::make('trial_ends_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('filament-subscriptions::messages.subscriptions.sections.custom_dates.columns.trial_ends_at'))
+                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.trial_ends_at'))
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
                     Forms\Components\DatePicker::make('starts_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('filament-subscriptions::messages.subscriptions.sections.custom_dates.columns.starts_at'))
+                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.starts_at'))
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
                     Forms\Components\DatePicker::make('ends_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('filament-subscriptions::messages.subscriptions.sections.custom_dates.columns.ends_at'))
+                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.ends_at'))
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
                     Forms\Components\DatePicker::make('canceled_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('filament-subscriptions::messages.subscriptions.sections.custom_dates.columns.canceled_at'))
+                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.canceled_at'))
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
             ]);
     }
@@ -98,11 +98,11 @@ class SubscriptionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('subscriber.name')
-                    ->label(trans('filament-subscriptions::messages.subscriptions.columns.subscriber'))
+                    ->label(trans('messages.subscriptions.columns.subscriber'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('plan.name')
-                    ->label(trans('filament-subscriptions::messages.subscriptions.columns.plan'))
+                    ->label(trans('messages.subscriptions.columns.plan'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\IconColumn::make('active')
@@ -110,39 +110,39 @@ class SubscriptionResource extends Resource
                         return $record->active();
                     })
                     ->boolean()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.columns.active'))
+                    ->label(trans('messages.subscriptions.columns.active'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('trial_ends_at')->dateTime()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.columns.trial_ends_at'))
+                    ->label(trans('messages.subscriptions.columns.trial_ends_at'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('starts_at')->dateTime()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.columns.starts_at'))
+                    ->label(trans('messages.subscriptions.columns.starts_at'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ends_at')->dateTime()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.columns.ends_at'))
+                    ->label(trans('messages.subscriptions.columns.ends_at'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('canceled_at')->dateTime()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.columns.canceled_at'))
+                    ->label(trans('messages.subscriptions.columns.canceled_at'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
-                Tables\Filters\Filter::make(trans('filament-subscriptions::messages.subscriptions.filters.date_range'))
+                Tables\Filters\Filter::make(trans('messages.subscriptions.filters.date_range'))
                     ->form([
                         Forms\Components\DatePicker::make('start_date')
-                            ->label(trans('filament-subscriptions::messages.subscriptions.filters.start_date'))
+                            ->label(trans('messages.subscriptions.filters.start_date'))
                             ->required(),
                         Forms\Components\DatePicker::make('end_date')
-                            ->label(trans('filament-subscriptions::messages.subscriptions.filters.end_date'))
+                            ->label(trans('messages.subscriptions.filters.end_date'))
                             ->required(),
                     ])
                     ->query(function (Builder $query, array $data) {
@@ -151,15 +151,15 @@ class SubscriptionResource extends Resource
                         }
                         return $query->whereBetween('starts_at', [$data['start_date'], $data['end_date']]);
                     }),
-                Tables\Filters\Filter::make(trans('filament-subscriptions::messages.subscriptions.filters.canceled'))
+                Tables\Filters\Filter::make(trans('messages.subscriptions.filters.canceled'))
                     ->form([
                         Forms\Components\Select::make('canceled')
                             ->options([
-                                '' => trans('filament-subscriptions::messages.subscriptions.filters.all'),
-                                '1' => trans('filament-subscriptions::messages.subscriptions.filters.yes'),
-                                '0' => trans('filament-subscriptions::messages.subscriptions.filters.no'),
+                                '' => trans('messages.subscriptions.filters.all'),
+                                '1' => trans('messages.subscriptions.filters.yes'),
+                                '0' => trans('messages.subscriptions.filters.no'),
                             ])
-                            ->label(trans('filament-subscriptions::messages.subscriptions.filters.canceled'))
+                            ->label(trans('messages.subscriptions.filters.canceled'))
                             ->required(),
                     ])
                     ->query(function (Builder $query, array $data) {
@@ -182,16 +182,16 @@ class SubscriptionResource extends Resource
                 Tables\Actions\Action::make('cancel')
                     ->visible(fn($record) => $record->active())
                     ->iconButton()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.actions.cancel'))
-                    ->tooltip(trans('filament-subscriptions::messages.subscriptions.actions.cancel'))
+                    ->label(trans('messages.subscriptions.actions.cancel'))
+                    ->tooltip(trans('messages.subscriptions.actions.cancel'))
                     ->icon('heroicon-o-x-circle')
                     ->color('warning')
                     ->action(function(Subscription $record){
                         $record->cancel(true);
 
                         Notification::make()
-                            ->title(trans('filament-subscriptions::messages.notifications.cancel.title'))
-                            ->body(trans('filament-subscriptions::messages.notifications.cancel.message'))
+                            ->title(trans('messages.notifications.cancel.title'))
+                            ->body(trans('messages.notifications.cancel.message'))
                             ->success()
                             ->send();
                     })
@@ -199,8 +199,8 @@ class SubscriptionResource extends Resource
                 Tables\Actions\Action::make('renew')
                     ->visible(fn($record) => $record->ended())
                     ->iconButton()
-                    ->label(trans('filament-subscriptions::messages.subscriptions.actions.renew'))
-                    ->tooltip(trans('filament-subscriptions::messages.subscriptions.actions.renew'))
+                    ->label(trans('messages.subscriptions.actions.renew'))
+                    ->tooltip(trans('messages.subscriptions.actions.renew'))
                     ->icon('heroicon-o-arrow-path-rounded-square')
                     ->color('info')
                     ->action(function(Subscription $record){
@@ -211,8 +211,8 @@ class SubscriptionResource extends Resource
                         $record->renew();
 
                         Notification::make()
-                            ->title(trans('filament-subscriptions::messages.notifications.renew.title'))
-                            ->body(trans('filament-subscriptions::messages.notifications.renew.message'))
+                            ->title(trans('messages.notifications.renew.title'))
+                            ->body(trans('messages.notifications.renew.message'))
                             ->success()
                             ->send();
 

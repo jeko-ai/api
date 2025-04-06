@@ -17,7 +17,7 @@ class FeatureManager extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return trans('filament-subscriptions::messages.features.title');
+        return trans('messages.features.title');
     }
 
     /**
@@ -25,7 +25,7 @@ class FeatureManager extends RelationManager
      */
     public static function getLabel(): ?string
     {
-        return trans('filament-subscriptions::messages.features.title');
+        return trans('messages.features.title');
     }
 
     /**
@@ -33,7 +33,7 @@ class FeatureManager extends RelationManager
      */
     public static function getModelLabel(): ?string
     {
-        return trans('filament-subscriptions::messages.features.single');
+        return trans('messages.features.single');
     }
 
     /**
@@ -41,7 +41,7 @@ class FeatureManager extends RelationManager
      */
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-subscriptions::messages.features.title');
+        return trans('messages.features.title');
     }
 
     public function form(Form $form): Form
@@ -49,27 +49,27 @@ class FeatureManager extends RelationManager
         return $form
             ->schema([
                 Translation::make('name')
-                    ->label(trans('filament-subscriptions::messages.features.columns.name'))
+                    ->label(trans('messages.features.columns.name'))
                     ->columnSpanFull()
                     ->required(),
                 Translation::make('description')
                     ->columnSpanFull()
-                    ->label(trans('filament-subscriptions::messages.features.columns.description')),
+                    ->label(trans('messages.features.columns.description')),
                 Forms\Components\TextInput::make('value')
                     ->columnSpanFull()
                     ->default(0)
-                    ->label(trans('filament-subscriptions::messages.features.columns.value'))
+                    ->label(trans('messages.features.columns.value'))
                     ->required(),
                 Forms\Components\Select::make('resettable_interval')
                     ->default(Interval::DAY->value)
-                    ->label(trans('filament-subscriptions::messages.features.columns.resettable_interval'))
+                    ->label(trans('messages.features.columns.resettable_interval'))
                     ->options([
-                        Interval::DAY->value => trans('filament-subscriptions::messages.features.columns.day'),
-                        Interval::MONTH->value => trans('filament-subscriptions::messages.features.columns.month'),
-                        Interval::YEAR->value => trans('filament-subscriptions::messages.features.columns.year'),
+                        Interval::DAY->value => trans('messages.features.columns.day'),
+                        Interval::MONTH->value => trans('messages.features.columns.month'),
+                        Interval::YEAR->value => trans('messages.features.columns.year'),
                     ])->required(),
                 Forms\Components\TextInput::make('resettable_period')
-                    ->label(trans('filament-subscriptions::messages.features.columns.resettable_period'))
+                    ->label(trans('messages.features.columns.resettable_period'))
                     ->required()
                     ->default(0)
                     ->numeric(),
@@ -83,19 +83,19 @@ class FeatureManager extends RelationManager
             ->recordTitleAttribute('feature')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(trans('filament-subscriptions::messages.features.columns.name'))
+                    ->label(trans('messages.features.columns.name'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('value')
-                    ->label(trans('filament-subscriptions::messages.features.columns.value'))
+                    ->label(trans('messages.features.columns.value'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('resettable_interval')
-                    ->label(trans('filament-subscriptions::messages.features.columns.resettable_interval'))
+                    ->label(trans('messages.features.columns.resettable_interval'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('resettable_period')
-                    ->label(trans('filament-subscriptions::messages.features.columns.resettable_period'))
+                    ->label(trans('messages.features.columns.resettable_period'))
                     ->sortable()
                     ->searchable(),
             ])

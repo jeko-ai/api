@@ -24,22 +24,22 @@ class PlanResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('filament-subscriptions::messages.group');
+        return trans('messages.group');
     }
 
     public static function getNavigationLabel(): string
     {
-        return trans('filament-subscriptions::messages.plans.title');
+        return trans('messages.plans.title');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-subscriptions::messages.plans.title');
+        return trans('messages.plans.title');
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-subscriptions::messages.plans.title');
+        return trans('messages.plans.title');
     }
 
     public static function form(Form $form): Form
@@ -50,57 +50,57 @@ class PlanResource extends Resource
                     ->schema([
                         Translation::make('name')
                             ->columnSpanFull()
-                            ->label(trans('filament-subscriptions::messages.plans.columns.name'))
+                            ->label(trans('messages.plans.columns.name'))
                             ->required(),
                         Translation::make('description')
                             ->columnSpanFull()
-                            ->label(trans('filament-subscriptions::messages.plans.columns.description')),
+                            ->label(trans('messages.plans.columns.description')),
                         Forms\Components\Select::make('currency')
                             ->columnSpanFull()
                             ->default('USD')
                             ->searchable()
-                            ->label(trans('filament-subscriptions::messages.plans.columns.currency'))
+                            ->label(trans('messages.plans.columns.currency'))
                             ->options(Currency::query()->pluck('name', 'iso')->toArray())
                             ->required(),
                         Forms\Components\TextInput::make('price')
                             ->default(0)
-                            ->label(trans('filament-subscriptions::messages.plans.columns.price'))
+                            ->label(trans('messages.plans.columns.price'))
                             ->required()
                             ->numeric()
                             ->prefix('$'),
                         Forms\Components\TextInput::make('signup_fee')
-                            ->label(trans('filament-subscriptions::messages.plans.columns.signup_fee'))
+                            ->label(trans('messages.plans.columns.signup_fee'))
                             ->default(0)
                             ->numeric()
                             ->prefix('$'),
                         Forms\Components\Select::make('invoice_interval')
                             ->default(Interval::MONTH->value)
-                            ->label(trans('filament-subscriptions::messages.plans.columns.invoice_interval'))
+                            ->label(trans('messages.plans.columns.invoice_interval'))
                             ->options([
-                                Interval::DAY->value => trans('filament-subscriptions::messages.plans.columns.day'),
-                                Interval::MONTH->value => trans('filament-subscriptions::messages.plans.columns.month'),
-                                Interval::YEAR->value => trans('filament-subscriptions::messages.plans.columns.year'),
+                                Interval::DAY->value => trans('messages.plans.columns.day'),
+                                Interval::MONTH->value => trans('messages.plans.columns.month'),
+                                Interval::YEAR->value => trans('messages.plans.columns.year'),
                             ])->required(),
                         Forms\Components\TextInput::make('invoice_period')
-                            ->label(trans('filament-subscriptions::messages.plans.columns.invoice_period'))
+                            ->label(trans('messages.plans.columns.invoice_period'))
                             ->default(0)
                             ->numeric()
                             ->required(),
                         Forms\Components\Select::make('trial_interval')
                             ->default(Interval::MONTH->value)
-                            ->label(trans('filament-subscriptions::messages.plans.columns.trial_interval'))
+                            ->label(trans('messages.plans.columns.trial_interval'))
                             ->default(0)
                             ->options([
-                                Interval::DAY->value => trans('filament-subscriptions::messages.plans.columns.day'),
-                                Interval::MONTH->value => trans('filament-subscriptions::messages.plans.columns.month'),
-                                Interval::YEAR->value => trans('filament-subscriptions::messages.plans.columns.year'),
+                                Interval::DAY->value => trans('messages.plans.columns.day'),
+                                Interval::MONTH->value => trans('messages.plans.columns.month'),
+                                Interval::YEAR->value => trans('messages.plans.columns.year'),
                             ]),
                         Forms\Components\TextInput::make('trial_period')
-                            ->label(trans('filament-subscriptions::messages.plans.columns.trial_period'))
+                            ->label(trans('messages.plans.columns.trial_period'))
                             ->default(0)
                             ->numeric(),
                         Forms\Components\Toggle::make('is_active')
-                            ->label(trans('filament-subscriptions::messages.plans.columns.is_active')),
+                            ->label(trans('messages.plans.columns.is_active')),
                     ])->columns(2)
             ]);
     }
@@ -111,11 +111,11 @@ class PlanResource extends Resource
             ->reorderable('sort_order')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(trans('filament-subscriptions::messages.plans.columns.name'))
+                    ->label(trans('messages.plans.columns.name'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->label(trans('filament-subscriptions::messages.plans.columns.price'))
+                    ->label(trans('messages.plans.columns.price'))
                     ->sortable()
                     ->searchable()
                     ->money(locale: 'en', currency: function ($record){
@@ -123,7 +123,7 @@ class PlanResource extends Resource
                     })
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('is_active')
-                    ->label(trans('filament-subscriptions::messages.plans.columns.is_active')),
+                    ->label(trans('messages.plans.columns.is_active')),
             ])
             ->defaultSort('sort_order', 'aces')
             ->filters([
