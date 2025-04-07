@@ -8,7 +8,7 @@ class GetPredictionsAction
 {
     /**
      * @OA\Get(
-     *     path="/api/v1/ai/predictions",
+     *     path="/v1/ai/predictions",
      *     summary="Get user predictions",
      *     description="Retrieves all price predictions for the authenticated user",
      *     operationId="getPredictions",

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * @OA\Post(
- *     path="/api/v1/ai/simulations",
+ *     path="/v1/ai/simulations",
  *     operationId="createSimulation",
  *     tags={"AI Simulations"},
  *     summary="Create a new trading simulation",

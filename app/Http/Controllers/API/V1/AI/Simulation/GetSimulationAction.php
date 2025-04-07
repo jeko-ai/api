@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * @OA\Get(
- *     path="/api/v1/ai/simulations/{id}",
+ *     path="/v1/ai/simulations/{id}",
  *     operationId="getSimulation",
  *     tags={"AI Simulations"},
  *     summary="Get a specific simulation",

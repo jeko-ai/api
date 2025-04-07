@@ -6,7 +6,7 @@ use App\Models\TradingSimulationRequest;
 
 /**
  * @OA\Get(
- *     path="/api/v1/ai/simulations",
+ *     path="/v1/ai/simulations",
  *     operationId="getSimulations",
  *     tags={"AI Simulations"},
  *     summary="Get all simulations",
