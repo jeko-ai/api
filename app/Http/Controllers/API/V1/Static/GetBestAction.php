@@ -26,7 +26,24 @@ use Illuminate\Support\Facades\Cache;
  *     @OA\Response(
  *         response=200,
  *         description="Successful operation",
- *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/MarketMoversGainer"))
+ *         @OA\JsonContent(type="array", @OA\Items(
+ *             type="object",
+ *             @OA\Property(property="id", type="string", format="uuid"),
+ *             @OA\Property(property="symbol_id", type="string", format="uuid"),
+ *             @OA\Property(property="market_id", type="string"),
+ *             @OA\Property(property="price", type="number", format="float"),
+ *             @OA\Property(property="change_percent", type="number", format="float"),
+ *             @OA\Property(property="volume", type="number"),
+ *             @OA\Property(property="rel_volume", type="number", format="float"),
+ *             @OA\Property(property="market_cap", type="number"),
+ *             @OA\Property(property="pe_ratio", type="number", format="float"),
+ *             @OA\Property(property="eps_dil_ttm", type="number", format="float"),
+ *             @OA\Property(property="eps_dil_growth_ttm_yoy", type="number", format="float"),
+ *             @OA\Property(property="div_yield_ttm", type="number", format="float"),
+ *             @OA\Property(property="sector", type="string"),
+ *             @OA\Property(property="analyst_rating", type="string"),
+ *             @OA\Property(property="created_at", type="string", format="date-time")
+ *         ))
  *     ),
  *     @OA\Response(
  *         response=400,

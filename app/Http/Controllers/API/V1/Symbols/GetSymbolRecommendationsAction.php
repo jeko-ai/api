@@ -28,13 +28,31 @@ use Illuminate\Support\Facades\Cache;
  *         @OA\Schema(type="integer")
  *     ),
  *     @OA\Response(
- *         response=200,
- *         description="Recommendations list",
- *         @OA\JsonContent(
- *             type="array",
- *             @OA\Items(ref="#/components/schemas/Recommendation")
- *         )
- *     )
+ *          response=200,
+ *          description="Successful operation",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="data", type="array",
+ *                  @OA\Items(
+ *                      type="object",
+ *                      @OA\Property(property="id", type="integer"),
+ *                      @OA\Property(property="symbol_id", type="integer"),
+ *                      @OA\Property(property="sector_id", type="integer"),
+ *                      @OA\Property(property="market_id", type="integer"),
+ *                      @OA\Property(property="target_price", type="number", format="float"),
+ *                      @OA\Property(property="expected_return", type="number", format="float"),
+ *                      @OA\Property(property="timeframe", type="string"),
+ *                      @OA\Property(property="risk_level", type="string"),
+ *                      @OA\Property(property="slug", type="string"),
+ *                      @OA\Property(property="title", type="string"),
+ *                      @OA\Property(property="description", type="string"),
+ *                      @OA\Property(property="points", type="string")
+ *                  )
+ *              ),
+ *              @OA\Property(property="links", type="object"),
+ *              @OA\Property(property="meta", type="object")
+ *          )
+ *      ),
  * )
  */
 class GetSymbolRecommendationsAction

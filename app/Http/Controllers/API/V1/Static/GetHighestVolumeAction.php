@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Cache;
  *     @OA\Response(
  *         response=200,
  *         description="Successful operation",
- *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/MarketMoversActive"))
+ *         @OA\JsonContent(type="array", @OA\Items(type="object"))
  *     ),
  *     @OA\Response(
  *         response=400,
