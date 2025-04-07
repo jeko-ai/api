@@ -32,13 +32,27 @@ use Illuminate\Support\Facades\Cache;
  *         description="Maximum number of news items to return"
  *     ),
  *     @OA\Response(
- *         response=200,
- *         description="News list",
- *         @OA\JsonContent(
- *             type="array",
- *             @OA\Items(ref="#/components/schemas/News")
- *         )
- *     )
+ *          response=200,
+ *          description="Successful operation",
+ *          @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(property="data", type="array",
+ *                  @OA\Items(
+ *                      type="object",
+ *                      @OA\Property(property="slug", type="string"),
+ *                      @OA\Property(property="title", type="string"),
+ *                      @OA\Property(property="small_image_url", type="string"),
+ *                      @OA\Property(property="symbol_id", type="integer"),
+ *                      @OA\Property(property="market_id", type="integer"),
+ *                      @OA\Property(property="description", type="string"),
+ *                      @OA\Property(property="sentiment", type="string"),
+ *                      @OA\Property(property="date", type="string", format="date-time")
+ *                  )
+ *              ),
+ *              @OA\Property(property="links", type="object"),
+ *              @OA\Property(property="meta", type="object")
+ *          )
+ *      )
  * )
  */
 class GetSymbolNewsAction
