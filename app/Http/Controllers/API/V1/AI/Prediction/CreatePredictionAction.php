@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Cache;
  *         )
  *     ),
  *     @OA\Response(
- *         response=403,
+ *         response=400,
  *         description="Subscription limit reached or not allowed",
  *         @OA\JsonContent(
  *             @OA\Property(property="status", type="string", example="error"),

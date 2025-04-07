@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  *     path="/v1/symbols/{symbol}/prediction",
  *     summary="Get symbol price prediction",
  *     description="Retrieves the latest price prediction for a specific symbol",
- *     tags={"predictions"},
+ *     tags={"AI Predictions"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",
