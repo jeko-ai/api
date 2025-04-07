@@ -40,6 +40,13 @@ class Symbol extends Model
         'next_year_recommendation',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'status' => 'boolean',
+        ];
+    }
+
     public function quote(): HasOne
     {
         return $this->hasOne(Quote::class, 'symbol_id', 'id');
