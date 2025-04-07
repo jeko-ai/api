@@ -6,6 +6,34 @@ use App\Models\MarketMoversGainer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @OA\Get(
+ *     path="/v1/static/best/{market}",
+ *     summary="Get best companies",
+ *     tags={"Static"},
+ *     @OA\Parameter(
+ *         name="market",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="limit",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successful operation",
+ *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/MarketMoversGainer"))
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Bad request"
+ *     )
+ * )
+ */
 class GetBestAction
 {
     public function __invoke(string $market): JsonResponse

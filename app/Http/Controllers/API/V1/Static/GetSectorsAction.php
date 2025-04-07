@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
  *     path="/v1/static/sectors",
  *     summary="Get a list of sectors",
  *     description="Fetches all markets from the database and caches the response indefinitely.",
- *     tags={"static"},
+ *     tags={"Static"},
  *     @OA\Response(
  *         response=200,
  *         description="List of sectors retrieved successfully",

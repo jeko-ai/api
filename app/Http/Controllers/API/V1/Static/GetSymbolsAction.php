@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
  *     path="/v1/static/symbols",
  *     summary="Get a list of symbols",
  *     description="Fetches all symbols from the database and caches the response indefinitely.",
- *     tags={"static"},
+ *     tags={"Static"},
  *     @OA\Response(
  *         response=200,
  *         description="List of symbols retrieved successfully",
