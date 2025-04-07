@@ -17,7 +17,7 @@ class FeatureManager extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return trans('messages.features.title');
+        return 'Features';
     }
 
     /**
@@ -25,7 +25,7 @@ class FeatureManager extends RelationManager
      */
     public static function getLabel(): ?string
     {
-        return trans('messages.features.title');
+        return 'Features';
     }
 
     /**
@@ -33,7 +33,7 @@ class FeatureManager extends RelationManager
      */
     public static function getModelLabel(): ?string
     {
-        return trans('messages.features.single');
+        return 'Feature';
     }
 
     /**
@@ -41,7 +41,7 @@ class FeatureManager extends RelationManager
      */
     public static function getPluralLabel(): ?string
     {
-        return trans('messages.features.title');
+        return 'Features';
     }
 
     public function form(Form $form): Form
@@ -49,27 +49,27 @@ class FeatureManager extends RelationManager
         return $form
             ->schema([
                 Translation::make('name')
-                    ->label(trans('messages.features.columns.name'))
+                    ->label('Name')
                     ->columnSpanFull()
                     ->required(),
                 Translation::make('description')
                     ->columnSpanFull()
-                    ->label(trans('messages.features.columns.description')),
+                    ->label('Description'),
                 Forms\Components\TextInput::make('value')
                     ->columnSpanFull()
                     ->default(0)
-                    ->label(trans('messages.features.columns.value'))
+                    ->label('Value')
                     ->required(),
                 Forms\Components\Select::make('resettable_interval')
                     ->default(Interval::DAY->value)
-                    ->label(trans('messages.features.columns.resettable_interval'))
+                    ->label('Reset Interval')
                     ->options([
-                        Interval::DAY->value => trans('messages.features.columns.day'),
-                        Interval::MONTH->value => trans('messages.features.columns.month'),
-                        Interval::YEAR->value => trans('messages.features.columns.year'),
+                        Interval::DAY->value => 'Day',
+                        Interval::MONTH->value => 'Month',
+                        Interval::YEAR->value => 'Year',
                     ])->required(),
                 Forms\Components\TextInput::make('resettable_period')
-                    ->label(trans('messages.features.columns.resettable_period'))
+                    ->label('Reset Period')
                     ->required()
                     ->default(0)
                     ->numeric(),
@@ -83,19 +83,19 @@ class FeatureManager extends RelationManager
             ->recordTitleAttribute('feature')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(trans('messages.features.columns.name'))
+                    ->label('Name')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('value')
-                    ->label(trans('messages.features.columns.value'))
+                    ->label('Value')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('resettable_interval')
-                    ->label(trans('messages.features.columns.resettable_interval'))
+                    ->label('Reset Interval')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('resettable_period')
-                    ->label(trans('messages.features.columns.resettable_period'))
+                    ->label('Reset Period')
                     ->sortable()
                     ->searchable(),
             ])

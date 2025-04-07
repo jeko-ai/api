@@ -20,26 +20,26 @@ class SubscriptionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('messages.group');
+        return 'Users';
     }
 
     public static function getNavigationLabel(): string
     {
-        return trans('messages.subscriptions.title');
+        return 'Subscriptions';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('messages.subscriptions.title');
+        return 'Subscriptions';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('messages.subscriptions.title');
+        return 'Subscriptions';
     }
 
     public static function form(Form $form): Form
@@ -48,20 +48,20 @@ class SubscriptionResource extends Resource
             ->schema( [
                 Forms\Components\Hidden::make('name'),
                 Forms\Components\Select::make('subscriber_type')
-                    ->label(trans('messages.subscriptions.sections.subscriber.columns.subscriber_type'))
+                    ->label('Subscriber Type')
                     ->options([User::class => 'Users'])
                     ->afterStateUpdated(fn(Forms\Get $get, Forms\Set $set) => $set('subscriber_id', null))
                     ->preload()
                     ->live()
                     ->searchable(),
                 Forms\Components\Select::make('subscriber_id')
-                    ->label(trans('messages.subscriptions.sections.subscriber.columns.subscriber'))
+                    ->label('Subscriber')
                     ->options(fn(Forms\Get $get) => $get('subscriber_type') ? $get('subscriber_type')::pluck('email', 'id')->toArray() : [])
                     ->searchable(),
                 Forms\Components\Select::make('plan_id')
                     ->columnSpanFull()
                     ->searchable()
-                    ->label(trans('messages.subscriptions.sections.plan.columns.plan'))
+                    ->label('Plan')
                     ->options(Plan::query()->where('is_active', 1)->pluck('name', 'id')->toArray())
                     ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set){
                         $set('name', $get('plan_id') ? Plan::find($get('plan_id'))->name : null);
@@ -69,24 +69,24 @@ class SubscriptionResource extends Resource
                     ->required(),
                 Forms\Components\Toggle::make('use_custom_dates')
                     ->columnSpanFull()
-                    ->label(trans('messages.subscriptions.sections.plan.columns.use_custom_dates'))
+                    ->label('Use Custom Dates')
                     ->live()
                     ->required(),
                     Forms\Components\DatePicker::make('trial_ends_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.trial_ends_at'))
+                        ->label('Trial Ends At')
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
                     Forms\Components\DatePicker::make('starts_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.starts_at'))
+                        ->label('Starts At')
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
                     Forms\Components\DatePicker::make('ends_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.ends_at'))
+                        ->label('Ends At')
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
                     Forms\Components\DatePicker::make('canceled_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label(trans('messages.subscriptions.sections.custom_dates.columns.canceled_at'))
+                        ->label('Canceled At')
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
             ]);
     }
@@ -96,11 +96,11 @@ class SubscriptionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('subscriber.email')
-                    ->label(trans('messages.subscriptions.columns.subscriber'))
+                    ->label('Subscriber')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('plan.name')
-                    ->label(trans('messages.subscriptions.columns.plan'))
+                    ->label('Plan')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\IconColumn::make('active')
@@ -108,39 +108,39 @@ class SubscriptionResource extends Resource
                         return $record->active();
                     })
                     ->boolean()
-                    ->label(trans('messages.subscriptions.columns.active'))
+                    ->label('Active')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('trial_ends_at')->dateTime()
-                    ->label(trans('messages.subscriptions.columns.trial_ends_at'))
+                    ->label('Trial Ends At')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('starts_at')->dateTime()
-                    ->label(trans('messages.subscriptions.columns.starts_at'))
+                    ->label('Starts At')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ends_at')->dateTime()
-                    ->label(trans('messages.subscriptions.columns.ends_at'))
+                    ->label('Ends At')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('canceled_at')->dateTime()
-                    ->label(trans('messages.subscriptions.columns.canceled_at'))
+                    ->label('Canceled At')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
-                Tables\Filters\Filter::make(trans('messages.subscriptions.filters.date_range'))
+                Tables\Filters\Filter::make('Date Range')
                     ->form([
                         Forms\Components\DatePicker::make('start_date')
-                            ->label(trans('messages.subscriptions.filters.start_date'))
+                            ->label('Start Date')
                             ->required(),
                         Forms\Components\DatePicker::make('end_date')
-                            ->label(trans('messages.subscriptions.filters.end_date'))
+                            ->label('End Date')
                             ->required(),
                     ])
                     ->query(function (Builder $query, array $data) {
@@ -149,15 +149,15 @@ class SubscriptionResource extends Resource
                         }
                         return $query->whereBetween('starts_at', [$data['start_date'], $data['end_date']]);
                     }),
-                Tables\Filters\Filter::make(trans('messages.subscriptions.filters.canceled'))
+                Tables\Filters\Filter::make('Canceled')
                     ->form([
                         Forms\Components\Select::make('canceled')
                             ->options([
-                                '' => trans('messages.subscriptions.filters.all'),
-                                '1' => trans('messages.subscriptions.filters.yes'),
-                                '0' => trans('messages.subscriptions.filters.no'),
+                                '' => 'All',
+                                '1' => 'Yes',
+                                '0' => 'No',
                             ])
-                            ->label(trans('messages.subscriptions.filters.canceled'))
+                            ->label('Canceled')
                             ->required(),
                     ])
                     ->query(function (Builder $query, array $data) {
@@ -180,16 +180,16 @@ class SubscriptionResource extends Resource
                 Tables\Actions\Action::make('cancel')
                     ->visible(fn($record) => $record->active())
                     ->iconButton()
-                    ->label(trans('messages.subscriptions.actions.cancel'))
-                    ->tooltip(trans('messages.subscriptions.actions.cancel'))
+                    ->label('Cancel Subscription')
+                    ->tooltip('Cancel Subscription')
                     ->icon('heroicon-o-x-circle')
                     ->color('warning')
                     ->action(function(Subscription $record){
                         $record->cancel(true);
 
                         Notification::make()
-                            ->title(trans('messages.notifications.cancel.title'))
-                            ->body(trans('messages.notifications.cancel.message'))
+                            ->title('Subscription Canceled')
+                            ->body('The subscription has been successfully canceled')
                             ->success()
                             ->send();
                     })
@@ -197,8 +197,8 @@ class SubscriptionResource extends Resource
                 Tables\Actions\Action::make('renew')
                     ->visible(fn($record) => $record->ended())
                     ->iconButton()
-                    ->label(trans('messages.subscriptions.actions.renew'))
-                    ->tooltip(trans('messages.subscriptions.actions.renew'))
+                    ->label('Renew Subscription')
+                    ->tooltip('Renew Subscription')
                     ->icon('heroicon-o-arrow-path-rounded-square')
                     ->color('info')
                     ->action(function(Subscription $record){
@@ -209,8 +209,8 @@ class SubscriptionResource extends Resource
                         $record->renew();
 
                         Notification::make()
-                            ->title(trans('messages.notifications.renew.title'))
-                            ->body(trans('messages.notifications.renew.message'))
+                            ->title('Subscription Renewed')
+                            ->body('The subscription has been successfully renewed')
                             ->success()
                             ->send();
 

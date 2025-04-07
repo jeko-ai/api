@@ -17,26 +17,26 @@ class PlanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('messages.group');
+        return 'Users';
     }
 
     public static function getNavigationLabel(): string
     {
-        return trans('messages.plans.title');
+        return 'Plans';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('messages.plans.title');
+        return 'Plans';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('messages.plans.title');
+        return 'Plans';
     }
 
     public static function form(Form $form): Form
@@ -47,16 +47,16 @@ class PlanResource extends Resource
                     ->schema([
                         Translation::make('name')
                             ->columnSpanFull()
-                            ->label(trans('messages.plans.columns.name'))
+                            ->label('Name')
                             ->required(),
                         Translation::make('description')
                             ->columnSpanFull()
-                            ->label(trans('messages.plans.columns.description')),
+                            ->label('Description'),
                         Forms\Components\Select::make('currency')
                             ->columnSpanFull()
                             ->default('USD')
                             ->searchable()
-                            ->label(trans('messages.plans.columns.currency'))
+                            ->label('Currency')
                             ->options([
                                 'EGP',
                                 'USD',
@@ -67,43 +67,43 @@ class PlanResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('price')
                             ->default(0)
-                            ->label(trans('messages.plans.columns.price'))
+                            ->label('Price')
                             ->required()
                             ->numeric()
                             ->prefix('$'),
                         Forms\Components\TextInput::make('signup_fee')
-                            ->label(trans('messages.plans.columns.signup_fee'))
+                            ->label('Signup Fee')
                             ->default(0)
                             ->numeric()
                             ->prefix('$'),
                         Forms\Components\Select::make('invoice_interval')
                             ->default(Interval::MONTH->value)
-                            ->label(trans('messages.plans.columns.invoice_interval'))
+                            ->label('Invoice Interval')
                             ->options([
-                                Interval::DAY->value => trans('messages.plans.columns.day'),
-                                Interval::MONTH->value => trans('messages.plans.columns.month'),
-                                Interval::YEAR->value => trans('messages.plans.columns.year'),
+                                Interval::DAY->value => 'Day',
+                                Interval::MONTH->value => 'Month',
+                                Interval::YEAR->value => 'Year',
                             ])->required(),
                         Forms\Components\TextInput::make('invoice_period')
-                            ->label(trans('messages.plans.columns.invoice_period'))
+                            ->label('Invoice Period')
                             ->default(0)
                             ->numeric()
                             ->required(),
                         Forms\Components\Select::make('trial_interval')
                             ->default(Interval::MONTH->value)
-                            ->label(trans('messages.plans.columns.trial_interval'))
+                            ->label('Trial Interval')
                             ->default(0)
                             ->options([
-                                Interval::DAY->value => trans('messages.plans.columns.day'),
-                                Interval::MONTH->value => trans('messages.plans.columns.month'),
-                                Interval::YEAR->value => trans('messages.plans.columns.year'),
+                                Interval::DAY->value => 'Day',
+                                Interval::MONTH->value => 'Month',
+                                Interval::YEAR->value => 'Year',
                             ]),
                         Forms\Components\TextInput::make('trial_period')
-                            ->label(trans('messages.plans.columns.trial_period'))
+                            ->label('Trial Period')
                             ->default(0)
                             ->numeric(),
                         Forms\Components\Toggle::make('is_active')
-                            ->label(trans('messages.plans.columns.is_active')),
+                            ->label('Is Active'),
                     ])->columns(2)
             ]);
     }
@@ -114,11 +114,11 @@ class PlanResource extends Resource
             ->reorderable('sort_order')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(trans('messages.plans.columns.name'))
+                    ->label('Name')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->label(trans('messages.plans.columns.price'))
+                    ->label('Price')
                     ->sortable()
                     ->searchable()
                     ->money(locale: 'en', currency: function ($record){
@@ -126,7 +126,7 @@ class PlanResource extends Resource
                     })
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('is_active')
-                    ->label(trans('messages.plans.columns.is_active')),
+                    ->label('Is Active'),
             ])
             ->defaultSort('sort_order', 'aces')
             ->filters([
