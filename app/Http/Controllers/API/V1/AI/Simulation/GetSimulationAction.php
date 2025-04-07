@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
  * @OA\Get(
  *     path="/api/v1/ai/simulations/{id}",
  *     operationId="getSimulation",
- *     tags={"simulations"},
+ *     tags={"AI Simulations"},
  *     summary="Get a specific simulation",
  *     description="Retrieve details of a specific trading simulation",
  *     security={{"bearerAuth":{}}},

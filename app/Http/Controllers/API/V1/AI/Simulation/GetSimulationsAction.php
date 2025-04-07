@@ -8,7 +8,7 @@ use App\Models\TradingSimulationRequest;
  * @OA\Get(
  *     path="/api/v1/ai/simulations",
  *     operationId="getSimulations",
- *     tags={"simulations"},
+ *     tags={"AI Simulations"},
  *     summary="Get all simulations",
  *     description="Retrieve all trading simulations for the authenticated user",
  *     security={{"bearerAuth":{}}},
