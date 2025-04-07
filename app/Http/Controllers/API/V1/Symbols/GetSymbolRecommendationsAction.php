@@ -5,6 +5,38 @@ namespace App\Http\Controllers\API\V1\Symbols;
 use App\Models\Recommendation;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @OA\Get(
+ *     path="/v1/symbols/{symbol}/recommendations",
+ *     summary="Get recommendations for a symbol",
+ *     tags={"Symbols"},
+ *     @OA\Parameter(
+ *         name="symbol",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="timeframe",
+ *         in="query",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="limit",
+ *         in="query",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Recommendations list",
+ *         @OA\JsonContent(
+ *             type="array",
+ *             @OA\Items(ref="#/components/schemas/Recommendation")
+ *         )
+ *     )
+ * )
+ */
 class GetSymbolRecommendationsAction
 {
     public function __invoke(string $symbol, string $timeframe)
@@ -30,3 +62,4 @@ class GetSymbolRecommendationsAction
         });
     }
 }
+

@@ -9,6 +9,37 @@ use App\Models\PortfolioTransaction;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @OA\Post(
+ *     path="/v1/symbols/{symbol}/buy",
+ *     summary="Buy a symbol and add it to the user's portfolio",
+ *     tags={"Symbols"},
+ *     @OA\Parameter(
+ *         name="symbol",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/BuySymbolRequest")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="success")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Invalid portfolio or error",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="error")
+ *         )
+ *     )
+ * )
+ */
 class BuySymbolAction
 {
     public function __invoke(BuySymbolRequest $request, string $symbol)
@@ -72,3 +103,4 @@ class BuySymbolAction
         }
     }
 }
+

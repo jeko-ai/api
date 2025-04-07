@@ -9,6 +9,37 @@ use App\Models\PortfolioTransaction;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @OA\Post(
+ *     path="/v1/symbols/{symbol}/sell",
+ *     summary="Sell a symbol from the user's portfolio",
+ *     tags={"Symbols"},
+ *     @OA\Parameter(
+ *         name="symbol",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/SellSymbolRequest")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="success")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Invalid symbol, portfolio, or insufficient shares",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="error")
+ *         )
+ *     )
+ * )
+ */
 class SellSymbolAction
 {
     public function __invoke(SellSymbolRequest $request, string $symbol)
@@ -68,3 +99,4 @@ class SellSymbolAction
         }
     }
 }
+

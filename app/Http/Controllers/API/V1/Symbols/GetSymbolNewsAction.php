@@ -5,6 +5,38 @@ namespace App\Http\Controllers\API\V1\Symbols;
 use App\Models\News;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @OA\Get(
+ *     path="/v1/symbols/{symbol}/news",
+ *     summary="Get news for a symbol",
+ *     tags={"Symbols"},
+ *     @OA\Parameter(
+ *         name="symbol",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="sentiment",
+ *         in="query",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="limit",
+ *         in="query",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="News list",
+ *         @OA\JsonContent(
+ *             type="array",
+ *             @OA\Items(ref="#/components/schemas/News")
+ *         )
+ *     )
+ * )
+ */
 class GetSymbolNewsAction
 {
     public function __invoke(string $symbol, string $sentiment)

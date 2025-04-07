@@ -9,6 +9,37 @@ use App\Models\PortfolioTransaction;
 use App\Models\Symbol;
 use DB;
 
+/**
+ * @OA\Post(
+ *     path="/v1/symbols/{symbol}/add",
+ *     summary="Add a symbol to the user's portfolio",
+ *     tags={"Symbols"},
+ *     @OA\Parameter(
+ *         name="symbol",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/AddSymbolToPortfolioRequest")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="success")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Invalid symbol or portfolio",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="string", example="invalid_symbol")
+ *         )
+ *     )
+ * )
+ */
 class AddSymbolToPortfolioAction
 {
     public function __invoke(AddSymbolToPortfolioRequest $request, string $symbol)
@@ -79,3 +110,4 @@ class AddSymbolToPortfolioAction
         }, 5); // Retry up to 5 times if a deadlock occurs
     }
 }
+
