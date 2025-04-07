@@ -22,7 +22,13 @@ use DB;
  *     ),
  *     @OA\RequestBody(
  *         required=true,
- *         @OA\JsonContent(ref="#/components/schemas/AddSymbolToPortfolioRequest")
+ *         @OA\JsonContent(
+ *             required={"id", "quantity", "avg_buy_price", "buy_date"},
+ *             @OA\Property(property="id", type="string", format="uuid", description="Symbol UUID"),
+ *             @OA\Property(property="quantity", type="number", format="float", description="Quantity to buy", minimum=0.01),
+ *             @OA\Property(property="avg_buy_price", type="number", format="float", description="Average buy price", minimum=0.01),
+ *             @OA\Property(property="buy_date", type="string", format="date", description="Date of purchase")
+ *         )
  *     ),
  *     @OA\Response(
  *         response=200,

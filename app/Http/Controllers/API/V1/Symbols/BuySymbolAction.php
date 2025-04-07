@@ -22,7 +22,13 @@ use Illuminate\Support\Facades\DB;
  *     ),
  *     @OA\RequestBody(
  *         required=true,
- *         @OA\JsonContent(ref="#/components/schemas/BuySymbolRequest")
+ *         @OA\JsonContent(
+ *             required={"id", "quantity", "price_per_unit", "buy_date"},
+ *             @OA\Property(property="id", type="string", format="uuid", description="Symbol UUID"),
+ *             @OA\Property(property="quantity", type="number", format="float", description="Quantity to buy", minimum=1),
+ *             @OA\Property(property="price_per_unit", type="number", format="float", description="Price per unit", minimum=0),
+ *             @OA\Property(property="buy_date", type="string", format="date", description="Date of purchase")
+ *         )
  *     ),
  *     @OA\Response(
  *         response=200,
