@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->boolean('is_market_sentiment_alerts_enabled')->default(false);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

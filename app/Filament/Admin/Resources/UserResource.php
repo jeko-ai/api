@@ -51,6 +51,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->disableCreateButton()
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(trans('messages.users.columns.name'))
@@ -79,7 +80,6 @@ class UserResource extends Resource
     {
         return [
             'index' => \App\Filament\Admin\Resources\UserResource\Pages\ListUsers::route('/'),
-            'create' => \App\Filament\Admin\Resources\UserResource\Pages\CreateUser::route('/create'),
             'edit' => \App\Filament\Admin\Resources\UserResource\Pages\EditUser::route('/{record}/edit'),
         ];
     }
