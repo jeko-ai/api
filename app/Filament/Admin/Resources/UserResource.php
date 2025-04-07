@@ -8,7 +8,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class UserResource extends Resource
 {
@@ -17,29 +16,24 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user';
     protected static ?int $navigationSort = 2;
 
-    public static function getNavigationGroup(): ?string
-    {
-        return trans('messages.group');
-    }
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make()
                     ->schema([
-                        Translation::make('name')
-                            ->label(trans('messages.users.columns.name'))
+                        Forms\Components\TextInput::make('name')
+                            ->label('Name')
                             ->required(),
 
                         Forms\Components\TextInput::make('email')
-                            ->label(trans('messages.users.columns.email'))
+                            ->label('Email')
                             ->email()
                             ->required()
                             ->unique(ignoreRecord: true),
 
                         Forms\Components\TextInput::make('password')
-                            ->label(trans('messages.users.columns.password'))
+                            ->label('Password')
                             ->password()
                             ->required()
                             ->hiddenOn('edit')
@@ -53,17 +47,17 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(trans('messages.users.columns.name'))
+                    ->label('Name')
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('email')
-                    ->label(trans('messages.users.columns.email'))
+                    ->label('Email')
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(trans('messages.users.columns.created_at'))
+                    ->label('Created At')
                     ->dateTime()
                     ->sortable(),
             ])
