@@ -4,6 +4,46 @@ namespace App\Http\Controllers\API\V1\Recommendations;
 
 use App\Models\Recommendation;
 
+/**
+ * @OA\Get(
+ *     path="/v1/recommendations",
+ *     summary="Get recommendations",
+ *     tags={"Recommendations"},
+ *     @OA\Parameter(
+ *         name="Accept-Language",
+ *         in="header",
+ *         required=false,
+ *         @OA\Schema(type="string", default="en")
+ *     ),
+ *     @OA\Parameter(
+ *         name="locale",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="string", default="en")
+ *     ),
+ *     @OA\Parameter(
+ *         name="limit",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="integer", default=12)
+ *     ),
+ *     @OA\Parameter(
+ *         name="market_id",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successful operation",
+ *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Recommendation"))
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Bad request"
+ *     )
+ * )
+ */
 class GetRecommendationsAction
 {
     public function __invoke()
@@ -30,3 +70,4 @@ class GetRecommendationsAction
         return $query->paginate($limit);
     }
 }
+

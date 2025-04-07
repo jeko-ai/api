@@ -5,6 +5,52 @@ namespace App\Http\Controllers\API\V1\Recommendations;
 use App\Models\Recommendation;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @OA\Get(
+ *     path="/v1/recommendations/timeframe/{timeframe}",
+ *     summary="Get recommendations by timeframe",
+ *     tags={"Recommendations"},
+ *     @OA\Parameter(
+ *         name="timeframe",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="Accept-Language",
+ *         in="header",
+ *         required=false,
+ *         @OA\Schema(type="string", default="en")
+ *     ),
+ *     @OA\Parameter(
+ *         name="locale",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="string", default="en")
+ *     ),
+ *     @OA\Parameter(
+ *         name="limit",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Parameter(
+ *         name="market_id",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successful operation",
+ *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Recommendation"))
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Bad request"
+ *     )
+ * )
+ */
 class GetRecommendationsByTimeframeAction
 {
     public function __invoke(string $timeframe)
@@ -33,3 +79,4 @@ class GetRecommendationsByTimeframeAction
         });
     }
 }
+
