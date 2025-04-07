@@ -54,7 +54,7 @@ class VerifyAction
             ]);
             $plan = $user->activePlanSubscriptions()->first();
             if (!$plan) {
-                $freePlan = Plan::where('slug', 'free')->first();
+                $freePlan = Plan::where('slug', 'standard')->first();
                 $subscription = $user->newPlanSubscription($freePlan->slug, $freePlan);
                 $subscription->forceFill([
                     'features' => $freePlan->features->map(function ($feature) {
