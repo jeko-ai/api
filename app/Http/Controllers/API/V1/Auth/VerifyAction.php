@@ -48,23 +48,27 @@ class VerifyAction
         $validation = (new Otp)->validate($request->identifier, $request->token);
 
         if ($validation->status) {
+            /** @var User $user */
             $user = User::firstOrCreate([
                 'email' => $request->identifier
             ]);
-            $freePlan = Plan::where('slug', 'free')->first();
-            $subscription = $user->newPlanSubscription($freePlan->slug, $freePlan);
-            $subscription->forceFill([
-                'features' => $freePlan->features->map(function ($feature) {
-                    return $feature->only([
-                        'slug',
-                        'name',
-                        'description',
-                        'value',
-                        'resettable_period',
-                        'resettable_interval',
-                    ]);
-                }),
-            ])->save();
+            $plan = $user->activePlanSubscriptions()->first();
+            if (!$plan) {
+                $freePlan = Plan::where('slug', 'free')->first();
+                $subscription = $user->newPlanSubscription($freePlan->slug, $freePlan);
+                $subscription->forceFill([
+                    'features' => $freePlan->features->map(function ($feature) {
+                        return $feature->only([
+                            'slug',
+                            'name',
+                            'description',
+                            'value',
+                            'resettable_period',
+                            'resettable_interval',
+                        ]);
+                    }),
+                ])->save();
+            }
 
             return response()->json([
                 'message' => 'OTP verified',
