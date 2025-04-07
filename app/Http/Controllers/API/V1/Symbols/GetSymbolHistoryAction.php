@@ -13,7 +13,7 @@ use Str;
  *     path="/v1/symbols/{symbol}/history",
  *     summary="Get symbol historical data",
  *     description="Retrieves historical price data for a specific symbol from investing.com",
- *     tags={"symbols"},
+ *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

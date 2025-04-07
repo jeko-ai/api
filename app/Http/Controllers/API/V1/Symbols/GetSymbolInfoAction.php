@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
  *     path="/v1/symbols/{symbol}/info",
  *     summary="Get symbol information",
  *     description="Retrieves detailed information about a specific symbol",
- *     tags={"symbols"},
+ *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

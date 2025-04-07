@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  *     path="/v1/symbols/{symbol}/transactions",
  *     summary="Get symbol transactions",
  *     description="Retrieves all transactions for a specific symbol ordered by execution date",
- *     tags={"symbols"},
+ *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

@@ -13,7 +13,7 @@ use Str;
  *     path="/v1/symbols/{symbol}/chart-info",
  *     summary="Get symbol chart information",
  *     description="Retrieves chart data for a specific symbol from investing.com",
- *     tags={"symbols"},
+ *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

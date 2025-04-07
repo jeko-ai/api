@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
  *     path="/v1/symbols/{symbol}/technical/{timeframe}",
  *     summary="Get symbol technical analysis",
  *     description="Retrieves technical analysis data for a specific symbol with the given timeframe",
- *     tags={"symbols"},
+ *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

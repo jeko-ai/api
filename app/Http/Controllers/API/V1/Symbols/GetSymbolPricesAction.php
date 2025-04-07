@@ -13,7 +13,7 @@ use Str;
  *     path="/v1/symbols/{symbol}/{from}/{to}",
  *     summary="Get symbol prices for a specific time range",
  *     description="Retrieves price data for a specific symbol within the given time range",
- *     tags={"symbols"},
+ *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",

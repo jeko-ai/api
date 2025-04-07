@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  *     path="/v1/symbols/{symbol}/alerts",
  *     summary="Get symbol alerts for the authenticated user",
  *     description="Retrieves alert settings for a specific symbol for the authenticated user",
- *     tags={"symbols"},
+ *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",
