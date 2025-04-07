@@ -46,13 +46,13 @@ class UserResource extends Resource
                         Translation::make('name')
                             ->label(trans('messages.users.columns.name'))
                             ->required(),
-                        
+
                         Forms\Components\TextInput::make('email')
                             ->label(trans('messages.users.columns.email'))
                             ->email()
                             ->required()
                             ->unique(ignoreRecord: true),
-                        
+
                         Forms\Components\TextInput::make('password')
                             ->label(trans('messages.users.columns.password'))
                             ->password()
@@ -87,12 +87,6 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
