@@ -7,25 +7,29 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * @OA\Get(
- *     path="/v1/symbols/{symbol}/news",
- *     summary="Get news for a symbol",
+ *     path="/v1/symbols/{symbol}/news/{sentiment}",
+ *     summary="Get news for a symbol with specific sentiment",
  *     tags={"Symbols"},
  *     @OA\Parameter(
  *         name="symbol",
  *         in="path",
  *         required=true,
- *         @OA\Schema(type="string")
+ *         @OA\Schema(type="string"),
+ *         description="Symbol identifier"
  *     ),
  *     @OA\Parameter(
  *         name="sentiment",
- *         in="query",
+ *         in="path",
  *         required=true,
- *         @OA\Schema(type="string")
+ *         @OA\Schema(type="string", enum={"positive", "negative", "neutral"}),
+ *         description="News sentiment filter"
  *     ),
  *     @OA\Parameter(
  *         name="limit",
  *         in="query",
- *         @OA\Schema(type="integer")
+ *         required=false,
+ *         @OA\Schema(type="integer"),
+ *         description="Maximum number of news items to return"
  *     ),
  *     @OA\Response(
  *         response=200,
