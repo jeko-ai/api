@@ -51,10 +51,10 @@ class VerifyAction
             $user = User::firstOrCreate([
                 'email' => $request->identifier
             ]);
-            $standardPlan = Plan::where('slug', 'standard')->first();
-            $subscription = $user->newPlanSubscription($standardPlan->slug, $standardPlan);
+            $freePlan = Plan::where('slug', 'free')->first();
+            $subscription = $user->newPlanSubscription($freePlan->slug, $freePlan);
             $subscription->forceFill([
-                'features' => $standardPlan->features->map(function ($feature) {
+                'features' => $freePlan->features->map(function ($feature) {
                     return $feature->only([
                         'slug',
                         'name',
