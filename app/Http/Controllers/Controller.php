@@ -14,6 +14,12 @@ namespace App\Http\Controllers;
  *          name="MIT License"
  *      )
  * )
+ * @OA\SecurityScheme(
+ *      securityScheme="bearerAuth",
+ *      type="http",
+ *      scheme="bearer",
+ *      bearerFormat="JWT"
+ *  )
  */
 abstract class Controller
 {
