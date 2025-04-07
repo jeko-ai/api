@@ -50,12 +50,21 @@ use Illuminate\Support\Facades\Cache;
  *         )
  *     ),
  *     @OA\Response(
- *         response=400,
- *         description="Invalid input or subscription limit reached",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="You have reached the limit of your plan for this feature")
- *         )
- *     ),
+ *          response=422,
+ *          description="Bad request or validation error",
+ *          @OA\JsonContent(
+ *              @OA\Property(property="status", type="string", example="error"),
+ *              @OA\Property(property="message", type="string", example="Validation errors")
+ *          )
+ *      ),
+ *      @OA\Response(
+ *          response=400,
+ *          description="Subscription limit reached or not allowed",
+ *          @OA\JsonContent(
+ *              @OA\Property(property="status", type="string", example="error"),
+ *              @OA\Property(property="message", type="string", example="You have reached the limit of your plan for this feature")
+ *          )
+ *      ),
  *     @OA\Response(
  *         response=401,
  *         description="Unauthorized"
