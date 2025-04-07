@@ -51,7 +51,6 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->disableCreateButton()
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label(trans('messages.users.columns.name'))
