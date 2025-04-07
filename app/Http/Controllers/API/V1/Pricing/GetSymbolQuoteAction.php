@@ -7,6 +7,41 @@ use App\Models\Symbol;
 use Http;
 use Str;
 
+/**
+ * @OA\Get(
+ *     path="/v1/pricing/symbols/{id}/quote",
+ *     summary="Get quote of a specific symbol",
+ *     tags={"Pricing"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successful operation",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="symbol_id", type="string"),
+ *             @OA\Property(property="symbol", type="string"),
+ *             @OA\Property(property="name", type="string"),
+ *             @OA\Property(property="exchange", type="string"),
+ *             @OA\Property(property="description", type="string"),
+ *             @OA\Property(property="last_price", type="number", format="float"),
+ *             @OA\Property(property="change", type="number", format="float"),
+ *             @OA\Property(property="change_percent", type="number", format="float"),
+ *             @OA\Property(property="open_price", type="number", format="float"),
+ *             @OA\Property(property="high_price", type="number", format="float"),
+ *             @OA\Property(property="low_price", type="number", format="float"),
+ *             @OA\Property(property="prev_close_price", type="number", format="float"),
+ *             @OA\Property(property="volume", type="number", format="float"),
+ *             @OA\Property(property="ask_price", type="number", format="float"),
+ *             @OA\Property(property="bid_price", type="number", format="float"),
+ *             @OA\Property(property="spread", type="number", format="float")
+ *         )
+ *     )
+ * )
+ */
 class GetSymbolQuoteAction
 {
     public function __invoke(string $id)
@@ -55,3 +90,4 @@ class GetSymbolQuoteAction
         return floatval(str_replace(',', '', (string)$value));
     }
 }
+
