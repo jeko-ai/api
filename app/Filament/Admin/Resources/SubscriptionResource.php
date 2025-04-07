@@ -95,7 +95,7 @@ class SubscriptionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('subscriber.name')
+                Tables\Columns\TextColumn::make('subscriber.email')
                     ->label(trans('messages.subscriptions.columns.subscriber'))
                     ->sortable()
                     ->searchable(),
