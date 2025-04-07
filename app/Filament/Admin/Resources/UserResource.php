@@ -22,21 +22,6 @@ class UserResource extends Resource
         return trans('messages.group');
     }
 
-    public static function getNavigationLabel(): string
-    {
-        return trans('messages.users.title');
-    }
-
-    public static function getPluralLabel(): ?string
-    {
-        return trans('messages.users.title');
-    }
-
-    public static function getLabel(): ?string
-    {
-        return trans('messages.users.title');
-    }
-
     public static function form(Form $form): Form
     {
         return $form
