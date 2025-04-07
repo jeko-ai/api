@@ -59,7 +59,7 @@ class GetBestAction
             return MarketMoversGainer::where('market_id', $market)->get();
         });
 
-        if (request('limit') == 0) {
+        if (request()->has('limit') and request('limit') == 0) {
             return response()->json($items);
         }
         $count = $items->count();
