@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * @OA\Get(
- *     path="/v1/recommendations/timeframe/{timeframe}",
+ *     path="/v1/recommendations/{timeframe}",
  *     summary="Get recommendations by timeframe",
  *     tags={"Recommendations"},
  *     @OA\Parameter(
