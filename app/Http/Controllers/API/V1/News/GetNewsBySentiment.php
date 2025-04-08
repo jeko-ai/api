@@ -8,7 +8,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Get(
- *     path="/v1/news/sentiment/{sentiment}",
+ *     path="/v1/news/{sentiment}",
  *     summary="Get news by sentiment",
  *     description="Returns news articles filtered by sentiment",
  *     operationId="getNewsBySentiment",
