@@ -82,6 +82,7 @@ class GetNewsBySentiment
         $locale = request()->header('Accept-Language', request('locale', 'en'));
         $limit = request('limit', 4);
         $market_id = request('market_id');
+        $symbol_id = request('symbol_id');
 
         $query = News::isRewritten()->select([
             'slug', 'title', 'small_image_url', 'symbol_id', 'market_id', 'description', 'sentiment', 'date'
@@ -93,6 +94,10 @@ class GetNewsBySentiment
 
         if ($market_id) {
             $query->where('market_id', $market_id);
+        }
+
+        if ($symbol_id) {
+            $query->where('symbol_id', $symbol_id);
         }
 
         return $query->get();

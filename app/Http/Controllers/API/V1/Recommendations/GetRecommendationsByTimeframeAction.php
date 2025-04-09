@@ -85,6 +85,7 @@ class GetRecommendationsByTimeframeAction
         $locale = request()->header('Accept-Language', request('locale', 'en'));
         $limit = request('limit', 4);
         $market_id = request('market_id');
+        $symbol_id = request('symbol_id');
         $select = [
             'id', 'symbol_id', 'sector_id', 'market_id', 'target_price', 'expected_return', 'timeframe', 'risk_level', 'slug'
         ];
@@ -100,6 +101,10 @@ class GetRecommendationsByTimeframeAction
         }
         if ($limit) {
             $query->limit($limit);
+        }
+
+        if ($symbol_id) {
+            $query->where('symbol_id', $symbol_id);
         }
 
         return $query->where('timeframe', $timeframe)->get();
