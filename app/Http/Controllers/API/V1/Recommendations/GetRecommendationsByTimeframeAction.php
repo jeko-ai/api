@@ -40,6 +40,12 @@ use Illuminate\Support\Facades\Cache;
  *         required=false,
  *         @OA\Schema(type="integer")
  *     ),
+ *     @OA\Parameter(
+ *         name="symbol_id",
+ *         in="query",
+ *         required=false,
+ *         @OA\Schema(type="string")
+ *     ),
  *     @OA\Response(
  *          response=200,
  *          description="Successful operation",
@@ -88,15 +94,14 @@ class GetRecommendationsByTimeframeAction
             $select = array_merge($select, ['title', 'description', 'points']);
         }
         $query = Recommendation::query()->select($select);
+        $key = "recommendations-$timeframe-$limit-$locale";
+
         if ($market_id) {
             $query->where('market_id', $market_id);
+            $key .= "-$market_id";
         }
         if ($limit) {
             $query->limit($limit);
-        }
-        $key = "recommendations-$timeframe-$limit-$locale";
-        if ($market_id) {
-            $key .= "-$market_id";
         }
 
         return Cache::remember($key, 20 * 24 * 60 * 60, function () use ($query, $timeframe) {

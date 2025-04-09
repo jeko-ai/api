@@ -46,7 +46,14 @@ use OpenApi\Annotations as OA;
  *         in="query",
  *         description="Filter news by market ID",
  *         required=false,
- *         @OA\Schema(type="integer")
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="symbol_id",
+ *         in="query",
+ *         description="Filter news by symbol ID",
+ *         required=false,
+ *         @OA\Schema(type="string")
  *     ),
  *     @OA\Response(
  *         response=200,
@@ -83,11 +90,14 @@ class GetNewsBySentiment
         if ($limit) {
             $query->limit($limit);
         }
+        $key = "news-$sentiment-$market_id-$limit-$locale";
+
         if ($market_id) {
             $query->where('market_id', $market_id);
+            $key = "news-$sentiment-$market_id-$limit-$locale";
         }
 
-        return Cache::remember("news-$sentiment-$market_id-$limit-$locale", 60 * 60, function () use ($query) {
+        return Cache::remember($key, 60 * 60, function () use ($query) {
             return $query->get();
         });
     }
