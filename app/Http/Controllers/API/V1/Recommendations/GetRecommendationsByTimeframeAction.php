@@ -94,8 +94,12 @@ class GetRecommendationsByTimeframeAction
         if ($limit) {
             $query->limit($limit);
         }
+        $key = "recommendations-$timeframe-$limit-$locale";
+        if ($market_id) {
+            $key .= "-$market_id";
+        }
 
-        return Cache::remember("recommendations-$timeframe-$market_id-$limit-$locale", 20 * 24 * 60 * 60, function () use ($query, $timeframe) {
+        return Cache::remember($key, 20 * 24 * 60 * 60, function () use ($query, $timeframe) {
             return $query->where('timeframe', $timeframe)->get();
         });
     }
