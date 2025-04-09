@@ -90,16 +90,13 @@ class GetNewsBySentiment
         if ($limit) {
             $query->limit($limit);
         }
-        $key = "news-$sentiment-$market_id-$limit-$locale";
 
         if ($market_id) {
             $query->where('market_id', $market_id);
-            $key = "news-$sentiment-$market_id-$limit-$locale";
         }
 
-        return Cache::remember($key, 60 * 60, function () use ($query) {
-            return $query->get();
-        });
+        return $query->get();
+
     }
 }
 

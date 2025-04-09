@@ -94,19 +94,15 @@ class GetRecommendationsByTimeframeAction
             $select = array_merge($select, ['title', 'description', 'points']);
         }
         $query = Recommendation::query()->select($select);
-        $key = "recommendations-$timeframe-$limit-$locale";
 
         if ($market_id) {
             $query->where('market_id', $market_id);
-            $key .= "-$market_id";
         }
         if ($limit) {
             $query->limit($limit);
         }
 
-        return Cache::remember($key, 20 * 24 * 60 * 60, function () use ($query, $timeframe) {
-            return $query->where('timeframe', $timeframe)->get();
-        });
+        return $query->where('timeframe', $timeframe)->get();
     }
 }
 
