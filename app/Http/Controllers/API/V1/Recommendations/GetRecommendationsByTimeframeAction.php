@@ -83,7 +83,7 @@ class GetRecommendationsByTimeframeAction
     public function __invoke(string $timeframe)
     {
         $locale = request()->header('Accept-Language', request('locale', 'en'));
-        $limit = request('limit');
+        $limit = request('limit', 4);
         $market_id = request('market_id');
         $select = [
             'id', 'symbol_id', 'sector_id', 'market_id', 'target_price', 'expected_return', 'timeframe', 'risk_level', 'slug'

@@ -80,7 +80,7 @@ class GetNewsBySentiment
     public function __invoke(string $sentiment)
     {
         $locale = request()->header('Accept-Language', request('locale', 'en'));
-        $limit = request('limit');
+        $limit = request('limit', 4);
         $market_id = request('market_id');
 
         $query = News::isRewritten()->select([
