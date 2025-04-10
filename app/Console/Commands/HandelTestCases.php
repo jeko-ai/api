@@ -34,21 +34,8 @@ class HandelTestCases extends Command
         /** @var Subscription $subscription */
         $subscription = $user->activePlanSubscriptions()->first();
 
-        $featureValue = $subscription->getFeatureValue('ai-trading-simulations');
-        dump($featureValue);
-
-        $featureValue = $subscription->getFeatureValue('ai-stock-predictions');
-        dump($featureValue);
-
-        $usage = $subscription->usage()->byFeatureSlug('ai-trading-simulations', $subscription->plan_id)->first();
-        dump($usage);
-        $usage = $subscription->usage()->byFeatureSlug('ai-stock-predictions', $subscription->plan_id)->first();
-        dump($usage);
-
-
-        dump($subscription->features);
-
-        dd($subscription->canUseFeature('ai-trading-simulations'), $subscription->canUseFeature('ai-stock-predictions'));
+        $usages = $subscription->getFeatureUsage('ai-stock-predictions');
+        dd($usages);
     }
 
     private function postNewsToFlow()
