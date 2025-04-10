@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\SubscriptionResource\Pages;
 
 use App\Filament\Admin\Resources\SubscriptionResource;
 use App\Models\Plan;
+use App\Models\Subscription;
 use App\Models\User;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
@@ -28,6 +29,10 @@ class CreateSubscription extends CreateRecord
         }
 
         $plan = Plan::with('features')->find($data['plan_id']);
+
+        $subscriberModel->activePlanSubscriptions()->each(function (Subscription $subscription) {
+            $subscription->cancel();
+        });
 
         if ($useCustomDates) {
             $subscription = $this->getModel()::create([
