@@ -68,6 +68,7 @@ class CreateSubscription extends CreateRecord
                     'resettable_interval',
                 ]);
             });
+            $subscription->save();
         }
 
         return $subscription;
