@@ -18,6 +18,8 @@ class Subscription extends BaseSubscription
 
     public function active(): bool
     {
-        return ! $this->ended() || $this->onTrial() || ! $this->canceled();
+        if ($this->ended()) return false;
+        if ($this->canceled()) return false;
+        return $this->ended() || $this->onTrial();
     }
 }
