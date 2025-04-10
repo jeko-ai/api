@@ -37,7 +37,17 @@ class CreateSubscription extends CreateRecord
                 'starts_at' => $data['starts_at'] ?? null,
                 'ends_at' => $data['ends_at'] ?? null,
                 'canceled_at' => $data['canceled_at'] ?? null,
-                'features' => $plan->features
+                'features' => $plan->features->map(function ($feature) {
+                    return $feature->only([
+                        'id',
+                        'slug',
+                        'name',
+                        'description',
+                        'value',
+                        'resettable_period',
+                        'resettable_interval',
+                    ]);
+                })
             ]);
         } else {
             // Use the newPlanSubscription method
@@ -47,6 +57,17 @@ class CreateSubscription extends CreateRecord
                 ->where('subscriber_id', $data['subscriber_id'])
                 ->where('plan_id', $data['plan_id'])
                 ->first();
+            $subscription->features = $plan->features->map(function ($feature) {
+                return $feature->only([
+                    'id',
+                    'slug',
+                    'name',
+                    'description',
+                    'value',
+                    'resettable_period',
+                    'resettable_interval',
+                ]);
+            });
         }
 
         return $subscription;
