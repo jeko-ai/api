@@ -32,7 +32,7 @@ class HandelTestCases extends Command
         $user = User::where('email', 'yasoesr@gmail.com')->first();
         $subscription = $user->activePlanSubscriptions()->first();
 
-        dd($subscription->canUseFeature('ai-trading-simulations'));
+        dd($subscription->canUseFeature('ai-trading-simulations'), $subscription->canUseFeature('ai-stock-predictions'));
     }
 
     private function postNewsToFlow()
