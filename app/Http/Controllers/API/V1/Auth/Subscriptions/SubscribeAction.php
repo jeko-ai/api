@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Auth;
+namespace App\Http\Controllers\API\V1\Auth\Subscriptions;
 
 use App\Http\Requests\SubscribeRequest;
 use App\Models\Plan;

@@ -37,6 +37,7 @@ class CreateSubscription extends CreateRecord
                 'starts_at' => $data['starts_at'] ?? null,
                 'ends_at' => $data['ends_at'] ?? null,
                 'canceled_at' => $data['canceled_at'] ?? null,
+                'features' => $plan->features
             ]);
         } else {
             // Use the newPlanSubscription method

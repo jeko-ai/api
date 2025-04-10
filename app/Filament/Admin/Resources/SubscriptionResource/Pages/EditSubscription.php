@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\SubscriptionResource\Pages;
 
 use App\Filament\Admin\Resources\SubscriptionResource;
+use App\Models\Subscription;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
@@ -22,9 +23,10 @@ class EditSubscription extends EditRecord
 
     protected function handleRecordCreation(array $data): Model
     {
-        $useCustomDates = isset($data['use_custom_dates']) ? (bool) $data['use_custom_dates'] : false;
+        $useCustomDates = isset($data['use_custom_dates']) ? (bool)$data['use_custom_dates'] : false;
 
         $subscriberType = $data['subscriber_type'];
+        /** @var Subscription $subscriberModel */
         $subscriberModel = $subscriberType::find($data['subscriber_id']);
 
         if (!$subscriberModel) {
@@ -45,10 +47,13 @@ class EditSubscription extends EditRecord
                 'starts_at' => $data['starts_at'] ?? null,
                 'ends_at' => $data['ends_at'] ?? null,
                 'canceled_at' => $data['canceled_at'] ?? null,
+                'features' => $plan->features
             ]);
         } else {
             // Change subscription plan
             $subscriberModel->changePlan($plan);
+            $subscriberModel->features = $plan->features;
+
 
             $subscription = $this->getModel()::where('subscriber_type', $data['subscriber_type'])
                 ->where('subscriber_id', $data['subscriber_id'])

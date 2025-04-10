@@ -9,11 +9,11 @@ use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
 use App\Http\Controllers\API\V1\Auth\GetInvitationsAction;
 use App\Http\Controllers\API\V1\Auth\GetNotificationsAction;
-use App\Http\Controllers\API\V1\Auth\GetSubscriptionsAction;
 use App\Http\Controllers\API\V1\Auth\GetUserAction;
 use App\Http\Controllers\API\V1\Auth\LoginAction;
 use App\Http\Controllers\API\V1\Auth\LogoutAction;
-use App\Http\Controllers\API\V1\Auth\SubscribeAction;
+use App\Http\Controllers\API\V1\Auth\Subscriptions\GetSubscriptionsAction;
+use App\Http\Controllers\API\V1\Auth\Subscriptions\SubscribeAction;
 use App\Http\Controllers\API\V1\Auth\UpdateUserSettingsAction;
 use App\Http\Controllers\API\V1\Auth\VerifyAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
@@ -76,10 +76,12 @@ Route::prefix('v1')->group(function () {
             Route::post('logout', LogoutAction::class);
             Route::get('me', GetUserAction::class);
             Route::post('settings', UpdateUserSettingsAction::class);
-            Route::post('subscribe', SubscribeAction::class);
             Route::get('invitations', GetInvitationsAction::class);
             Route::get('notifications', GetNotificationsAction::class);
-            Route::get('subscriptions', GetSubscriptionsAction::class);
+            Route::prefix('subscriptions')->group(function () {
+                Route::get('', GetSubscriptionsAction::class);
+                Route::post('subscribe', SubscribeAction::class);
+            });
         });
     });
     Route::prefix('static')->group(function () {
