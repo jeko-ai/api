@@ -6,7 +6,7 @@ use App\Models\Recommendation;
 
 /**
  * @OA\Get(
- *     path="/v1/recommendations/{slug}",
+ *     path="/v1/recommendations/details/{slug}",
  *     summary="Get recommendation details",
  *     tags={"Recommendations"},
  *     @OA\Parameter(
