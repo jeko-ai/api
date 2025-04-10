@@ -9,6 +9,7 @@ use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationAction;
 use App\Http\Controllers\API\V1\AI\Simulation\GetSimulationsAction;
 use App\Http\Controllers\API\V1\Auth\GetInvitationsAction;
 use App\Http\Controllers\API\V1\Auth\GetNotificationsAction;
+use App\Http\Controllers\API\V1\Auth\GetSubscriptionsAction;
 use App\Http\Controllers\API\V1\Auth\GetUserAction;
 use App\Http\Controllers\API\V1\Auth\LoginAction;
 use App\Http\Controllers\API\V1\Auth\LogoutAction;
@@ -78,6 +79,7 @@ Route::prefix('v1')->group(function () {
             Route::post('subscribe', SubscribeAction::class);
             Route::get('invitations', GetInvitationsAction::class);
             Route::get('notifications', GetNotificationsAction::class);
+            Route::get('subscriptions', GetSubscriptionsAction::class);
         });
     });
     Route::prefix('static')->group(function () {
