@@ -51,20 +51,20 @@ class CreateSubscription extends CreateRecord
             ]);
         } else {
             // Use the newPlanSubscription method
-            $subscription = $subscriberModel->newPlanSubscription('main', $plan);
-
-            $subscription->features = $plan->features->map(function ($feature) {
-                return $feature->only([
-                    'id',
-                    'slug',
-                    'name',
-                    'description',
-                    'value',
-                    'resettable_period',
-                    'resettable_interval',
-                ]);
-            });
-            $subscription->save();
+//            $subscription = $subscriberModel->newPlanSubscription('main', $plan);
+//
+//            $subscription->features = $plan->features->map(function ($feature) {
+//                return $feature->only([
+//                    'id',
+//                    'slug',
+//                    'name',
+//                    'description',
+//                    'value',
+//                    'resettable_period',
+//                    'resettable_interval',
+//                ]);
+//            });
+//            $subscription->save();
         }
 
         return $subscription;
