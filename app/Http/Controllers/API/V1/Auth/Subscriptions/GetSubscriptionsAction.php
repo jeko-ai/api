@@ -12,6 +12,9 @@ class GetSubscriptionsAction
     {
         $user = auth()->user();
 
-        return $this->respondWithSuccess($user->planSubscriptions()->with('plan')->get());
+        return $this->respondWithSuccess($user->planSubscriptions()->with([
+            'plan',
+            'usage'
+        ])->get());
     }
 }
