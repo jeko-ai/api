@@ -28,27 +28,27 @@ class CreateSubscription extends CreateRecord
         $plan = Plan::find($data['plan_id']);
 
         if ($useCustomDates) {
-            $subscription = $this->getModel()::create([
-                'subscriber_type' => $data['subscriber_type'],
-                'subscriber_id' => $data['subscriber_id'],
-                'name' => 'main',
-                'plan_id' => $data['plan_id'],
-                'trial_ends_at' => $data['trial_ends_at'] ?? null,
-                'starts_at' => $data['starts_at'] ?? null,
-                'ends_at' => $data['ends_at'] ?? null,
-                'canceled_at' => $data['canceled_at'] ?? null,
-                'features' => $plan->features->map(function ($feature) {
-                    return $feature->only([
-                        'id',
-                        'slug',
-                        'name',
-                        'description',
-                        'value',
-                        'resettable_period',
-                        'resettable_interval',
-                    ]);
-                })
-            ]);
+//            $subscription = $this->getModel()::create([
+//                'subscriber_type' => $data['subscriber_type'],
+//                'subscriber_id' => $data['subscriber_id'],
+//                'name' => 'main',
+//                'plan_id' => $data['plan_id'],
+//                'trial_ends_at' => $data['trial_ends_at'] ?? null,
+//                'starts_at' => $data['starts_at'] ?? null,
+//                'ends_at' => $data['ends_at'] ?? null,
+//                'canceled_at' => $data['canceled_at'] ?? null,
+//                'features' => $plan->features->map(function ($feature) {
+//                    return $feature->only([
+//                        'id',
+//                        'slug',
+//                        'name',
+//                        'description',
+//                        'value',
+//                        'resettable_period',
+//                        'resettable_interval',
+//                    ]);
+//                })
+//            ]);
         } else {
             // Use the newPlanSubscription method
 //            $subscription = $subscriberModel->newPlanSubscription('main', $plan);
