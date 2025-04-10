@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V1\Auth;
 
 use F9Web\ApiResponseHelpers;
-use OpenApi\Annotations as OA;
 
 class GetNotificationsAction
 {
