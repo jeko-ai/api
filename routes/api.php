@@ -76,6 +76,8 @@ Route::prefix('v1')->group(function () {
             Route::get('me', GetUserAction::class);
             Route::post('settings', UpdateUserSettingsAction::class);
             Route::post('subscribe', SubscribeAction::class);
+            Route::get('invitations', GetInvitationsAction::class);
+            Route::get('notifications', GetNotificationsAction::class);
         });
     });
     Route::prefix('static')->group(function () {
@@ -160,8 +162,6 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware('auth:api')->group(function () {
-        Route::get('invitations', GetInvitationsAction::class);
-        Route::get('notifications', GetNotificationsAction::class);
         Route::prefix('portfolio')->group(function () {
             Route::get('', GetUserPortfolioAction::class);
             Route::get('news/{sentiment}', GetPortfolioNewsAction::class)
