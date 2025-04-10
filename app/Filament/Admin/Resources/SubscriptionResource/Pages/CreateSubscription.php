@@ -3,10 +3,10 @@
 namespace App\Filament\Admin\Resources\SubscriptionResource\Pages;
 
 use App\Filament\Admin\Resources\SubscriptionResource;
+use App\Models\Plan;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
-use Laravelcm\Subscriptions\Models\Plan;
 
 class CreateSubscription extends CreateRecord
 {
@@ -25,7 +25,7 @@ class CreateSubscription extends CreateRecord
                 ->title('Subscriber not found.');
         }
 
-        $plan = Plan::find($data['plan_id']);
+        $plan = Plan::with('features')->find($data['plan_id']);
 
         if ($useCustomDates) {
             $subscription = $this->getModel()::create([
