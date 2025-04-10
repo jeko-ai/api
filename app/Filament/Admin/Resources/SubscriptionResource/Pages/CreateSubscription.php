@@ -56,7 +56,7 @@ class CreateSubscription extends CreateRecord
                 ]);
             })
         ]);
-        dd($subscription, $plan->features);
+        dd($plan, $subscription, $plan->features);
         return $subscription;
     }
 }
