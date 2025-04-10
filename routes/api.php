@@ -14,6 +14,7 @@ use App\Http\Controllers\API\V1\Auth\SubscribeAction;
 use App\Http\Controllers\API\V1\Auth\UpdateUserSettingsAction;
 use App\Http\Controllers\API\V1\Auth\VerifyAction;
 use App\Http\Controllers\API\V1\GetInvitationsAction;
+use App\Http\Controllers\API\V1\GetNotificationsAction;
 use App\Http\Controllers\API\V1\News\GetNewsAction;
 use App\Http\Controllers\API\V1\News\GetNewsBySentiment;
 use App\Http\Controllers\API\V1\News\GetNewsDetailsAction;
@@ -160,6 +161,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         Route::get('invitations', GetInvitationsAction::class);
+        Route::get('notifications', GetNotificationsAction::class);
         Route::prefix('portfolio')->group(function () {
             Route::get('', GetUserPortfolioAction::class);
             Route::get('news/{sentiment}', GetPortfolioNewsAction::class)
