@@ -48,6 +48,7 @@ class GetUserAction
                 $subscription->forceFill([
                     'features' => $freePlan->features->map(function ($feature) {
                         return $feature->only([
+                            'id',
                             'slug',
                             'name',
                             'description',
