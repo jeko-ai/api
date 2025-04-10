@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\SubscriptionResource\Pages;
 
 use App\Filament\Admin\Resources\SubscriptionResource;
 use App\Models\Plan;
+use App\Models\User;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,7 @@ class CreateSubscription extends CreateRecord
         $useCustomDates = isset($data['use_custom_dates']) ? (bool)$data['use_custom_dates'] : false;
 
         $subscriberType = $data['subscriber_type'];
+        /** @var User $subscriberModel */
         $subscriberModel = $subscriberType::find($data['subscriber_id']);
 
         if (!$subscriberModel) {
@@ -32,6 +34,7 @@ class CreateSubscription extends CreateRecord
                 'subscriber_type' => $data['subscriber_type'],
                 'subscriber_id' => $data['subscriber_id'],
                 'name' => $plan->slug,
+                'plan_id' => $plan->id,
                 'trial_ends_at' => $data['trial_ends_at'] ?? null,
                 'starts_at' => $data['starts_at'] ?? null,
                 'ends_at' => $data['ends_at'] ?? null,
@@ -43,7 +46,6 @@ class CreateSubscription extends CreateRecord
         }
 
         $subscription->forceFill([
-            'plan_id' => $plan->id,
             'features' => $plan->features->map(function ($feature) {
                 return $feature->only([
                     'id',
