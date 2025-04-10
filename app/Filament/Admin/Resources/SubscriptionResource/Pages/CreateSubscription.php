@@ -51,12 +51,8 @@ class CreateSubscription extends CreateRecord
             ]);
         } else {
             // Use the newPlanSubscription method
-            $subscriberModel->newPlanSubscription('main', $plan);
+            $subscription = $subscriberModel->newPlanSubscription('main', $plan);
 
-            $subscription = $this->getModel()::where('subscriber_type', $data['subscriber_type'])
-                ->where('subscriber_id', $data['subscriber_id'])
-                ->where('plan_id', $data['plan_id'])
-                ->first();
             $subscription->features = $plan->features->map(function ($feature) {
                 return $feature->only([
                     'id',
