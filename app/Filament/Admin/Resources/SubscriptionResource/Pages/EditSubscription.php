@@ -9,7 +9,7 @@ use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
-use Laravelcm\Subscriptions\Models\Plan;
+use App\Models\Plan;
 
 class EditSubscription extends EditRecord
 {
@@ -27,6 +27,7 @@ class EditSubscription extends EditRecord
         $useCustomDates = isset($data['use_custom_dates']) ? (bool)$data['use_custom_dates'] : false;
 
         $subscriberType = $data['subscriber_type'];
+        /** @var User $subscriberModel */
         $subscriberModel = $subscriberType::find($data['subscriber_id']);
 
         if (!$subscriberModel) {
@@ -47,23 +48,16 @@ class EditSubscription extends EditRecord
                 'starts_at' => $data['starts_at'] ?? null,
                 'ends_at' => $data['ends_at'] ?? null,
                 'canceled_at' => $data['canceled_at'] ?? null,
-                'features' => $plan->features->map(function ($feature) {
-                    return $feature->only([
-                        'id',
-                        'slug',
-                        'name',
-                        'description',
-                        'value',
-                        'resettable_period',
-                        'resettable_interval',
-                    ]);
-                })
             ]);
         } else {
             // Change subscription plan
-            $subscription = $subscriberModel->changePlan($plan);
-            $subscription->plan_id = $plan->id;
-            $subscriberModel->features = $plan->features->map(function ($feature) {
+            /** @var Subscription $subscription */
+            $subscription = $subscriberModel->activePlanSubscriptions()->first();
+            $subscription = $subscription->changePlan($plan);
+        }
+
+        $subscription->forceFill([
+            'features' => $plan->features->map(function ($feature) {
                 return $feature->only([
                     'id',
                     'slug',
@@ -73,9 +67,8 @@ class EditSubscription extends EditRecord
                     'resettable_period',
                     'resettable_interval',
                 ]);
-            });
-            $subscriberModel->save();
-        }
+            })
+        ])->save();
 
         return $subscription;
     }
