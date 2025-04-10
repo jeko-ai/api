@@ -14,6 +14,7 @@ class CreateSubscription extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
+        dd($data);
         $useCustomDates = isset($data['use_custom_dates']) ? (bool) $data['use_custom_dates'] : false;
 
         $subscriberType = $data['subscriber_type'];
