@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\SubscriptionResource\Pages\CreateSubscription;
+use App\Filament\Admin\Resources\SubscriptionResource\Pages\EditSubscription;
+use App\Filament\Admin\Resources\SubscriptionResource\Pages\ListSubscriptions;
 use App\Models\Plan;
 use App\Models\Subscription;
 use App\Models\User;
@@ -245,7 +248,9 @@ class SubscriptionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\SubscriptionResource\Pages\ListSubscriptions::route('/')
+            'index' => ListSubscriptions::route('/'),
+            'create' => CreateSubscription::route('/create'),
+            'edit' => EditSubscription::route('/{record}/edit'),
         ];
     }
 }
