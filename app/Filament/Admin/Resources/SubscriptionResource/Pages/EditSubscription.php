@@ -42,7 +42,7 @@ class EditSubscription extends EditRecord
                 'subscriber_type' => $data['subscriber_type'],
                 'subscriber_id' => $data['subscriber_id'],
                 'name' => $plan->slug,
-                'plan_id' => $data['plan_id'],
+                'plan_id' => $plan->id,
                 'trial_ends_at' => $data['trial_ends_at'] ?? null,
                 'starts_at' => $data['starts_at'] ?? null,
                 'ends_at' => $data['ends_at'] ?? null,
@@ -62,6 +62,7 @@ class EditSubscription extends EditRecord
         } else {
             // Change subscription plan
             $subscription = $subscriberModel->changePlan($plan);
+            $subscription->plan_id = $plan->id;
             $subscriberModel->features = $plan->features->map(function ($feature) {
                 return $feature->only([
                     'id',
