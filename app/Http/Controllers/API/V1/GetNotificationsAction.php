@@ -75,7 +75,9 @@ class GetNotificationsAction
         $type = request('type');
 
         $notifications = $type
-            ? $user->notifications->where('type', $type)
+            ? $user->notifications->filter(function ($notification) use ($type) {
+                return $notification->type === $type;
+            })
             : $user->notifications;
 
         return $this->respondWithSuccess($notifications);
