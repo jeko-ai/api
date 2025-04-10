@@ -20,21 +20,22 @@ class SubscriptionResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'description' => $this->description,
-            'trial_ends_at' =>  $this->trial_ends_at,
-            'starts_at' =>  $this->starts_at,
-            'ends_at'   =>  $this->ends_at,
-            'cancels_at'    =>  $this->cancels_at,
-            'canceled_at'   =>  $this->canceled_at,
-            'active'   =>  $this->active(),
-            'on_trial'   =>  $this->onTrial(),
-            'canceled'   =>  $this->canceled(),
-            'ended'   =>  $this->ended(),
-            'usage'   =>  $this->usage->map(function ($usage) {
-                return $usage->only([
-                    'feature_id',
-                    'used',
-                    'valid_until',
-                ]);
+            'trial_ends_at' => $this->trial_ends_at,
+            'starts_at' => $this->starts_at,
+            'ends_at' => $this->ends_at,
+            'cancels_at' => $this->cancels_at,
+            'canceled_at' => $this->canceled_at,
+            'active' => $this->active(),
+            'on_trial' => $this->onTrial(),
+            'canceled' => $this->canceled(),
+            'ended' => $this->ended(),
+            'usage' => $this->usage->map(function ($usage) {
+                return [
+                    'feature_id' => $usage->feature_id,
+                    'used' => $usage->used,
+                    'valid_until' => $usage->valid_until,
+                    'expired' => $usage->expired()
+                ];
             }),
         ];
     }
