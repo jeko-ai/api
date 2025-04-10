@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\News;
+use App\Models\Subscription;
 use App\Models\Symbol;
 use App\Models\User;
 use Http;
@@ -30,7 +31,16 @@ class HandelTestCases extends Command
     public function handle()
     {
         $user = User::where('email', 'yasoesr@gmail.com')->first();
+        /** @var Subscription $subscription */
         $subscription = $user->activePlanSubscriptions()->first();
+
+        $featureValue = $subscription->getFeatureValue('ai-trading-simulations');
+        dump($featureValue);
+
+        $featureValue = $subscription->getFeatureValue('ai-stock-predictions');
+        dump($featureValue);
+
+        dump($subscription->features);
 
         dd($subscription->canUseFeature('ai-trading-simulations'), $subscription->canUseFeature('ai-stock-predictions'));
     }
