@@ -15,4 +15,9 @@ class Subscription extends BaseSubscription
             'features' => 'array',
         ];
     }
+
+    public function active(): bool
+    {
+        return ! $this->ended() || $this->onTrial() || ! $this->canceled();
+    }
 }
