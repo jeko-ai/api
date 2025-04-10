@@ -29,6 +29,13 @@ class SubscriptionResource extends JsonResource
             'on_trial'   =>  $this->onTrial(),
             'canceled'   =>  $this->canceled(),
             'ended'   =>  $this->ended(),
+            'usage'   =>  $this->usage->map(function ($usage) {
+                return $usage->only([
+                    'feature_id',
+                    'used',
+                    'valid_until',
+                ]);
+            }),
         ];
     }
 }
