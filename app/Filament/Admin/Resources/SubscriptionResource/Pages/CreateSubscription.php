@@ -14,7 +14,7 @@ class CreateSubscription extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
-        $useCustomDates = isset($data['use_custom_dates']) ? (bool) $data['use_custom_dates'] : false;
+        $useCustomDates = isset($data['use_custom_dates']) ? (bool)$data['use_custom_dates'] : false;
 
         $subscriberType = $data['subscriber_type'];
         $subscriberModel = $subscriberType::find($data['subscriber_id']);
@@ -32,28 +32,19 @@ class CreateSubscription extends CreateRecord
                 'subscriber_type' => $data['subscriber_type'],
                 'subscriber_id' => $data['subscriber_id'],
                 'name' => $plan->slug,
-                'plan_id' => $plan->id,
                 'trial_ends_at' => $data['trial_ends_at'] ?? null,
                 'starts_at' => $data['starts_at'] ?? null,
                 'ends_at' => $data['ends_at'] ?? null,
                 'canceled_at' => $data['canceled_at'] ?? null,
-                'features' => $plan->features->map(function ($feature) {
-                    return $feature->only([
-                        'id',
-                        'slug',
-                        'name',
-                        'description',
-                        'value',
-                        'resettable_period',
-                        'resettable_interval',
-                    ]);
-                })
             ]);
         } else {
             // Use the newPlanSubscription method
             $subscription = $subscriberModel->newPlanSubscription($plan->slug, $plan);
-            $subscription->plan_id = $plan->id;
-            $subscription->features = $plan->features->map(function ($feature) {
+        }
+
+        $subscription->forceFill([
+            'plan_id' => $plan->id,
+            'features' => $plan->features->map(function ($feature) {
                 return $feature->only([
                     'id',
                     'slug',
@@ -63,11 +54,8 @@ class CreateSubscription extends CreateRecord
                     'resettable_period',
                     'resettable_interval',
                 ]);
-            });
-            $subscription->save();
-        }
-
-        dd($subscription);
+            })
+        ])->save();
         return $subscription;
     }
 }
