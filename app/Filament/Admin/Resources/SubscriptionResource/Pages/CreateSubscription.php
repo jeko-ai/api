@@ -26,6 +26,7 @@ class CreateSubscription extends CreateRecord
         }
 
         $plan = Plan::find($data['plan_id']);
+        dd($plan);
 
         if ($useCustomDates) {
 //            $subscription = $this->getModel()::create([
