@@ -31,7 +31,7 @@ class CreateSubscription extends CreateRecord
             $subscription = $this->getModel()::create([
                 'subscriber_type' => $data['subscriber_type'],
                 'subscriber_id' => $data['subscriber_id'],
-                'name' => 'main',
+                'name' => $plan->slug,
                 'plan_id' => $data['plan_id'],
                 'trial_ends_at' => $data['trial_ends_at'] ?? null,
                 'starts_at' => $data['starts_at'] ?? null,
@@ -51,7 +51,7 @@ class CreateSubscription extends CreateRecord
             ]);
         } else {
             // Use the newPlanSubscription method
-            $subscription = $subscriberModel->newPlanSubscription('main', $plan);
+            $subscription = $subscriberModel->newPlanSubscription($plan->slug, $plan);
 
             $subscription->features = $plan->features->map(function ($feature) {
                 return $feature->only([

@@ -38,27 +38,42 @@ class EditSubscription extends EditRecord
         $plan = Plan::find($data['plan_id']);
 
         if ($useCustomDates) {
-//            $subscription = $this->getModel()::create([
-//                'subscriber_type' => $data['subscriber_type'],
-//                'subscriber_id' => $data['subscriber_id'],
-//                'name' => 'main',
-//                'plan_id' => $data['plan_id'],
-//                'trial_ends_at' => $data['trial_ends_at'] ?? null,
-//                'starts_at' => $data['starts_at'] ?? null,
-//                'ends_at' => $data['ends_at'] ?? null,
-//                'canceled_at' => $data['canceled_at'] ?? null,
-//                'features' => $plan->features
-//            ]);
+            $subscription = $this->getModel()::create([
+                'subscriber_type' => $data['subscriber_type'],
+                'subscriber_id' => $data['subscriber_id'],
+                'name' => $plan->slug,
+                'plan_id' => $data['plan_id'],
+                'trial_ends_at' => $data['trial_ends_at'] ?? null,
+                'starts_at' => $data['starts_at'] ?? null,
+                'ends_at' => $data['ends_at'] ?? null,
+                'canceled_at' => $data['canceled_at'] ?? null,
+                'features' => $plan->features->map(function ($feature) {
+                    return $feature->only([
+                        'id',
+                        'slug',
+                        'name',
+                        'description',
+                        'value',
+                        'resettable_period',
+                        'resettable_interval',
+                    ]);
+                })
+            ]);
         } else {
             // Change subscription plan
-//            $subscriberModel->changePlan($plan);
-//            $subscriberModel->features = $plan->features;
-//
-//
-//            $subscription = $this->getModel()::where('subscriber_type', $data['subscriber_type'])
-//                ->where('subscriber_id', $data['subscriber_id'])
-//                ->where('plan_id', $data['plan_id'])
-//                ->first();
+            $subscription = $subscriberModel->changePlan($plan);
+            $subscriberModel->features = $plan->features->map(function ($feature) {
+                return $feature->only([
+                    'id',
+                    'slug',
+                    'name',
+                    'description',
+                    'value',
+                    'resettable_period',
+                    'resettable_interval',
+                ]);
+            });
+            $subscriberModel->save();
         }
 
         return $subscription;
