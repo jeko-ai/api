@@ -38,13 +38,14 @@ class GetUserAction
     {
         $user = auth()->user();
         $plan = $user->activePlanSubscriptions()->first();
-        dump($plan);
         if (!$plan) {
             $subscription = $user->planSubscription('free');
+            dump($subscription);
             if ($subscription) {
                 $subscription->renew();
             } else {
                 $freePlan = Plan::where('slug', 'free')->first();
+                dump($freePlan);
                 $subscription = $user->newPlanSubscription($freePlan->slug, $freePlan);
                 $subscription->forceFill([
                     'features' => $freePlan->features->map(function ($feature) {
