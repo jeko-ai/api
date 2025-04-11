@@ -38,13 +38,6 @@ class CancelSubscriptionAction
             ])->save();
         }
 
-        $subscriptions = $user->planSubscriptions()->with([
-            'plan:id,slug,name',
-            'usage'
-        ])->get();
-
-        return $this->respondWithSuccess([
-            'subscriptions' => SubscriptionResource::collection($subscriptions),
-        ]);
+        return $this->respondOk('Subscription canceled successfully');
     }
 }
