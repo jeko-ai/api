@@ -20,6 +20,6 @@ class Subscription extends BaseSubscription
     {
         if ($this->ended()) return false;
         if ($this->canceled()) return false;
-        return $this->ended() || $this->onTrial();
+        return ! $this->ended() || $this->onTrial();
     }
 }
