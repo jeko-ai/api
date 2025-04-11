@@ -12,6 +12,8 @@ use App\Http\Controllers\API\V1\Auth\GetNotificationsAction;
 use App\Http\Controllers\API\V1\Auth\GetUserAction;
 use App\Http\Controllers\API\V1\Auth\LoginAction;
 use App\Http\Controllers\API\V1\Auth\LogoutAction;
+use App\Http\Controllers\API\V1\Auth\Subscriptions\CancelSubscriptionAction;
+use App\Http\Controllers\API\V1\Auth\Subscriptions\GetCurrentSubscriptionAction;
 use App\Http\Controllers\API\V1\Auth\Subscriptions\GetSubscriptionsAction;
 use App\Http\Controllers\API\V1\Auth\Subscriptions\SubscribeAction;
 use App\Http\Controllers\API\V1\Auth\UpdateUserSettingsAction;
@@ -79,8 +81,10 @@ Route::prefix('v1')->group(function () {
             Route::get('invitations', GetInvitationsAction::class);
             Route::get('notifications', GetNotificationsAction::class);
             Route::prefix('subscriptions')->group(function () {
+                Route::get('current', GetCurrentSubscriptionAction::class);
                 Route::get('', GetSubscriptionsAction::class);
                 Route::post('subscribe', SubscribeAction::class);
+                Route::post('{id}/cancel', CancelSubscriptionAction::class);
             });
         });
     });
