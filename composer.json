@@ -11,6 +11,7 @@
         "f9webltd/laravel-api-response-helpers": "^2.1",
         "filament/filament": "^3.3",
         "ichtrojan/laravel-otp": "^2.0",
+        "kreait/laravel-firebase": "^6.0",
         "laravel/framework": "^11.44",
         "laravel/octane": "^2.8",
         "laravel/passport": "^12.0",
