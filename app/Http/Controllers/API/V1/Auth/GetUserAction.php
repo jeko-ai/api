@@ -38,6 +38,7 @@ class GetUserAction
     {
         $user = auth()->user();
         $plan = $user->activePlanSubscriptions()->first();
+        dump($plan);
         if (!$plan) {
             $subscription = $user->planSubscription('free');
             if ($subscription) {
