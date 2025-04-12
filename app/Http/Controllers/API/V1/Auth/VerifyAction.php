@@ -71,6 +71,12 @@ class VerifyAction
                 ])->save();
             }
 
+            if ($request->has('fcm_token') && !empty($request->fcm_token)) {
+                $user->devices()->firstOrCreate([
+                    'fcm_token' => $request->fcm_token
+                ]);
+            }
+
             return response()->json([
                 'message' => 'OTP verified',
                 'status' => true,

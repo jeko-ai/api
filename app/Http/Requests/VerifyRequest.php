@@ -25,6 +25,7 @@ class VerifyRequest extends FormRequest
         return [
             'identifier' => 'required|string|email|max:255',
             'token' => 'required|numeric|digits:6',
+            'fcm_token' =>  'sometimes',
         ];
     }
 }

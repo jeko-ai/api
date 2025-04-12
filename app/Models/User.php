@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSymbolAlert::class);
     }
+
+    public function devices(): HasMany
+    {
+        return $this->hasMany(UserDevice::class, 'user_id', 'id');
+    }
 }
