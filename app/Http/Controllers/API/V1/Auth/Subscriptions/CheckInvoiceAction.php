@@ -20,6 +20,10 @@ class CheckInvoiceAction
     public function __invoke($id)
     {
         $user = auth()->user();
+        $subscription = Subscription::where('invoice_id', $id)->first();
+        if ($subscription) {
+            return $this->respondError('Invoice already exists');
+        }
         $apiUrl = config('services.fawaterk.api_url');
 
         $response = Http::asJson()
@@ -78,6 +82,7 @@ class CheckInvoiceAction
                         ]);
                     }),
                 ]);
+
                 return $this->respondWithSuccess($subscription);
             }
         }
