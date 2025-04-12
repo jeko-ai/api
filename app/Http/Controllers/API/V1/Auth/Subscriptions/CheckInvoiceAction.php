@@ -22,7 +22,10 @@ class CheckInvoiceAction
         $user = auth()->user();
         $subscription = Subscription::where('invoice_id', $id)->first();
         if ($subscription) {
-            return $this->respondError('Invoice already exists');
+            if ($subscription->user_id != $user->id) {
+                return $this->respondError('Invoice already exists');
+            }
+            return $this->respondWithSuccess($subscription);
         }
         $apiUrl = config('services.fawaterk.api_url');
 
