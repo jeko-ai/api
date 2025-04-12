@@ -11,6 +11,7 @@ return new class extends Migration {
     {
         Schema::create(config('laravel-subscriptions.tables.subscriptions'), function (Blueprint $table): void {
             $table->uuid('id')->primary();
+            $table->string('invoice_id')->nullable()->unique();
 
             $table->uuidMorphs('subscriber');
             $table->foreignIdFor(config('laravel-subscriptions.models.plan'));

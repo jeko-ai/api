@@ -32,13 +32,6 @@ class CheckInvoiceAction
             $data = $json['data'];
             $extra = json_decode($data['pay_load'], true);
             if ($data['paid']) {
-                $interval = $extra['payment_option'];
-//                monthly
-//                quarterly
-//                biannual
-//                yearly
-
-
                 $user->activePlanSubscriptions()->each(function (Subscription $subscription) {
                     if ($subscription->active()) {
                         $subscription->cancel();
@@ -67,11 +60,23 @@ class CheckInvoiceAction
                 );
 
                 $subscription = $user->planSubscriptions()->create([
+                    'invoice_id' => $id,
                     'name' => $plan->slug,
                     'plan_id' => $plan->id,
                     'trial_ends_at' => $trial->getEndDate(),
                     'starts_at' => $period->getStartDate(),
                     'ends_at' => $period->getEndDate(),
+                    'features' => $plan->features->map(function ($feature) {
+                        return $feature->only([
+                            'id',
+                            'slug',
+                            'name',
+                            'description',
+                            'value',
+                            'resettable_period',
+                            'resettable_interval',
+                        ]);
+                    }),
                 ]);
                 return $this->respondWithSuccess($subscription);
             }
