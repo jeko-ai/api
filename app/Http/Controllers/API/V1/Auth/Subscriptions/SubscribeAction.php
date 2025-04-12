@@ -33,10 +33,11 @@ class SubscribeAction
         $cartTotal -= ($cartTotal * $discount) / 100;
         $firstName = explode(' ', $user->name)[0] ?? '-';
         $lastName = explode(' ', $user->name)[1] ?? '-';
+        $apiUrl = config('services.fawaterk.api_url');
         $response = Http::asJson()
             ->acceptJson()
             ->withToken('Bearer ' . config('services.fawaterk.api_key'))
-            ->post('https://staging.fawaterk.com/api/v2/createInvoiceLink', [
+            ->post("$apiUrl/api/v2/createInvoiceLink", [
                 'cartTotal' => $cartTotal,
                 'currency' => 'USD',
                 'customer' => [
