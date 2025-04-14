@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Recommendation extends Model
 {
@@ -56,4 +57,9 @@ class Recommendation extends Model
         'meta_tags_ar' => 'array',
         'meta_tags' => 'array',
     ];
+
+    public function symbol(): BelongsTo
+    {
+        return $this->belongsTo(Symbol::class);
+    }
 }
