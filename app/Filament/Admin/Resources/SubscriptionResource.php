@@ -76,9 +76,9 @@ class SubscriptionResource extends Resource
                     ->live()
                     ->required(),
                     Forms\Components\DatePicker::make('trial_ends_at')
+                        ->nullable()
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label('Trial Ends At')
-                        ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
+                        ->label('Trial Ends At'),
                     Forms\Components\DatePicker::make('starts_at')
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
                         ->label('Starts At')
@@ -88,9 +88,9 @@ class SubscriptionResource extends Resource
                         ->label('Ends At')
                         ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
                     Forms\Components\DatePicker::make('canceled_at')
+                        ->nullable()
                         ->visible(fn(Forms\Get $get) => $get('use_custom_dates'))
-                        ->label('Canceled At')
-                        ->required(fn(Forms\Get $get) => $get('use_custom_dates')),
+                        ->label('Canceled At'),
             ]);
     }
 
