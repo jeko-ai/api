@@ -56,4 +56,9 @@ class Symbol extends Model
     {
         return $this->belongsTo(Market::class, 'market_id', 'id');
     }
+
+    public function sector(): BelongsTo
+    {
+        return $this->belongsTo(Sector::class, 'sector_id', 'id');
+    }
 }
