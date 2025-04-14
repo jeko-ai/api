@@ -109,8 +109,8 @@ class SymbolHasRecommendations extends Notification implements ShouldQueue
             'priceChangePercentage' => $quote?->change_percentage ?? 0, // Get change % from quote
 
             // URLs and Config
-            'appUrl' => url("/recommendations/{$this->recommendation->slug}"),
-            'helpUrl' => url('/contact'),
+            'appUrl' => url("https://kira.ws/recommendations/{$this->recommendation->slug}"),
+            'helpUrl' => url('https://kira.ws/contact'),
             'logoUrl' => 'https://objects.kira.ws/logos/kira-dark.png',
             'footerLogoUrl' => 'https://objects.kira.ws/logos/kira-dark-full.png',
             'socialXUrl' => 'https://objects.kira.ws/logos/social/x.png',
@@ -152,7 +152,7 @@ class SymbolHasRecommendations extends Notification implements ShouldQueue
             'message' => $shortDescription, // Localized short description/message
             'symbol' => $this->recommendation->symbol?->symbol ?? 'N/A',
             'icon' => 'pi pi-megaphone', // Example icon for UI
-            'url' => url("/recommendations/{$this->recommendation->slug}"), // Link to the full recommendation
+            'url' => url("https://kira.ws/recommendations/{$this->recommendation->slug}"), // Link to the full recommendation
             'type' => 'recommendation', // Type identifier for frontend handling
         ];
     }
