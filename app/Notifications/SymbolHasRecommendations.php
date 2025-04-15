@@ -44,8 +44,7 @@ class SymbolHasRecommendations extends Notification implements ShouldQueue
         $subject = "{$viewData['stockSymbol']} : {$viewData['title']}";
 
         return (new MailMessage)
-            ->subject($subject)
-            ->markdown('emails.recommendation', $viewData);
+            ->subject($subject);
     }
 
     /**
