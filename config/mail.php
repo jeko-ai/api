@@ -49,6 +49,18 @@ return [
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
+        'otp_smtp' => [
+            'transport' => 'smtp',
+            'scheme' => env('OTP_MAIL_SCHEME'),
+            'url' => env('OTP_MAIL_URL'),
+            'host' => env('OTP_MAIL_HOST', '127.0.0.1'),
+            'port' => env('OTP_MAIL_PORT', 2525),
+            'username' => env('OTP_MAIL_USERNAME'),
+            'password' => env('OTP_MAIL_PASSWORD'),
+            'timeout' => null,
+            'local_domain' => env('OTP_MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],
