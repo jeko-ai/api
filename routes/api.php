@@ -211,8 +211,11 @@ Route::prefix('webhook')->group(function () {
 
     Route::prefix('notifications')->group(function () {
         Route::post('news/{id}', HandelNewsAction::class);
-        Route::post('price/{id}', HandelPriceAction::class);
         Route::post('recommendations/{id}', HandelRecommendationsAction::class);
+
+        Route::post('symbol/price/{id}', HandelPriceAction::class);
+        Route::post('symbol/prediction/{id}', HandelPriceAction::class);
+
         Route::post('predictions/{id}/{type}', HandelPredictionsAction::class)->where('type', 'update|partially_completed|completed|failed|new');
         Route::post('simulations/{id}/{type}', HandelSimulationsAction::class)->where('type', 'update|partially_completed|completed|failed|new');
     });
