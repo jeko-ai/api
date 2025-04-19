@@ -69,6 +69,7 @@ use App\Http\Controllers\Webhook\Fawaterk\TokenizationAction;
 use App\Http\Controllers\Webhook\Notifications\AI\HandelPredictionsAction;
 use App\Http\Controllers\Webhook\Notifications\AI\HandelSimulationsAction;
 use App\Http\Controllers\Webhook\Notifications\HandelNewsAction;
+use App\Http\Controllers\Webhook\Notifications\HandelPriceAction;
 use App\Http\Controllers\Webhook\Notifications\HandelRecommendationsAction;
 use Illuminate\Support\Facades\Route;
 
@@ -210,6 +211,7 @@ Route::prefix('webhook')->group(function () {
 
     Route::prefix('notifications')->group(function () {
         Route::post('news/{id}', HandelNewsAction::class);
+        Route::post('price/{id}', HandelPriceAction::class);
         Route::post('recommendations/{id}', HandelRecommendationsAction::class);
         Route::post('predictions/{id}/{type}', HandelPredictionsAction::class)->where('type', 'update|partially_completed|completed|failed|new');
         Route::post('simulations/{id}/{type}', HandelSimulationsAction::class)->where('type', 'update|partially_completed|completed|failed|new');
