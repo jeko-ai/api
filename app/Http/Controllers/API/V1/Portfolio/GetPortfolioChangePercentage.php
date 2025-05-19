@@ -6,27 +6,6 @@ use App\Models\Portfolio;
 use DB;
 use Illuminate\Support\Carbon;
 
-/**
- * @OA\Get(
- *     path="/v1/portfolio/change-percentage",
- *     operationId="getPortfolioChangePercentage",
- *     tags={"Portfolio"},
- *     summary="Get portfolio value change percentage from yesterday",
- *     description="Returns the percentage change in portfolio value compared to yesterday",
- *     security={{"bearerAuth":{}}},
- *     @OA\Response(
- *         response=200,
- *         description="Successful operation",
- *         @OA\JsonContent(
- *             @OA\Property(property="change_percentage", type="string", example="+2.5% from yesterday")
- *         )
- *     ),
- *     @OA\Response(
- *         response=401,
- *         description="Unauthenticated"
- *     )
- * )
- */
 class GetPortfolioChangePercentage
 {
     public function __invoke()

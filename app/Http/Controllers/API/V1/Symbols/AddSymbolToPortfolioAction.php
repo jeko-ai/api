@@ -9,43 +9,6 @@ use App\Models\PortfolioTransaction;
 use App\Models\Symbol;
 use DB;
 
-/**
- * @OA\Post(
- *     path="/v1/symbols/{symbol}/add",
- *     summary="Add a symbol to the user's portfolio",
- *     tags={"Symbols"},
- *     @OA\Parameter(
- *         name="symbol",
- *         in="path",
- *         required=true,
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\RequestBody(
- *         required=true,
- *         @OA\JsonContent(
- *             required={"id", "quantity", "avg_buy_price", "buy_date"},
- *             @OA\Property(property="id", type="string", format="uuid", description="Symbol UUID"),
- *             @OA\Property(property="quantity", type="number", format="float", description="Quantity to buy", minimum=0.01),
- *             @OA\Property(property="avg_buy_price", type="number", format="float", description="Average buy price", minimum=0.01),
- *             @OA\Property(property="buy_date", type="string", format="date", description="Date of purchase")
- *         )
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Success",
- *         @OA\JsonContent(
- *             @OA\Property(property="status", type="string", example="success")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Invalid symbol or portfolio",
- *         @OA\JsonContent(
- *             @OA\Property(property="status", type="string", example="invalid_symbol")
- *         )
- *     )
- * )
- */
 class AddSymbolToPortfolioAction
 {
     public function __invoke(AddSymbolToPortfolioRequest $request, string $symbol)

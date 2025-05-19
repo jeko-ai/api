@@ -8,37 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 use Str;
 
-/**
- * @OA\Get(
- *     path="/v1/symbols/{symbol}/chart-info",
- *     summary="Get symbol chart information",
- *     description="Retrieves chart data for a specific symbol from investing.com",
- *     tags={"Symbols"},
- *     @OA\Parameter(
- *         name="symbol",
- *         in="path",
- *         required=true,
- *         description="Symbol ID to retrieve chart information for",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Symbol chart information retrieved successfully",
- *         @OA\JsonContent(
- *             type="object",
- *             description="Chart data from investing.com"
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="Symbol not found"
- *     ),
- *     @OA\Response(
- *         response=500,
- *         description="Internal Server Error"
- *     )
- * )
- */
 class GetSymbolChartInfoAction
 {
     public function __invoke($symbol): JsonResponse

@@ -6,62 +6,6 @@ use App\Models\PortfolioAsset;
 use App\Models\Recommendation;
 use Illuminate\Support\Facades\Cache;
 
-/**
- * @OA\Get(
- *     path="/v1/portfolio/recommendations/{timeframe}",
- *     operationId="getPortfolioRecommendations",
- *     tags={"Portfolio"},
- *     summary="Get recommendations for assets in user's portfolio by timeframe",
- *     description="Returns investment recommendations related to assets in the user's portfolio for a specific timeframe",
- *     security={{"bearerAuth":{}}},
- *     @OA\Parameter(
- *         name="timeframe",
- *         in="path",
- *         required=true,
- *         description="Recommendation timeframe (short, medium, long)",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="limit",
- *         in="query",
- *         required=false,
- *         description="Maximum number of recommendations to return",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Parameter(
- *         name="Accept-Language",
- *         in="header",
- *         required=false,
- *         description="Language preference (en, ar)",
- *         @OA\Schema(type="string", default="en")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Successful operation",
- *         @OA\JsonContent(
- *             type="array",
- *             @OA\Items(
- *                 @OA\Property(property="id", type="integer"),
- *                 @OA\Property(property="symbol_id", type="integer"),
- *                 @OA\Property(property="sector_id", type="integer"),
- *                 @OA\Property(property="market_id", type="integer"),
- *                 @OA\Property(property="target_price", type="number", format="float"),
- *                 @OA\Property(property="expected_return", type="number", format="float"),
- *                 @OA\Property(property="timeframe", type="string"),
- *                 @OA\Property(property="risk_level", type="string"),
- *                 @OA\Property(property="slug", type="string"),
- *                 @OA\Property(property="title", type="string"),
- *                 @OA\Property(property="description", type="string"),
- *                 @OA\Property(property="points", type="string")
- *             )
- *         )
- *     ),
- *     @OA\Response(
- *         response=401,
- *         description="Unauthenticated"
- *     )
- * )
- */
 class GetPortfolioRecommendationsAction
 {
     public function __invoke(string $timeframe)

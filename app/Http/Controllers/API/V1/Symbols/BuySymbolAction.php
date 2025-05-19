@@ -9,43 +9,6 @@ use App\Models\PortfolioTransaction;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-/**
- * @OA\Post(
- *     path="/v1/symbols/{symbol}/buy",
- *     summary="Buy a symbol and add it to the user's portfolio",
- *     tags={"Symbols"},
- *     @OA\Parameter(
- *         name="symbol",
- *         in="path",
- *         required=true,
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\RequestBody(
- *         required=true,
- *         @OA\JsonContent(
- *             required={"id", "quantity", "price_per_unit", "buy_date"},
- *             @OA\Property(property="id", type="string", format="uuid", description="Symbol UUID"),
- *             @OA\Property(property="quantity", type="number", format="float", description="Quantity to buy", minimum=1),
- *             @OA\Property(property="price_per_unit", type="number", format="float", description="Price per unit", minimum=0),
- *             @OA\Property(property="buy_date", type="string", format="date", description="Date of purchase")
- *         )
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Success",
- *         @OA\JsonContent(
- *             @OA\Property(property="status", type="string", example="success")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Invalid portfolio or error",
- *         @OA\JsonContent(
- *             @OA\Property(property="status", type="string", example="error")
- *         )
- *     )
- * )
- */
 class BuySymbolAction
 {
     public function __invoke(BuySymbolRequest $request, string $symbol)

@@ -5,42 +5,6 @@ namespace App\Http\Controllers\API\V1\Portfolio;
 use App\Models\Portfolio;
 use App\Models\PortfolioHistory;
 
-/**
- * @OA\Get(
- *     path="/v1/portfolio",
- *     operationId="getUserPortfolio",
- *     tags={"Portfolio"},
- *     summary="Get user's default portfolio details",
- *     description="Returns detailed information about the user's default portfolio including value and change percentage",
- *     security={{"bearerAuth":{}}},
- *     @OA\Response(
- *         response=200,
- *         description="Successful operation",
- *         @OA\JsonContent(
- *             @OA\Property(property="id", type="integer"),
- *             @OA\Property(property="name", type="string"),
- *             @OA\Property(property="description", type="string"),
- *             @OA\Property(property="total_value", type="number", format="float"),
- *             @OA\Property(property="currency", type="string"),
- *             @OA\Property(property="is_default", type="boolean"),
- *             @OA\Property(property="created_at", type="string", format="date-time"),
- *             @OA\Property(property="change_percentage", type="number", format="float"),
- *             @OA\Property(property="previous_total_value", type="number", format="float")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="Portfolio not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="status", type="string", example="no_portfolio")
- *         )
- *     ),
- *     @OA\Response(
- *         response=401,
- *         description="Unauthenticated"
- *     )
- * )
- */
 class GetUserPortfolioAction
 {
     public function __invoke()

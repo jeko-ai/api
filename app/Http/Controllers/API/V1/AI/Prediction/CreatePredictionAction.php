@@ -11,63 +11,6 @@ use Carbon\Carbon;
 use F9Web\ApiResponseHelpers;
 use Illuminate\Support\Facades\Cache;
 
-/**
- * @OA\Post(
- *     path="/v1/ai/predictions",
- *     summary="Create a new price prediction",
- *     description="Creates a new AI price prediction request for a stock symbol",
- *     operationId="createPrediction",
- *     tags={"AI Predictions"},
- *     security={{"bearerAuth":{}}},
- *     @OA\RequestBody(
- *         required=true,
- *         @OA\JsonContent(
- *             required={"id", "prediction_type", "prediction_start_date", "prediction_end_date"},
- *             @OA\Property(property="id", type="integer", description="Symbol ID"),
- *             @OA\Property(property="prediction_type", type="string", description="Type of prediction", example="price"),
- *             @OA\Property(property="prediction_start_date", type="string", format="date", description="Start date for prediction"),
- *             @OA\Property(property="prediction_end_date", type="string", format="date", description="End date for prediction")
- *         )
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Prediction request created successfully",
- *         @OA\JsonContent(
- *             @OA\Property(property="id", type="integer"),
- *             @OA\Property(property="user_id", type="integer"),
- *             @OA\Property(property="symbol_id", type="integer"),
- *             @OA\Property(property="symbol", type="string"),
- *             @OA\Property(property="market_id", type="integer"),
- *             @OA\Property(property="prediction_type", type="string"),
- *             @OA\Property(property="prediction_start_date", type="string", format="date-time"),
- *             @OA\Property(property="prediction_end_date", type="string", format="date-time"),
- *             @OA\Property(property="status", type="string", default="pending"),
- *             @OA\Property(property="created_at", type="string", format="date-time"),
- *             @OA\Property(property="updated_at", type="string", format="date-time")
- *         )
- *     ),
- *     @OA\Response(
- *         response=422,
- *         description="Bad request or validation error",
- *         @OA\JsonContent(
- *             @OA\Property(property="status", type="string", example="error"),
- *             @OA\Property(property="message", type="string", example="Validation errors")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Subscription limit reached or not allowed",
- *         @OA\JsonContent(
- *             @OA\Property(property="status", type="string", example="error"),
- *             @OA\Property(property="message", type="string", example="You have reached the limit of your plan for this feature")
- *         )
- *     ),
- *      @OA\Response(
- *          response=401,
- *          description="Unauthorized"
- *      )
- * )
- */
 class CreatePredictionAction
 {
     use ApiResponseHelpers;
