@@ -5,7 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
-
+use Illuminate\Support\Str;
+use Dedoc\Scramble\Scramble;
+use Illuminate\Routing\Route;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,5 +28,10 @@ class AppServiceProvider extends ServiceProvider
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
         URL::forceHttps($this->app->isProduction());
+
+        Scramble::configure()
+            ->routes(function (Route $route) {
+                return Str::startsWith($route->uri, 'v1');
+            });
     }
 }
