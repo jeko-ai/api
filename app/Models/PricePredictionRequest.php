@@ -46,4 +46,9 @@ class PricePredictionRequest extends Model
     {
         return $this->hasMany(PricePredictionRequestResult::class, 'request_id', 'id')->orderBy('prediction_date');
     }
+
+    public function market(): BelongsTo
+    {
+        return $this->belongsTo(Market::class, 'market_id');
+    }
 }

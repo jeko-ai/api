@@ -62,4 +62,9 @@ class TradingSimulationRequest extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function market(): BelongsTo
+    {
+        return $this->belongsTo(Market::class, 'market_id');
+    }
 }
