@@ -28,7 +28,7 @@ class SendOtpJob implements ShouldQueue
     {
         $otp = (new Otp)->generate($this->email, 'numeric', 6);
         if ($otp->status) {
-            Mail::mailer('otp_smtp')->send('emails.verify-email', [
+            Mail::send('emails.verify-email', [
                 'otp' => $otp->token,
                 'email' => $this->email
             ], function ($message) {
