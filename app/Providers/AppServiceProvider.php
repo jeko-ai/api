@@ -8,6 +8,9 @@ use Laravel\Passport\Passport;
 use Illuminate\Support\Str;
 use Dedoc\Scramble\Scramble;
 use Illuminate\Routing\Route;
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -32,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
         Scramble::configure()
             ->routes(function (Route $route) {
                 return Str::startsWith($route->uri, 'v1');
+            })->withDocumentTransformers(function (OpenApi $openApi) {
+                $openApi->secure(
+                    SecurityScheme::http('bearer')
+                );
             });
     }
 }
