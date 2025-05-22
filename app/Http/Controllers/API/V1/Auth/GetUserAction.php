@@ -33,6 +33,6 @@ class GetUserAction
                 ])->save();
             }
         }
-        return response()->json(UserResource::make($user->load('planSubscriptions')));
+        return response()->json(UserResource::make($user->load(['planSubscriptions', 'sectors'])));
     }
 }

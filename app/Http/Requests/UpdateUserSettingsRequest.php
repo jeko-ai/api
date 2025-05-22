@@ -34,6 +34,8 @@ class UpdateUserSettingsRequest extends FormRequest
             'is_new_recommendations_alerts_enabled' => 'sometimes|boolean',
             'is_portfolio_update_alerts_enabled' => 'sometimes|boolean',
             'is_market_sentiment_alerts_enabled' => 'sometimes|boolean',
+            'sectors' => 'sometimes|array',
+            'sectors.*' => 'uuid|exists:sectors,id',
         ];
     }
 }

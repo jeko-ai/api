@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Requests\UpdateUserSettingsRequest;
+use App\Http\Resources\API\V1\Auth\UserResource;
 
 class UpdateUserSettingsAction
 {
@@ -21,6 +22,10 @@ class UpdateUserSettingsAction
             ]);
         }
 
-        return response()->json($user->refresh());
+        if ($request->has('sectors')) {
+            $user->sectors()->sync($request->sectors);
+        }
+
+        return response()->json(UserResource::make($user->refresh()->load('sectors')));
     }
 }

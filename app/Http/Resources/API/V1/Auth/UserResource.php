@@ -28,6 +28,7 @@ class UserResource extends JsonResource
             'is_portfolio_update_alerts_enabled' => $this->is_portfolio_update_alerts_enabled,
             'is_market_sentiment_alerts_enabled' => $this->is_market_sentiment_alerts_enabled,
             'plan' => UserPlanResource::make($this->activePlanSubscriptions()->first()),
+            'sectors' => $this->whenLoaded('sectors', $this->sectors),
         ];
     }
 }
