@@ -32,7 +32,8 @@ class SendOtpJob implements ShouldQueue
                 'otp' => $otp->token,
                 'email' => $this->email
             ], function ($message) {
-                $message->to($this->email)
+                $message->from('otp@kira.ws', 'Kira')
+                    ->to($this->email)
                     ->subject('Verify your email address');
             });
         }
