@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Requests\UpdateUserSettingsRequest;
 use App\Http\Resources\API\V1\Auth\UserResource;
+use App\Models\UserSector;
 
 class UpdateUserSettingsAction
 {
@@ -26,7 +27,10 @@ class UpdateUserSettingsAction
             \DB::transaction(function () use ($request, $user) {
                 $user->sectors()->detach();
                 foreach ($request->sectors as $sector) {
-                    $user->sectors()->attach($sector);
+                    UserSector::create([
+                        'user_id' => $user->id,
+                        'sector_id' => $sector
+                    ]);
                 }
             });
         }
