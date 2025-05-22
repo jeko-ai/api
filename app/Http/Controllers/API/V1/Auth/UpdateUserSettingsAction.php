@@ -23,7 +23,12 @@ class UpdateUserSettingsAction
         }
 
         if ($request->has('sectors')) {
-            $user->sectors()->sync($request->sectors);
+            \DB::transaction(function () use ($request, $user) {
+                $user->sectors()->detach();
+                foreach ($request->sectors as $sector) {
+                    $user->sectors()->attach($sector);
+                }
+            });
         }
 
         return response()->json(UserResource::make($user->refresh()->load('sectors')));
