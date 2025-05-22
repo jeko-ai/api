@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'language' => $this->language,
             'risk_level' => $this->risk_level,
+            'trading_style' => $this->trading_style,
             'country_id' => $this->country_id,
             'is_notification_enabled' => $this->is_notification_enabled,
             'is_price_alerts_enabled' => $this->is_price_alerts_enabled,

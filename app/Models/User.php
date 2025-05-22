@@ -31,6 +31,7 @@ class User extends Authenticatable
         'phone',
         'language',
         'risk_level',
+        'trading_style',
         'country_id',
         'is_notification_enabled',
         'is_price_alerts_enabled',

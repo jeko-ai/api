@@ -27,6 +27,7 @@ class UpdateUserSettingsRequest extends FormRequest
             'phone' => 'sometimes|phone:INTERNATIONAL|unique:users,phone,' . $this->user()->id,
             'language' => 'sometimes|string|max:10',
             'risk_level' => 'sometimes|in:low,medium,high',
+            'trading_style' => 'sometimes|in:day_trading,swing_trading,position_trading,scalping_trading',
             'country_id' => 'sometimes|uuid|exists:countries,id',
             'is_notification_enabled' => 'sometimes|boolean',
             'is_price_alerts_enabled' => 'sometimes|boolean',
