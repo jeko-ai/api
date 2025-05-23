@@ -12,6 +12,7 @@ class GetUserPortfolioAction
         // Get the latest default portfolio
         $latestPortfolio = Portfolio::where('user_id', request()->user()->id)
             ->where('is_default', true)
+            ->withCount('assets')
             ->first();
 
         if (!$latestPortfolio) {
@@ -40,6 +41,7 @@ class GetUserPortfolioAction
             'created_at' => $latestPortfolio->created_at,
             'change_percentage' => $changePercentage,
             'previous_total_value' => $previousValue,
+            'assets_count' => $latestPortfolio->assets_count,
         ]);
     }
 }
